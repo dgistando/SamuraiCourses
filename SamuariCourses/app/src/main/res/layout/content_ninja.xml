@@ -15,12 +15,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:text="Hello BRUH! This plplplplpl is the new text"
-=======
-        android:text="Hello BRUH! This is the new text"
->>>>>>> d8d7537cba4eec950bc175992c21eb6028b007bd
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+     />
     
     <Button
         android:layout_width="wrap_content"
