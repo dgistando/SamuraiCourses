@@ -84,10 +84,6 @@ public class NinjaActivity extends AppCompatActivity {
         department.setThreshold(1);
         department.setHint("Department");
 
-                    Log.d("Created", "This is the message");
-                    Log.d("Created","This is the message");
-
-
                     try {
                         mClient = new MobileServiceClient(
                                 "https://samuraicourses.azurewebsites.net",
