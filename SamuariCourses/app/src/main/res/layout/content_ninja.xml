@@ -12,29 +12,61 @@
     tools:context="com.ninja.cse.samuaricourses.NinjaActivity"
     tools:showIn="@layout/activity_ninja">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello BRUH! This is the new text"
-        android:id="@+id/textView"
-     />
-    
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bruh"
+        android:text="@string/generate"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="51dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
-    <ImageView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bruhi"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:id="@+id/add"
+        android:text="@string/add"
         android:layout_alignParentStart="true"
-        android:src="@drawable/bruho"/>
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/LL"
+        android:weightSum="2"
+        >
+
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/department"
+            android:layout_weight="1"
+            />
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/number"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LL"
+        android:id="@+id/classes"
+        android:text="@string/classes"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classes"
+        android:id="@+id/courses"
+        android:text="@string/sometext"/>
+
+
 </RelativeLayout>

@@ -8,42 +8,76 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.http.NextServiceFilterCallback;
+import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
+import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.query.Query;
+import com.microsoft.windowsazure.mobileservices.table.query.QueryOperations;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDataType;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.MobileServiceLocalStoreException;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLocalStore;
+import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
+import com.squareup.okhttp.OkHttpClient;
+
+import java.util.List;
+
+import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
+
+
 
 public class NinjaActivity extends AppCompatActivity {
-//testij
 
-    Button bruh;
-    ImageView ibruh;
+    private AutoCompleteTextView department,classes;
+    private ArrayAdapter<String> departmentAdapter,classesAdapter;
+    List<String> classeslist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ninja);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        bruh = (Button)findViewById(R.id.button);
-        ibruh = (ImageView)findViewById(R.id.bruhi);
         setSupportActionBar(toolbar);
 
-        ibruh.setImageResource(0);
-        bruh.setOnClickListener(new View.OnClickListener(){
+        classesAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,classeslist);
+        classes = (AutoCompleteTextView) findViewById(R.id.number);
+        classes.setThreshold(1);
+        classes.setAdapter(classesAdapter);
+        classes.setHint("Class");
+
+        departmentAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.Department_array));
+        department = (AutoCompleteTextView) findViewById(R.id.department);
+        department.setAdapter(departmentAdapter);
+        department.setThreshold(1);
+        department.setHint("Department");
+
+
+        department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                    ibruh.setImageResource(R.drawable.bruho);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
 
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
