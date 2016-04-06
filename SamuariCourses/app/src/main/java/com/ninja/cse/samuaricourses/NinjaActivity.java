@@ -47,6 +47,8 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.transform.Result;
+
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
 
 
@@ -60,7 +62,7 @@ public class NinjaActivity extends AppCompatActivity {
 
     private AutoCompleteTextView department,classes;
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
-    List<String> classeslist;
+    ArrayList<String> classeslist = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,30 +84,32 @@ public class NinjaActivity extends AppCompatActivity {
         department.setThreshold(1);
         department.setHint("Department");
 
-        Log.d("Created","\nThis is the message\n");
+                    Log.d("Created", "This is the message");
+                    Log.d("Created","This is the message");
 
 
-        try {
-            mClient = new MobileServiceClient(
-                    "https://samuraicourses.azurewebsites.net",
-                    this).withFilter(new ProgressFilter());
+                    try {
+                        mClient = new MobileServiceClient(
+                                "https://samuraicourses.azurewebsites.net",
+                                this).withFilter(new ProgressFilter());
+                        Log.d("samurai","Microsoft tries to connect");
+                        mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
+                            @Override
+                            public OkHttpClient createOkHttpClient() {
+                                OkHttpClient client = new OkHttpClient();
+                                client.setReadTimeout(20, TimeUnit.SECONDS);
+                                return client;
+                            }
+                        });
 
-            mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
-                @Override
-                public OkHttpClient createOkHttpClient() {
-                    OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(20, TimeUnit.SECONDS);
-                    return client;
-                }
-            });
+                        mCoursesTable = mClient.getTable(courses.class);
 
-            mCoursesTable = mClient.getTable(courses.class);
-
-            department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    classeslist = getClasseslist(parent.getItemAtPosition(position).toString());
-                }
+                        department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Log.d("Item Clicked", "Item was clicked");
+                               setClasseslist(parent.getItemAtPosition(position).toString());
+                            }
             });
 
         }catch (MalformedURLException e){
@@ -140,27 +144,34 @@ public class NinjaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<String> getClasseslist(final String selectedDepartment){
-
-        final List<String> classesList = new ArrayList<>();
+    //Plan to make nested class
+    private void setClasseslist(final String selectedDepartment){
 
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try{
-                    final List<courses> classes = availableClasses(selectedDepartment);
+                    Log.d("get Query", "Just before getting query");
+                    final ArrayList<courses> coursesList = availableClasses(selectedDepartment);
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            for(courses number : classes){
-                                classesList.add(number.getNumber());
+                            Set<String> hashedset = new HashSet<>();
+                            String temp;
+                            for (courses number : coursesList) {
+                                //gets rid of extra characters and duplicates
+                                temp = number.getNumber();
+                                temp = temp.substring(temp.indexOf("-") + 1);
+                                temp = temp.substring(0, temp.indexOf("-"));
+                                hashedset.add(temp);
                             }
 
-                            Set<String> hashedset = new HashSet<>();
-                            hashedset.addAll(classesList);
-                            classesList.clear();
-                            classesList.addAll(hashedset);
+                            classesAdapter.clear();
+                            for (String each : hashedset) {
+                                classesAdapter.add(each);
+                                classesAdapter.notifyDataSetChanged();
+                            }
                         }
                     });
 
@@ -169,12 +180,18 @@ public class NinjaActivity extends AppCompatActivity {
                 }
                 return null;
             }
+
+            /*@Override
+            protected void onPostExecute(Void Result){
+                return ;
+            }*/
+
         };
-        return classesList;
+        task.execute();
     }
 
-    private List<courses> availableClasses(String item) throws ExecutionException, InterruptedException{
-            List<courses> entities =  mCoursesTable.where().startsWith("number",item).execute().get();
+    private ArrayList<courses> availableClasses(String item) throws ExecutionException, InterruptedException{
+            ArrayList<courses> entities =  mCoursesTable.where().startsWith("number",item).execute().get();
         return entities;
     }
 
