@@ -64,6 +64,14 @@ public class NinjaActivity extends AppCompatActivity {
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
 
+    /**
+     * This is the current starting point for the app. It loads the
+     * autocomplete textviews and the buttons.
+     *
+     * @param savedInstanceState saves the state of the app when moving to a new onCreate. You
+     *                           can save objects in the the Bundle to be carried over to other
+     *                           activities
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +96,13 @@ public class NinjaActivity extends AppCompatActivity {
                         mClient = new MobileServiceClient(
                                 "https://samuraicourses.azurewebsites.net",
                                 this).withFilter(new ProgressFilter());
-                        Log.d("samurai","Microsoft tries to connect");
                         mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
+                            /**
+                             * makes an http request to the server for this application and
+                             * passes the response to progress filter.
+                             *
+                             * @return
+                             */
                             @Override
                             public OkHttpClient createOkHttpClient() {
                                 OkHttpClient client = new OkHttpClient();
@@ -117,7 +130,12 @@ public class NinjaActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * This method adds an options menu to the top at the start of the app.
+     *
+     * @param menu functions like a list to edit the options
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -125,11 +143,16 @@ public class NinjaActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -181,9 +204,14 @@ public class NinjaActivity extends AppCompatActivity {
         }
     }*/}
 
-    //Plan to make nested class
+    /**
+     * This method performs an Asynchronous task that adds a list of course number to the
+     * classes TextView.
+     *
+     * @param selectedDepartment String from the first dropdown list of textView ex:CSE
+     */
     private void setClasseslist(final String selectedDepartment){
-
+    //Plan to make nested class
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -227,6 +255,14 @@ public class NinjaActivity extends AppCompatActivity {
         task.execute();
     }
 
+    /**
+     * Runs LINQ to database and retrieves list of courses that have cse in the title.
+     *
+     * @param item string passed from the setClasseslist method and added to the LINQ query
+     * @return
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
     private ArrayList<courses> availableClasses(String item) throws ExecutionException, InterruptedException{
             ArrayList<courses> entities =  mCoursesTable.where().startsWith("number",item).execute().get();
         return entities;
@@ -234,12 +270,15 @@ public class NinjaActivity extends AppCompatActivity {
 
 
     private class ProgressFilter implements ServiceFilter {
+
         /**
+         * method that handles the html response from the client.
          *
+         * Plan to implement the progress bar for longer wait times.
          *
-         *@param
-         *
-         *@return
+         * @param request
+         * @param nextServiceFilterCallback
+         * @return
          */
         @Override
         public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
