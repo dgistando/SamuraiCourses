@@ -72,6 +72,7 @@ public class courses {
 
     public String getId(){return mId;}
 
+
     public int getCrn() {
         return crn;
     }
