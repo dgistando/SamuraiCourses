@@ -58,7 +58,7 @@ public class NinjaActivity extends AppCompatActivity {
     private MobileServiceClient mClient;
     private MobileServiceTable<courses> mCoursesTable;
     private ProgressBar mProgressBar;
-
+    //private scheduleDatabase db = new scheduleDatabase();
 
     private AutoCompleteTextView department,classes;
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
@@ -140,6 +140,47 @@ public class NinjaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    {/*private class scheduleDatabase extends AsyncTask<String,Void,ArrayList<courses>> {
+        private ArrayList<courses> coursesList;
+
+
+        @Override
+        protected ArrayList<courses> doInBackground(String... params) {
+            try {
+
+                coursesList = availableClasses(params[0]);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Set<String> hashedset = new HashSet<>();
+                        String temp;
+                        for (courses number : coursesList) {
+                            //gets rid of extra characters and duplicates
+                            temp = number.getNumber();
+                            temp = temp.substring(temp.indexOf("-") + 1);
+                            temp = temp.substring(0, temp.indexOf("-"));
+                            hashedset.add(temp);
+                        }
+
+                        classesAdapter.clear();
+                        for (String each : hashedset) {
+                            classesAdapter.add(each);
+                            classesAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+                return coursesList;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }*/}
+
     //Plan to make nested class
     private void setClasseslist(final String selectedDepartment){
 
@@ -191,8 +232,15 @@ public class NinjaActivity extends AppCompatActivity {
         return entities;
     }
 
-    private class ProgressFilter implements ServiceFilter {
 
+    private class ProgressFilter implements ServiceFilter {
+        /**
+         *
+         *
+         *@param
+         *
+         *@return
+         */
         @Override
         public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
 
