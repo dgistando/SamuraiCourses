@@ -1,0 +1,19 @@
+<resources>>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <string-array name="Department_array">
+        <item>CSE</item>
+        <item>Management</item>
+        <item>Arts</item>
+        <item>BIO</item>
+        <item>Biology</item>
+    </string-array>
+
+
+</resources>
