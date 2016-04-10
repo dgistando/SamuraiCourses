@@ -9,6 +9,7 @@
 
     <string-array name="Department_array">
         <item>ANTH</item>
+        <item>Anthropology</item>
         <item>ARTS</item>
         <item>BEST</item>
         <item>BIO</item>
@@ -16,6 +17,7 @@
         <item>BIOE</item>
         <item>CCST</item>
         <item>CHEM</item>
+        <item>Chemistry</item>
         <item>CHN</item>
         <item>COGS</item>
         <item>CORE</item>
@@ -59,12 +61,14 @@
 
     <string-array name="Department_tag_array">
         <item>ANTH</item>
+        <item>ANTH</item>
         <item>ARTS</item>
         <item>BEST</item>
         <item>BIO</item>
         <item>BIO</item>
         <item>BIOE</item>
         <item>CCST</item>
+        <item>CHEM</item>
         <item>CHEM</item>
         <item>CHN</item>
         <item>COGS</item>
@@ -105,6 +109,10 @@
         <item>WH</item>
         <item>WRI</item>
         <item>WRI</item>
+    </string-array>
+
+    <string-array name="listItems">
+
     </string-array>
 
 

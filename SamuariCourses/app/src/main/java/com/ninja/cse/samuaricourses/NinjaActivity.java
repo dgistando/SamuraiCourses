@@ -1,21 +1,21 @@
 package com.ninja.cse.samuaricourses;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -29,29 +29,14 @@ import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-import com.microsoft.windowsazure.mobileservices.table.query.Query;
-import com.microsoft.windowsazure.mobileservices.table.query.QueryOperations;
-import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
-import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
-import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDataType;
-import com.microsoft.windowsazure.mobileservices.table.sync.localstore.MobileServiceLocalStoreException;
-import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLocalStore;
-import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
-import javax.xml.transform.Result;
-
-import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
-
 
 
 public class NinjaActivity extends AppCompatActivity {
@@ -135,11 +120,49 @@ public class NinjaActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Button btn = (Button)findViewById(R.id.generateBtn);
+        Button btn = (Button)findViewById(R.id.btnGenerate);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NinjaActivity.this, Generations.class));
+            }
+        });
+
+
+        final ListView listview = (ListView) findViewById(R.id.listViewToDo);
+        ArrayList<String> mycourses = new ArrayList<String>();
+        final ArrayAdapter<String> listadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_listitems, mycourses);
+        listview.setAdapter(listadapter);
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+                if(!listview.isItemChecked(position)) {
+                    listadapter.remove(listadapter.getItem(position).toString());
+                    listadapter.notifyDataSetChanged();
+                }
+            }
+        };
+        listview.setOnItemClickListener(itemClickListener);
+
+
+        btn = (Button)findViewById(R.id.btnAdd);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
+                ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
+
+                int newpos = departmentTempAdapter.getPosition(department.getText().toString());
+                String chosen = departmentTagAdapter.getItem(newpos);
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                listadapter.add(chosen + " " + classes.getText().toString());
+                for(int i = 0; i<=listadapter.getCount(); i++)
+                    listview.setItemChecked(i, true);
+                listadapter.notifyDataSetChanged();
+                Log.w("GetCheck", chosen + " " + classes.getText().toString());
             }
         });
 

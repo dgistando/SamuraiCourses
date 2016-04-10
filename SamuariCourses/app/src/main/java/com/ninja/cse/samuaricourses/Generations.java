@@ -26,7 +26,13 @@ public class Generations extends BaseGenerations {
         startTime.set(Calendar.YEAR, newYear);
         Calendar endTime = (Calendar) startTime.clone();
         endTime.add(Calendar.HOUR, 1);
-        WeekViewEvent event = new WeekViewEvent(0, "Class01", startTime, endTime);
+        WeekViewEvent event = new WeekViewEvent(0,
+                "ANTH-005-02L\n" +
+                "Biological Anthropology\n" +
+                "8:00-8:50am\n" +
+                "SSM 107\n" +
+                "Staff",
+                startTime, endTime);
         event.setColor(getResources().getColor(R.color.event_color_01));
         events.add(event);
 

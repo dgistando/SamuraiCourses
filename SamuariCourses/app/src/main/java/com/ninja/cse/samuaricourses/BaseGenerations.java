@@ -62,6 +62,11 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         // Calendar testDate = Calendar.getInstance();
         testDate.set(2016, 8-1, 22);
         mWeekView.goToDate(testDate);
+
+        mWeekView.setHourHeight(45);
+        mWeekView.goToHour(7);
+
+
         //mWeekView.goToToday();
 
         Button btn = (Button)findViewById(R.id.btnNext);
@@ -174,7 +179,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, event.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

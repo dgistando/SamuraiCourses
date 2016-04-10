@@ -16,20 +16,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/generate"
-        android:id="@+id/generateBtn"
+        android:id="@+id/btnGenerate"
+        android:layout_marginBottom="42dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/courses"
-        android:layout_alignEnd="@+id/courses"
-        android:layout_marginBottom="48dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addBtn"
+        android:id="@+id/btnAdd"
         android:text="@string/add"
-        android:layout_alignTop="@+id/generateBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/LL"
+        android:layout_alignRight="@+id/btnGenerate"
+        android:layout_alignEnd="@+id/btnGenerate"
+        android:windowSoftInputMode="stateHidden" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,32 +55,21 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/LL"
-        android:id="@+id/classes"
-        android:text="@string/classes"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/classes"
-        android:id="@+id/courses"
-        android:text="@string/sometext"/>
-
     <ListView
         android:id="@+id/listViewToDo"
         android:layout_width="match_parent"
         android:layout_height="213dp"
+        android:choiceMode="multipleChoice"
+        android:textColor="@color/black"
         tools:listitem="@layout/row_list_to_do"
         android:padding="6dip"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/classes"
+        android:layout_below="@+id/btnAdd"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnGenerate">
 
     </ListView>
+
 
 
 </RelativeLayout>
