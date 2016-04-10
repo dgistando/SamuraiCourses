@@ -1,5 +1,6 @@
 package com.ninja.cse.samuaricourses;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -117,15 +118,30 @@ public class NinjaActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Log.d("Item Clicked", "Item was clicked");
-                               setClasseslist(parent.getItemAtPosition(position).toString());
+                                ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
+                                ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
+
+                                String chosen = parent.getItemAtPosition(position).toString();
+                                int newpos = departmentTempAdapter.getPosition(chosen);
+                                chosen = departmentTagAdapter.getItem(newpos);
+                                Log.w("EndCheck", chosen);
+                                setClasseslist(chosen);
                             }
-            });
+                        });
 
         }catch (MalformedURLException e){
             e.printStackTrace();
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        Button btn = (Button)findViewById(R.id.generateBtn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NinjaActivity.this, Generations.class));
+            }
+        });
 
     }
 

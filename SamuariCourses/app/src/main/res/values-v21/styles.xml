@@ -8,11 +8,103 @@
     </style>
 
     <string-array name="Department_array">
-        <item>CSE</item>
-        <item>Management</item>
-        <item>Arts</item>
+        <item>ANTH</item>
+        <item>ARTS</item>
+        <item>BEST</item>
         <item>BIO</item>
         <item>Biology</item>
+        <item>BIOE</item>
+        <item>CCST</item>
+        <item>CHEM</item>
+        <item>CHN</item>
+        <item>COGS</item>
+        <item>CORE</item>
+        <item>CRS</item>
+        <item>CSE</item>
+        <item>Computer Science Engineering</item>
+        <item>ECON</item>
+        <item>EECS</item>
+        <item>ENG</item>
+        <item>ENGR</item>
+        <item>Engineering</item>
+        <item>ENVE</item>
+        <item>ES</item>
+        <item>ESS</item>
+        <item>FRE</item>
+        <item>GASP</item>
+        <item>HIST</item>
+        <item>History</item>
+        <item>IH</item>
+        <item>JPN</item>
+        <item>MATH</item>
+        <item>Mathematics</item>
+        <item>ME</item>
+        <item>MGMT</item>
+        <item>Management</item>
+        <item>MSE</item>
+        <item>NSED</item>
+        <item>NSUS</item>
+        <item>PH</item>
+        <item>PHIL</item>
+        <item>PHYS</item>
+        <item>POLI</item>
+        <item>PSY</item>
+        <item>QSB</item>
+        <item>SOC</item>
+        <item>SPAN</item>
+        <item>WH</item>
+        <item>WRI</item>
+        <item>Writing</item>
+    </string-array>
+
+    <string-array name="Department_tag_array">
+        <item>ANTH</item>
+        <item>ARTS</item>
+        <item>BEST</item>
+        <item>BIO</item>
+        <item>BIO</item>
+        <item>BIOE</item>
+        <item>CCST</item>
+        <item>CHEM</item>
+        <item>CHN</item>
+        <item>COGS</item>
+        <item>CORE</item>
+        <item>CRS</item>
+        <item>CSE</item>
+        <item>CSE</item>
+        <item>ECON</item>
+        <item>EECS</item>
+        <item>ENG</item>
+        <item>ENGR</item>
+        <item>ENGR</item>
+        <item>ENVE</item>
+        <item>ES</item>
+        <item>ESS</item>
+        <item>FRE</item>
+        <item>GASP</item>
+        <item>HIST</item>
+        <item>HIST</item>
+        <item>IH</item>
+        <item>JPN</item>
+        <item>MATH</item>
+        <item>MATH</item>
+        <item>ME</item>
+        <item>MGMT</item>
+        <item>MGMT</item>
+        <item>MSE</item>
+        <item>NSED</item>
+        <item>NSUS</item>
+        <item>PH</item>
+        <item>PHIL</item>
+        <item>PHYS</item>
+        <item>POLI</item>
+        <item>PSY</item>
+        <item>QSB</item>
+        <item>SOC</item>
+        <item>SPAN</item>
+        <item>WH</item>
+        <item>WRI</item>
+        <item>WRI</item>
     </string-array>
 
 

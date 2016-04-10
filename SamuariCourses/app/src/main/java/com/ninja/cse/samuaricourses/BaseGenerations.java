@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -29,6 +31,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
+    Calendar testDate = Calendar.getInstance();
 
 
     @Override
@@ -55,6 +58,30 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
+
+        // Calendar testDate = Calendar.getInstance();
+        testDate.set(2016, 8-1, 22);
+        mWeekView.goToDate(testDate);
+        //mWeekView.goToToday();
+
+        Button btn = (Button)findViewById(R.id.btnNext);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testDate.add(Calendar.DATE, 7);
+                mWeekView.goToDate(testDate);
+            }
+        });
+
+        btn = (Button)findViewById(R.id.btnPrev);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendar testDate2 = Calendar.getInstance();
+                testDate.add(Calendar.DATE, -7);
+                mWeekView.goToDate(testDate);
+            }
+        });
     }
 
 
