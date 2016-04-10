@@ -158,7 +158,7 @@ public class WeekView extends View {
 
         @Override
         public boolean onDown(MotionEvent e) {
-            //goToNearestOrigin();
+            goToNearestOrigin();
             return true;
         }
 
@@ -173,9 +173,9 @@ public class WeekView extends View {
                     // Allow scrolling only in one direction.
                     if (Math.abs(distanceX) > Math.abs(distanceY)) {
                         if (distanceX > 0) {
-                            mCurrentScrollDirection = Direction.LEFT;
+                            //mCurrentScrollDirection = Direction.LEFT;
                         } else {
-                            mCurrentScrollDirection = Direction.RIGHT;
+                            //mCurrentScrollDirection = Direction.RIGHT;
                         }
                     } else {
                         mCurrentScrollDirection = Direction.VERTICAL;
@@ -734,7 +734,7 @@ public class WeekView extends View {
             String dayLabel = getDateTimeInterpreter().interpretDate(day);
             if (dayLabel == null)
                 throw new IllegalStateException("A DateTimeInterpreter must not return null date");
-            canvas.drawText(dayLabel, startPixel + mWidthPerDay / 2, mHeaderTextHeight + mHeaderRowPadding, sameDay ? mTodayHeaderTextPaint : mHeaderTextPaint);
+            canvas.drawText(dayLabel.substring(0,3), startPixel + mWidthPerDay / 2, mHeaderTextHeight + mHeaderRowPadding, sameDay ? mTodayHeaderTextPaint : mHeaderTextPaint);
             drawAllDayEvents(day, startPixel, canvas);
             startPixel += mWidthPerDay + mColumnGap;
         }
@@ -1826,34 +1826,17 @@ public class WeekView extends View {
 
         // Check after call of mGestureDetector, so mCurrentFlingDirection and mCurrentScrollDirection are set.
         if (event.getAction() == MotionEvent.ACTION_UP && !mIsZooming && mCurrentFlingDirection == Direction.NONE) {
-            if (mCurrentScrollDirection == Direction.RIGHT) {
-/*                Calendar testDate = Calendar.getInstance();
-                testDate.set(2016, 8 - 1 + 7, 22);
-                mHeaderColumnWidth = mTimeTextWidth + mHeaderColumnPadding *2;
-                mWidthPerDay = getWidth() - mHeaderColumnWidth - mColumnGap * (mNumberOfVisibleDays - 1);
-                mWidthPerDay = mWidthPerDay * 2;*/
-
-                //double leftDays = mCurrentOrigin.x / (mWidthPerDay + mColumnGap);
-                //int nearestOrigin = (int) (mCurrentOrigin.x - leftDays * (mWidthPerDay + mColumnGap));
-                // Snap to date.
-/*                mScroller.startScroll((int) mCurrentOrigin.x, (int) mCurrentOrigin.y, (int) mCurrentOrigin.x * 2, 0);
-                ViewCompat.postInvalidateOnAnimation(WeekView.this);*/
-
+            if (mCurrentScrollDirection == Direction.RIGHT || mCurrentScrollDirection == Direction.LEFT) {
+                goToNearestOrigin();
             }
-            else if (mCurrentScrollDirection == Direction.LEFT) {
-
-
-            }
-                //goToNearestOrigin();
-
-            mCurrentScrollDirection = mCurrentFlingDirection = Direction.NONE;
+            mCurrentScrollDirection = Direction.NONE;
         }
 
         return val;
     }
 
     private void goToNearestOrigin(){
-/*        double leftDays = mCurrentOrigin.x / (mWidthPerDay + mColumnGap);
+        double leftDays = mCurrentOrigin.x / (mWidthPerDay + mColumnGap);
 
         if (mCurrentFlingDirection != Direction.NONE) {
             // snap to nearest day
@@ -1879,13 +1862,13 @@ public class WeekView extends View {
             ViewCompat.postInvalidateOnAnimation(WeekView.this);
         }
         // Reset scrolling and fling direction.
-        mCurrentScrollDirection = mCurrentFlingDirection = Direction.NONE;*/
+        mCurrentScrollDirection = mCurrentFlingDirection = Direction.NONE;
     }
 
 
     @Override
     public void computeScroll() {
-/*        super.computeScroll();
+        super.computeScroll();
 
         if (mScroller.isFinished()) {
             if (mCurrentFlingDirection != Direction.NONE) {
@@ -1900,7 +1883,7 @@ public class WeekView extends View {
                 mCurrentOrigin.x = mScroller.getCurrX();
                 ViewCompat.postInvalidateOnAnimation(this);
             }
-        }*/
+        }
     }
 
     /**

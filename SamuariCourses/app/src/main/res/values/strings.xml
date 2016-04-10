@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Samuari Courses</string>
+    <string name="app_name">Samurai Courses</string>
     <string name="action_settings">Settings</string>
     <string name="hint">PUT CRN</string>
     <string name="classes">Classes: </string>
