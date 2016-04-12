@@ -24,7 +24,7 @@ class CRN{
         actv = _actv;
         days = _days;
         startTime = setStartTime(_time);
-        endTime = setEndTime(_time)
+        endTime = setEndTime(_time);
         room = _room;
         dates = _dates;
         instructor = _instructor;
@@ -50,7 +50,7 @@ class CRN{
     }
     
     private int setEndTime(String time){
-        String String meridian = time.substring(time.length()-2,time.length());
+        String  meridian = time.substring(time.length()-2,time.length());
         String endtime = time.substring(time.indexOf("-")+1,time.length()-2);
         
         return timeToInt(endtime, meridian);
