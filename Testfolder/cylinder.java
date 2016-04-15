@@ -9,6 +9,7 @@ import java.util.List;
 public class cylinder {
 	
 public static class schedule{
+	//Never used this class. I will use it to compare times once i get permutations
     ArrayList<ArrayList<courses>> week = new ArrayList<ArrayList<courses>>();    
     
     schedule(){
@@ -339,6 +340,7 @@ public static class courses {
     	}
     }
     
+	//converts time to an integer in 24-hour time.
     private int timeToInt(String time, String meridian){
         time = time.replaceAll(":","");
         
@@ -358,6 +360,7 @@ public static class courses {
 
 public static void main(String[] args) throws FileNotFoundException{
 	
+		//Master list with everything in it.
 		ArrayList<courses> coursesList = new ArrayList<courses>();
 		
 	
@@ -478,6 +481,7 @@ public static void main(String[] args) throws FileNotFoundException{
 			
 			for(int j=i+1;j<Lectures.size();j++)
 			{
+				
 				if(Lectures.get(i).getNumber() != Lectures.get(j).getNumber() && Title.equals("-sentinel")){
 					Title = Lectures.get(j).getNumber();
 				}
@@ -502,6 +506,7 @@ public static void main(String[] args) throws FileNotFoundException{
 		String classNumbers = Lectures.get(0).getNumber();
 		int ClassesAfter = 1;
 		
+		//Test to see if the new list passes.
 		for(int i=1;i<Lectures.size();i++){
 			if(!classNumbers.equals(Lectures.get(i).getNumber())){
 				ClassesAfter++;
@@ -516,6 +521,7 @@ public static void main(String[] args) throws FileNotFoundException{
 			return;
 		}
 		
+		//This is where you should add to the new finalList.
 		ArrayList<courses> finalList = new ArrayList<courses>();
 		
 		for(int i = 0; i < coursesList.size(); i++){
