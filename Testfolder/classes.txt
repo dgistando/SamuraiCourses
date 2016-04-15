@@ -1,0 +1,322 @@
+30173.0
+MATH-021-01
+Calc I Phys Sciences & Eng Must Also Register for a Corresponding Discussion
+4.0
+LECT
+MWF
+8:30-9:20am
+CLSSRM 105
+24-AUG 09-DEC
+Staff
+60.0
+1.0
+59.0
+1.0
+30174.0
+MATH-021-02D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+T
+9:30-11:20am
+CLSSRM 286
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30175.0
+MATH-021-03D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+T
+7:30-9:20am
+CLSSRM 279
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30176.0
+MATH-021-04D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+F
+11:30-1:20pm
+CLSSRM 288
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30177.0
+MATH-021-05D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+F
+9:30-11:20am
+CLSSRM 288
+24-AUG 09-DEC
+Staff
+12.0
+1.0
+11.0
+1.0
+33532.0
+MATH-021-06D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+T
+5:30-7:20pm
+CLSSRM 288
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30178.0
+MATH-021-20
+Calc I Phys Sciences & Eng Must Also Register for a Corresponding Discussion
+4.0
+LECT
+MWF
+2:30-3:20pm
+CLSSRM 120
+24-AUG 09-DEC
+Staff
+60.0
+0.0
+60.0
+1.0
+30179.0
+MATH-021-21D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+W
+9:30-11:20am
+KOLLIG 296
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30180.0
+MATH-021-22D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+T
+7:30-9:20pm
+CLSSRM 286
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30181.0
+MATH-021-23D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+T
+5:30-7:20pm
+CLSSRM 286
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30182.0
+MATH-021-24D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+R
+7:30-9:20pm
+CLSSRM 279
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+33542.0
+MATH-021-25D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+R
+5:30-7:20pm
+CLSSRM 279
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+35654.0
+MATH-021-30
+Calc I Phys Sciences & Eng Must Also Register for a Corresponding Discussion
+4.0
+LECT
+MWF
+3:30-4:20pm
+COB2 130
+24-AUG 09-DEC
+Staff
+48.0
+0.0
+48.0
+1.0
+35655.0
+MATH-021-31D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+R
+6:30-8:20pm
+CLSSRM 263
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+35657.0
+MATH-021-33D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+F
+4:30-6:20pm
+CLSSRM 263
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+35658.0
+MATH-021-34D
+Calc I Phys Sciences & Eng
+0.0
+DISC
+R
+7:30-9:20pm
+KOLLIG 396
+24-AUG 09-DEC
+Staff
+12.0
+0.0
+12.0
+1.0
+30406.0
+CSE-021-01
+Introduction to Computing II Must Also Register for a Corresponding Lab
+2.0
+LECT
+W
+2:00-2:50pm
+COB2 170
+24-AUG 09-DEC
+Staff
+90.0
+17.0
+73.0
+1.0
+30407.0
+CSE-021-02L
+Introduction to Computing II
+0.0
+LAB
+R
+10:30-1:20pm
+SCIENG 138
+24-AUG 09-DEC
+Staff
+30.0
+8.0
+22.0
+1.0
+30408.0
+CSE-021-03L
+Introduction to Computing II
+0.0
+LAB
+W
+4:30-7:20pm
+SCIENG 100
+24-AUG 09-DEC
+Staff
+30.0
+4.0
+26.0
+1.0
+31066.0
+CSE-021-04L
+Introduction to Computing II
+0.0
+LAB
+T
+1:30-4:20pm
+SCIENG 138
+24-AUG 09-DEC
+Staff
+30.0
+5.0
+25.0
+1.0
+30067.0
+SPAN-001-01
+Elementary Spanish I
+4.0
+LECT
+MTWR
+10:00-10:50am
+SSM 102
+24-AUG 09-DEC
+Torda,Elinor
+25.0
+10.0
+15.0
+1.0
+30339.0
+SPAN-001-02
+Elementary Spanish I
+4.0
+LECT
+MTWR
+9:00-9:50am
+SSM 102
+24-AUG 09-DEC
+Torda,Elinor
+25.0
+5.0
+20.0
+1.0
+34749.0
+SPAN-001-03
+Elementary Spanish I
+4.0
+LECT
+MTWR
+5:00-5:50pm
+SSM 102
+24-AUG 09-DEC
+Staff
+25.0
+19.0
+6.0
+1.0
