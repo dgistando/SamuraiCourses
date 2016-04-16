@@ -527,7 +527,7 @@ public static void main(String[] args) throws FileNotFoundException{
 		for(int i = 0; i < coursesList.size(); i++){
 			for(int j =0;j<Lectures.size();j++){
 				//finalList.add(j);
-				
+				n
 			}
 		}
 		
