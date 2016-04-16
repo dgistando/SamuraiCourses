@@ -530,7 +530,7 @@ public static void main(String[] args) throws FileNotFoundException{
 		 * list then its not okay to add eveything after.
 		 */
 		boolean okay=false;
-		for(course : coursesList){
+		for(courses course : coursesList){
 			if(course.getAct().equals("LECT")){
 				if(Lectures.contains(course))?okay=true:okay=false;
 			}
