@@ -524,10 +524,20 @@ public static void main(String[] args) throws FileNotFoundException{
 		//This is where you should add to the new finalList.
 		ArrayList<courses> finalList = new ArrayList<courses>();
 		
-		for(int i = 0; i < coursesList.size(); i++){
-			for(int j =0;j<Lectures.size();j++){
-				//finalList.add(j);
-				n
+		/**
+		 * if lecture and in Lectures list them its okay to add everything
+		 * after until you reach a lecture that's not in the list. if the lecture isn't in
+		 * list then its not okay to add eveything after.
+		 */
+		boolean okay=false;
+		for(course : coursesList){
+			if(course.getAct().equals("LECT")){
+				if(Lectures.contains(course))?okay=true:okay=false;
+			}
+			
+			if(okay){
+				finalList.add(course);
+				System.out.println(course.getCrn() +" "+course.getNumber());
 			}
 		}
 		
