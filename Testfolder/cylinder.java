@@ -531,8 +531,8 @@ public static void main(String[] args) throws FileNotFoundException{
 		 */
 		boolean okay=false;
 		for(courses course : coursesList){
-			if(course.getAct().equals("LECT")){
-				if(Lectures.contains(course))?okay=true:okay=false;
+			if(course.getActivity().equals("LECT")){
+				okay = (Lectures.contains(course)) ? true : false;
 			}
 			
 			if(okay){
