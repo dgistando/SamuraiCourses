@@ -1,15 +1,11 @@
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+
 
 public class cylinder {
 	
 public static class schedule{
-	//Never used this class. I will use it to compare times once i get permutations
     ArrayList<ArrayList<courses>> week = new ArrayList<ArrayList<courses>>();    
     
     schedule(){
@@ -69,6 +65,7 @@ public static class schedule{
                 a[i] = temp;
             }
         }
+        
     return lista;
     }
     
@@ -219,7 +216,7 @@ public static class courses {
 
     private void setStartTime(String time){
         //	10:00-12:50pm(example time)
-      	int Start_Time = 0;
+      	//int Start_Time = 0;
         String meridian = time.substring(time.length()-2,time.length());
         String endtime = time.substring(time.indexOf("-")+1,time.length()-2);
         String starttime = time.substring(0,time.indexOf("-"));
@@ -340,7 +337,6 @@ public static class courses {
     	}
     }
     
-	//converts time to an integer in 24-hour time.
     private int timeToInt(String time, String meridian){
         time = time.replaceAll(":","");
         
@@ -360,7 +356,6 @@ public static class courses {
 
 public static void main(String[] args) throws FileNotFoundException{
 	
-		//Master list with everything in it.
 		ArrayList<courses> coursesList = new ArrayList<courses>();
 		
 	
@@ -453,13 +448,22 @@ public static void main(String[] args) throws FileNotFoundException{
 		
 	
 		ArrayList<courses> Lectures = new ArrayList<courses>();
+		ArrayList<courses> listcopy = new ArrayList<courses>();
+		listcopy.addAll(coursesList);
+
 		int numDiffClasses = 0;
 		String className = "";
 		
-		for(courses entity:coursesList){
+		
+		String save="";
+		for(courses entity:listcopy){
 			if(entity.getActivity().equals("LECT")){
 				String s = entity.getNumber();
 				s = s.substring(0,s.indexOf('-')+4);
+				//System.out.println("test: "+entity.getNumber());
+				//Lectures.add(entity);//added
+				//Lectures.get(Lectures.size()-1).setNumber(s);//edit entry
+				
 				entity.setNumber(s);
 				Lectures.add(entity);
 				//className = s;
@@ -473,6 +477,8 @@ public static void main(String[] args) throws FileNotFoundException{
 			}
 		}
 		
+		listcopy = null;
+		
 		for(int i=0;i<Lectures.size();i++)
 		{
 			boolean deleteIt = false;
@@ -481,16 +487,15 @@ public static void main(String[] args) throws FileNotFoundException{
 			
 			for(int j=i+1;j<Lectures.size();j++)
 			{
-				
-				if(Lectures.get(i).getNumber() != Lectures.get(j).getNumber() && Title.equals("-sentinel")){
+				if(!Lectures.get(i).getNumber().equals(Lectures.get(j).getNumber()) && Title.equals("-sentinel")){
 					Title = Lectures.get(j).getNumber();
 				}
 				
-				if(Lectures.get(j).getNumber() == Title && !Lectures.get(j).conflicts(Lectures.get(i)) && deleteIt){
+				if(Lectures.get(j).getNumber().equals(Title) && !Lectures.get(j).conflicts(Lectures.get(i)) && deleteIt){
 					which = j;
 				}
 				
-				if(Lectures.get(j).getNumber() == Title && Lectures.get(j).conflicts(Lectures.get(i)) && !deleteIt){
+				if(Lectures.get(j).getNumber().equals(Title) && Lectures.get(j).conflicts(Lectures.get(i)) && !deleteIt){
 					deleteIt = true;
 					which = i;
 				}
@@ -503,17 +508,17 @@ public static void main(String[] args) throws FileNotFoundException{
 
 		System.out.println();
 		
+		//checking to see if same classes are there
 		String classNumbers = Lectures.get(0).getNumber();
 		int ClassesAfter = 1;
 		
-		//Test to see if the new list passes.
-		for(int i=1;i<Lectures.size();i++){
+		for(int i=0;i<Lectures.size();i++){
 			if(!classNumbers.equals(Lectures.get(i).getNumber())){
 				ClassesAfter++;
 			}
 			
-			classNumbers  =Lectures.get(i).getNumber();
-			System.out.println(Lectures.get(i).getNumber());//+" "+Lectures.get(i).getStartTime()+" "+ClassesAfter);
+			classNumbers = Lectures.get(i).getNumber();
+			System.out.println(Lectures.get(i).getCrn() +" "+ Lectures.get(i).getNumber()+" "+Lectures.get(i).getStartTime()+" "+ClassesAfter);
 		}
 		
 		if(numDiffClasses != ClassesAfter){
@@ -521,25 +526,48 @@ public static void main(String[] args) throws FileNotFoundException{
 			return;
 		}
 		
+		System.out.println();
+		
+		 
 		//This is where you should add to the new finalList.
 		ArrayList<courses> finalList = new ArrayList<courses>();
 		
 		/**
-		 * if lecture and in Lectures list them its okay to add everything
+		 * if lecture and in Lectures list then its okay to add everything
 		 * after until you reach a lecture that's not in the list. if the lecture isn't in
-		 * list then its not okay to add eveything after.
+		 * list then its not okay to add everything after.
 		 */
-		boolean okay=false;
+		boolean okay = false;
 		for(courses course : coursesList){
+			
+			//System.out.println("\n: "+course.getNumber());
+			
 			if(course.getActivity().equals("LECT")){
-				okay = (Lectures.contains(course)) ? true : false;
+				
+				for(int i=0;i<Lectures.size();i++){
+					
+					//System.out.println("comparing: "+course.getCrn()+" and "+Lectures.get(i).getCrn());
+					if(course.getCrn() == Lectures.get(i).getCrn()){
+						okay=true;
+						break;
+					}else{
+						okay=false;
+					}
+				}
+				//okay = (Lectures.contains(course)) ? true : false;
 			}
 			
 			if(okay){
 				finalList.add(course);
-				System.out.println(course.getCrn() +" "+course.getNumber());
+				//System.out.println(course.getCrn() +" "+course.getNumber());
 			}
 		}
+		
+		
+		for(int i=0;i<finalList.size();i++){
+			System.out.println(finalList.get(i).getCrn() +" "+finalList.get(i).getNumber());
+		}
+		
 		
 		
 		
