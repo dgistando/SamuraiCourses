@@ -1,23 +1,39 @@
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class cylinder {
 	
+	
 public static class schedule{
-    ArrayList<ArrayList<courses>> week = new ArrayList<ArrayList<courses>>();    
-    
-    schedule(){
-        int daysPerWeek = 5;
-        
-        for(int i = 0;i < daysPerWeek; i++){
-        	week.add(new ArrayList<courses>());
-        }   
+    courses LECT;
+    ArrayList<courses> DISC,LAB,OTHER;
+    int count;
+    static int counter=0;
+	
+    schedule(courses _lect){
+        LECT = _lect;
+        DISC = new ArrayList<courses>();
+        LAB = new ArrayList<courses>();
+        OTHER = new ArrayList<courses>();
+        counter++;
+        count = counter;
     }
     
-    public void addToList(courses Course){
+    schedule(){
     	
+    }
+    
+    public void insert(courses temp){
+    	if(temp.getActivity().equals("DISC")){
+    		DISC.add(temp);
+    	}else if(temp.getActivity().equals("LAB")){
+    		LAB.add(temp);
+    	}else{
+    		OTHER.add(temp);
+    	}
     }
     
     public boolean check(){
@@ -25,12 +41,18 @@ public static class schedule{
     	return false;
     }
     
-    public boolean generate(ArrayList<courses> list){
-    	courses[] arr = list.toArray(new courses[list.size()]);
+    public void generate(){    	
+
     	
-    	week.addAll(permute(arr,0));
+    	//for(int i=0; i < courseList.size(); i++){
+    		
+    	//}
     	
-    	return check();
+    	//courses[] arr = courseList.toArray(new courses[courseList.size()]);
+    	
+    	//week.addAll(permute(arr,1));
+    	
+    	//return check();
     }
     
     public ArrayList<ArrayList<courses>> permute(courses a[],int k){
@@ -43,7 +65,7 @@ public static class schedule{
             for (int i = 0; i < a.length; i++) 
             {
             	//add to list of courses
-            	lista.get(lista.size()).add(a[i]);
+            	lista.get(lista.size()-1).add(a[i]);
                 System.out.print(" [" + a[i].getCrn() + "] ");
             }
             System.out.println();
@@ -67,6 +89,14 @@ public static class schedule{
         }
         
     return lista;
+    }
+    
+    public void setCount(int i){
+    	counter=i;
+    }
+    
+    public int getCount(){
+    	return count;
     }
     
 }
@@ -124,6 +154,26 @@ public static class courses {
 
     public courses(){
     	
+    }
+    
+    public courses(courses temp){
+        this.setId(temp.getId());
+        this.setCrn(temp.getCrn());
+        this.setNumber(temp.getNumber());
+        this.setTitle(temp.getTitle());
+        this.setUnits(temp.getUnits());
+        this.setActivity(temp.getActivity());
+        this.setDays(temp.getDays());
+        this.startTime = temp.getStartTime();
+        this.endTime = temp.getEndTime();
+        //this.setTime(time);
+        this.setRoom(temp.getRoom());
+        this.setLength(temp.getLength());
+        this.setInstruction(temp.getInstruction());
+        this.setMaxEnrl(temp.getMaxEnrl());
+        this.setSeatsAvailable(temp.getSeatsAvailable());
+        this.setActiveEnrl(temp.getActiveEnrl());
+        this.setSem_id(1);
     }
     
     public courses(int crn) {
@@ -354,6 +404,81 @@ public static class courses {
     }
 }
 
+
+
+public static boolean testSchdeule(ArrayList<courses> list){
+	
+	for(int i=0;i<list.size();i++){
+		for(int j=i+1;j<list.size();j++){
+			
+			if(list.get(i).conflicts(list.get(j))){
+				System.out.println("CONFLICTS");
+				return false;
+			}
+			
+		}
+	}
+	
+	System.out.println("PASS AND VALID");
+	return true;
+}
+
+public static ArrayList<schedule> Kcombinations(schedule[] sequence, int n){
+	ArrayList<schedule> list = new ArrayList<schedule>();
+	int N = sequence.length,ct = 1;
+	String str = "";
+	schedule[] temp = new schedule[N];
+	 //param int[] sequence, 
+    //N = arr size.
+    //n = num elements in subsets or number of different classes
+    int[] binary = new int[(int) Math.pow(2, N)];
+    for (int i = 0; i < Math.pow(2, N); i++) 
+    {
+        int b = 1;
+        binary[i] = 0;
+        int num = i, count = 0;
+        while (num > 0) 
+        {
+            if (num % 2 == 1)
+                count++;
+            binary[i] += (num % 2) * b;
+            num /= 2;
+            b = b * 10;
+        }
+        if (count == n) 
+        {
+        	ct=0;
+            System.out.print("{ ");
+            for (int j = 0; j < N; j++) 
+            {
+                if (binary[i] % 10 == 1)
+                {
+                    if(!sequence[j].LECT.getNumber().substring(0, sequence[j].LECT.getNumber().indexOf('-')+4).equals(str)){
+                    	ct++;
+                    }
+                	
+                    
+                    
+                	str = sequence[j].LECT.getNumber().substring(0, sequence[j].LECT.getNumber().indexOf('-')+4);
+                    System.out.print(sequence[j].LECT.getNumber() + " ");
+                    
+                }
+                binary[i] /= 10;
+            }
+            System.out.println("}");
+            
+            if(ct != n){
+            	System.out.print(ct +" ::Rejected:: \n");
+            	
+            }else{
+            	list.addAll(Arrays.asList(temp));
+            }
+        }
+    }
+	
+	return list;
+}
+
 public static void main(String[] args) throws FileNotFoundException{
 	
 		ArrayList<courses> coursesList = new ArrayList<courses>();
@@ -448,24 +573,19 @@ public static void main(String[] args) throws FileNotFoundException{
 		
 	
 		ArrayList<courses> Lectures = new ArrayList<courses>();
-		ArrayList<courses> listcopy = new ArrayList<courses>();
-		listcopy.addAll(coursesList);
 
 		int numDiffClasses = 0;
 		String className = "";
-		
-		
-		String save="";
-		for(courses entity:listcopy){
+		for(courses entity:coursesList){
 			if(entity.getActivity().equals("LECT")){
 				String s = entity.getNumber();
 				s = s.substring(0,s.indexOf('-')+4);
 				//System.out.println("test: "+entity.getNumber());
-				//Lectures.add(entity);//added
-				//Lectures.get(Lectures.size()-1).setNumber(s);//edit entry
+				Lectures.add(new courses(entity));//added
+				Lectures.get(Lectures.size()-1).setNumber(s);//edit entry
 				
-				entity.setNumber(s);
-				Lectures.add(entity);
+				//entity.setNumber(s);
+				//Lectures.add(entity);
 				//className = s;
 				
 				if(!className.equals(s)){
@@ -477,7 +597,6 @@ public static void main(String[] args) throws FileNotFoundException{
 			}
 		}
 		
-		listcopy = null;
 		
 		for(int i=0;i<Lectures.size();i++)
 		{
@@ -568,7 +687,55 @@ public static void main(String[] args) throws FileNotFoundException{
 			System.out.println(finalList.get(i).getCrn() +" "+finalList.get(i).getNumber());
 		}
 		
+		String str="";
+		ArrayList<ArrayList<courses>> Valid = new ArrayList<ArrayList<courses>>();
+		ArrayList<schedule> Scheduler = new ArrayList<schedule>();
+		schedule c = new schedule();
 		
+		for(courses entity: finalList){
+			
+			if(entity.getActivity().equals("LECT")){
+				
+				if(!entity.getNumber().substring(0, entity.getNumber().indexOf('-')+4).equals(str)){
+					c.setCount(0);
+				}
+				
+				str = entity.getNumber().substring(0, entity.getNumber().indexOf('-')+4);
+				okay = true;
+				
+				Scheduler.add(new schedule(entity));
+				continue;
+			}
+			
+			if(okay){
+				Scheduler.get(Scheduler.size()-1).insert(entity);
+			}
+		}
+		
+		Kcombinations(Scheduler.toArray(new schedule[Scheduler.size()]),numDiffClasses);
+		
+		/*for(int i=0;i<Scheduler.size();i++){
+			//stop after first class
+			if(i!=0 && Scheduler.get(i).count == 1){
+				break;
+			}
+			
+			ArrayList<courses> temp  = new ArrayList<courses>();
+			System.out.println(Scheduler.get(i).LECT.getNumber()+" count:"+ Scheduler.get(i).getCount());
+			
+			//Add Lectures
+			for(int j=i+1;j<Scheduler.size();j++){
+				temp.add(Scheduler.get(i).LECT);
+				
+				if(Scheduler.get(j).count > i){
+					continue;
+				}else{
+					temp.add(Scheduler.get(j).LECT);
+				}
+				
+			}
+			
+		}*/
 		
 		
 	}
