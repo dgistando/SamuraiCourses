@@ -405,8 +405,59 @@ public static class courses {
 }
 
 
+public static ArrayList<ArrayList<courses>> df(schedule[] arr){
+	ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
+	ArrayList<courses> list = new ArrayList<courses>();
+	
+	
+	/*for(int i=0;i<arr.length;i++){
+		//list.add(arr[i].LECT);
+		for (int j = 0 ;j<arr.length;j++){
+			list.add(arr[j].LECT);
+			
+			if(arr[i].DISC.size() != 0){
+				list.add(arr[i].DISC.get(0));	
+			}
+			
+			if(arr[i].LAB.size() !=0){
+				list.add(arr[i].LAB.get(0));
+			}
+			
+		}
+		
+		if(testSchedule(list)){
+			coursesList.add(list);
+		}
+		
+	}*/
+	
+	
+	for(int i =0;i<arr.length;i++){
+		list.add(arr[i].LECT);
+		if(arr[i].DISC.size() != 0){
+			list.add(arr[i].DISC.get(0));
+			
+		}
+		
+		if(arr[i].LAB.size() !=0){
+			list.add(arr[i].LAB.get(0));
+		}
+		
+		if(arr[i].OTHER.size() != 0){
+			list.add(arr[i].OTHER.get(0));
+		}
+		
+		if(testSchedule(list)){
+			coursesList.add(list);
+		}
+	}
+	
+	
+	
+	return coursesList;
+}
 
-public static boolean testSchdeule(ArrayList<courses> list){
+public static boolean testSchedule(ArrayList<courses> list){
 	
 	for(int i=0;i<list.size();i++){
 		for(int j=i+1;j<list.size();j++){
@@ -423,11 +474,11 @@ public static boolean testSchdeule(ArrayList<courses> list){
 	return true;
 }
 
-public static ArrayList<schedule> Kcombinations(schedule[] sequence, int n){
-	ArrayList<schedule> list = new ArrayList<schedule>();
+public static ArrayList<ArrayList<schedule>> Kcombinations(schedule[] sequence, int n){
+	ArrayList<ArrayList<schedule>> list = new ArrayList<ArrayList<schedule>>();
 	int N = sequence.length,ct = 1;
 	String str = "";
-	schedule[] temp = new schedule[N];
+	schedule[] temp = new schedule[n];
 	 //param int[] sequence, 
     //N = arr size.
     //n = num elements in subsets or number of different classes
@@ -448,7 +499,8 @@ public static ArrayList<schedule> Kcombinations(schedule[] sequence, int n){
         if (count == n) 
         {
         	ct=0;
-            System.out.print("{ ");
+        	list.add(new ArrayList<schedule>());
+        	System.out.print("{ ");
             for (int j = 0; j < N; j++) 
             {
                 if (binary[i] % 10 == 1)
@@ -456,9 +508,9 @@ public static ArrayList<schedule> Kcombinations(schedule[] sequence, int n){
                     if(!sequence[j].LECT.getNumber().substring(0, sequence[j].LECT.getNumber().indexOf('-')+4).equals(str)){
                     	ct++;
                     }
+                    
+                    list.get(list.size()-1).add(sequence[j]);
                 	
-                    
-                    
                 	str = sequence[j].LECT.getNumber().substring(0, sequence[j].LECT.getNumber().indexOf('-')+4);
                     System.out.print(sequence[j].LECT.getNumber() + " ");
                     
@@ -469,9 +521,7 @@ public static ArrayList<schedule> Kcombinations(schedule[] sequence, int n){
             
             if(ct != n){
             	System.out.print(ct +" ::Rejected:: \n");
-            	
-            }else{
-            	list.addAll(Arrays.asList(temp));
+            	list.remove(list.size()-1);
             }
         }
     }
@@ -690,6 +740,8 @@ public static void main(String[] args) throws FileNotFoundException{
 		String str="";
 		ArrayList<ArrayList<courses>> Valid = new ArrayList<ArrayList<courses>>();
 		ArrayList<schedule> Scheduler = new ArrayList<schedule>();
+		ArrayList<ArrayList<schedule>> semifinal = new ArrayList<ArrayList<schedule>>();
+
 		schedule c = new schedule();
 		
 		for(courses entity: finalList){
@@ -712,7 +764,22 @@ public static void main(String[] args) throws FileNotFoundException{
 			}
 		}
 		
-		Kcombinations(Scheduler.toArray(new schedule[Scheduler.size()]),numDiffClasses);
+		semifinal.addAll(Kcombinations(Scheduler.toArray(new schedule[Scheduler.size()]),numDiffClasses));
+		
+
+		for(ArrayList<schedule> test : semifinal){
+				for(ArrayList<courses> list : df(test.toArray(new schedule[test.size()]))){
+					Valid.add(new ArrayList<courses>());
+					Valid.get(Valid.size()-1).addAll(list);
+				}
+		}
+		
+		for(int i=0;i<Valid.size();i++){
+			for(int j=0;j<Valid.get(i).size();j++){
+				System.out.print(Valid.get(i).get(j).getCrn()+" ");
+			}
+			System.out.println();
+		}
 		
 		/*for(int i=0;i<Scheduler.size();i++){
 			//stop after first class
