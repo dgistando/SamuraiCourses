@@ -407,7 +407,7 @@ public static class courses {
 
 public static ArrayList<ArrayList<courses>> df(schedule[] arr){
 	ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
-	ArrayList<courses> list = new ArrayList<courses>();
+	ArrayList<courses> list =  new ArrayList<courses>();
 	
 	
 	/*for(int i=0;i<arr.length;i++){
@@ -431,28 +431,36 @@ public static ArrayList<ArrayList<courses>> df(schedule[] arr){
 		
 	}*/
 	
-	
-	for(int i =0;i<arr.length;i++){
-		list.add(arr[i].LECT);
-		if(arr[i].DISC.size() != 0){
-			list.add(arr[i].DISC.get(0));
+	for(int j = 0; j < arr.length; j++)
+	{
+		list = new ArrayList<courses>();
+		for(int i = 0; i<arr.length; i++)
+		{
+			list.add(arr[i].LECT);
 			
+			if(arr[i].DISC.size() != 0 && j < arr[i].DISC.size())
+			{
+				list.add(arr[i].DISC.get(j));
+			}
+			
+			if(arr[i].LAB.size() !=0 && j < arr[i].LAB.size())
+			{
+				list.add(arr[i].LAB.get(j));
+			}
+			
+			if(arr[i].OTHER.size() != 0 && j < arr[i].OTHER.size())
+			{
+				list.add(arr[i].OTHER.get(j));
+			}
 		}
-		
-		if(arr[i].LAB.size() !=0){
-			list.add(arr[i].LAB.get(0));
-		}
-		
-		if(arr[i].OTHER.size() != 0){
-			list.add(arr[i].OTHER.get(0));
-		}
-		
-		if(testSchedule(list)){
-			coursesList.add(list);
-		}
+				if(testSchedule(list))
+				{
+				//for(courses entity : list){
+					//System.out.print(entity.getCrn());
+				//}	
+				coursesList.add(list);
+				}
 	}
-	
-	
 	
 	return coursesList;
 }
@@ -733,9 +741,9 @@ public static void main(String[] args) throws FileNotFoundException{
 		}
 		
 		
-		for(int i=0;i<finalList.size();i++){
+		/*for(int i=0;i<finalList.size();i++){
 			System.out.println(finalList.get(i).getCrn() +" "+finalList.get(i).getNumber());
-		}
+		}*/
 		
 		String str="";
 		ArrayList<ArrayList<courses>> Valid = new ArrayList<ArrayList<courses>>();

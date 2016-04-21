@@ -251,7 +251,7 @@ public class NinjaActivity extends AppCompatActivity {
      */
     private void setClasseslist(final String selectedDepartment){
     //Plan to make nested class
-        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+        AsyncTask<Void,Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try{
@@ -273,7 +273,7 @@ public class NinjaActivity extends AppCompatActivity {
 
                             classesAdapter.clear();
                             for (String each : hashedset) {
-                                classesAdapter.add(each);
+                                classesAdapter.add(each.replaceFirst("^0+(?!$)",""));
                                 classesAdapter.notifyDataSetChanged();
                             }
                         }
