@@ -2,7 +2,10 @@ package com.ninja.cse.samuaricourses;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -29,11 +33,19 @@ import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
+import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDataType;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.MobileServiceLocalStoreException;
+import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLocalStore;
+import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -42,14 +54,15 @@ import java.util.concurrent.TimeUnit;
 public class NinjaActivity extends AppCompatActivity {
 
     private MobileServiceClient mClient;
-    private MobileServiceTable<courses> mCoursesTable;
+    //private MobileServiceTable<courses> mCoursesTable;
+    private MobileServiceSyncTable<courses> mCoursesTable;
     private ProgressBar mProgressBar;
-    //private scheduleDatabase db = new scheduleDatabase();
+
 
     private AutoCompleteTextView department,classes;
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
-
+    ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
     /**
      * This is the current starting point for the app. It loads the
      * autocomplete textviews and the buttons.
@@ -97,7 +110,11 @@ public class NinjaActivity extends AppCompatActivity {
                             }
                         });
 
-                        mCoursesTable = mClient.getTable(courses.class);
+                        //mCoursesTable = mClient.getTable(courses.class);
+                        //mPullQurey = mClient.getTable(courses.class).where().field("complete").eq(false);
+                        initLocalStore().get();
+                        syncAsync();
+
 
                         department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -110,7 +127,8 @@ public class NinjaActivity extends AppCompatActivity {
                                 int newpos = departmentTempAdapter.getPosition(chosen);
                                 chosen = departmentTagAdapter.getItem(newpos);
                                 Log.w("EndCheck", chosen);
-                                setClasseslist(chosen);
+                                //disabled to avoid errors.
+                                //setClasseslist(chosen);
                             }
                         });
 
@@ -202,47 +220,6 @@ public class NinjaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    {/*private class scheduleDatabase extends AsyncTask<String,Void,ArrayList<courses>> {
-        private ArrayList<courses> coursesList;
-
-
-        @Override
-        protected ArrayList<courses> doInBackground(String... params) {
-            try {
-
-                coursesList = availableClasses(params[0]);
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Set<String> hashedset = new HashSet<>();
-                        String temp;
-                        for (courses number : coursesList) {
-                            //gets rid of extra characters and duplicates
-                            temp = number.getNumber();
-                            temp = temp.substring(temp.indexOf("-") + 1);
-                            temp = temp.substring(0, temp.indexOf("-"));
-                            hashedset.add(temp);
-                        }
-
-                        classesAdapter.clear();
-                        for (String each : hashedset) {
-                            classesAdapter.add(each);
-                            classesAdapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-                return coursesList;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }*/}
-
     /**
      * This method performs an Asynchronous task that adds a list of course number to the
      * classes TextView.
@@ -303,8 +280,8 @@ public class NinjaActivity extends AppCompatActivity {
      * @throws InterruptedException
      */
     private ArrayList<courses> availableClasses(String item) throws ExecutionException, InterruptedException{
-            ArrayList<courses> entities =  mCoursesTable.where().startsWith("number",item).execute().get();
-        return entities;
+           // ArrayList<courses> entities =  mCoursesTable.where().startsWith("number",item).execute().get();
+        return (new ArrayList<courses>());
     }
 
 
@@ -356,6 +333,111 @@ public class NinjaActivity extends AppCompatActivity {
             });
 
             return resultFuture;
+        }
+    }
+
+    /**
+     * Initialize local storage
+     * @return
+     * @throws MobileServiceLocalStoreException
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    private AsyncTask<Void, Void, Void> initLocalStore() throws MobileServiceLocalStoreException, ExecutionException, InterruptedException {
+
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+
+                    MobileServiceSyncContext syncContext = mClient.getSyncContext();
+
+                    if (syncContext.isInitialized())
+                        return null;
+
+                    SQLiteLocalStore localStore = new SQLiteLocalStore(mClient.getContext(), "OfflineStore", null, 1);
+
+
+                    Map<String, ColumnDataType> tableDefinition = new HashMap<String, ColumnDataType>();
+                    tableDefinition.put("crn", ColumnDataType.Integer);
+                    tableDefinition.put("number", ColumnDataType.String);
+                    tableDefinition.put("title", ColumnDataType.String);
+                    tableDefinition.put("units", ColumnDataType.Integer);
+                    tableDefinition.put("activity", ColumnDataType.String);
+                    tableDefinition.put("days", ColumnDataType.String);
+                    tableDefinition.put("time", ColumnDataType.String);
+                    tableDefinition.put("room", ColumnDataType.String);
+                    tableDefinition.put("length", ColumnDataType.String);
+                    tableDefinition.put("instruction", ColumnDataType.String);
+                    tableDefinition.put("maxEnrl", ColumnDataType.Integer);
+                    tableDefinition.put("seatsAvailable", ColumnDataType.Integer);
+                    tableDefinition.put("activeEnrl", ColumnDataType.Integer);
+                    tableDefinition.put("sem_id", ColumnDataType.Integer);
+
+                    localStore.defineTable("courses", tableDefinition);
+                    SimpleSyncHandler handler = new SimpleSyncHandler();
+
+                    syncContext.initialize(localStore, handler).get();
+
+                    mCoursesTable = mClient.getSyncTable(courses.class);
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        };
+
+        return runAsyncTask(task);
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void syncAsync(){
+        if (isNetworkAvailable()) {
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        mClient.getSyncContext().push().get();
+                        mCoursesTable.pull(mClient.getTable(courses.class).select(
+                                "crn",
+                                "number",
+                                "title",
+                                "units",
+                                "activity",
+                                "days",
+                                "time",
+                                "room",
+                                "length",
+                                "instruction",
+                                "maxEnrl",
+                                "seatsAvailable",
+                                "activeEnrl",
+                                "sem_id")).get();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    return null;
+                }
+            }.execute();
+        } else {
+            Toast.makeText(this, "You are not online, re-sync later!" +
+                    "", Toast.LENGTH_LONG).show();
         }
     }
 }
