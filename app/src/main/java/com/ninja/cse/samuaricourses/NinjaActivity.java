@@ -33,6 +33,8 @@ import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.query.Query;
+import com.microsoft.windowsazure.mobileservices.table.query.QueryOperations;
 import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext;
 import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable;
 import com.microsoft.windowsazure.mobileservices.table.sync.localstore.ColumnDataType;
@@ -45,6 +47,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -112,9 +115,10 @@ public class NinjaActivity extends AppCompatActivity {
 
                         //mCoursesTable = mClient.getTable(courses.class);
                         //mPullQurey = mClient.getTable(courses.class).where().field("complete").eq(false);
-                        initLocalStore().get();
-                        syncAsync();
-
+                        mCoursesTable = mClient.getSyncTable("courses", courses.class);
+                        initLocalStore();
+                        //sync();
+                        //refreshItemsFromMobileServiceTableSyncTable();
 
                         department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -219,6 +223,13 @@ public class NinjaActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     *
+     * @return
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
 
     /**
      * This method performs an Asynchronous task that adds a list of course number to the
@@ -379,7 +390,10 @@ public class NinjaActivity extends AppCompatActivity {
 
                     syncContext.initialize(localStore, handler).get();
 
-                    mCoursesTable = mClient.getSyncTable(courses.class);
+                    syncContext.push().get();
+                    Query query = QueryOperations.tableName("courses");
+                    mCoursesTable.pull(query).get();
+                    //mCoursesTable = mClient.getSyncTable(courses.class);
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }
@@ -406,38 +420,22 @@ public class NinjaActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void syncAsync(){
-        if (isNetworkAvailable()) {
-            new AsyncTask<Void, Void, Void>() {
-
-                @Override
-                protected Void doInBackground(Void... params) {
-                    try {
-                        mClient.getSyncContext().push().get();
-                        mCoursesTable.pull(mClient.getTable(courses.class).select(
-                                "crn",
-                                "number",
-                                "title",
-                                "units",
-                                "activity",
-                                "days",
-                                "time",
-                                "room",
-                                "length",
-                                "instruction",
-                                "maxEnrl",
-                                "seatsAvailable",
-                                "activeEnrl",
-                                "sem_id")).get();
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    return null;
+    /*private AsyncTask<Void, Void, Void> sync() {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    MobileServiceSyncContext syncContext = mClient.getSyncContext();
+                    //syncContext.initialize();
+                    syncContext.push().get();
+                    Query query = QueryOperations.tableName("courses");
+                    mCoursesTable.pull(query).get();
+                } catch (final Exception e) {
+                    e.printStackTrace();
                 }
-            }.execute();
-        } else {
-            Toast.makeText(this, "You are not online, re-sync later!" +
-                    "", Toast.LENGTH_LONG).show();
-        }
-    }
+                return null;
+            }
+        };
+        return runAsyncTask(task);
+    }*/
 }
