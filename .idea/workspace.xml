@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="QUER" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="sam" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -60,21 +60,25 @@
       <file leaf-file-name="NinjaActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.4274354">
-              <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.5683453">
+              <caret line="182" column="20" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
               <folding>
-                <element signature="e#2946#2955#0" expanded="true" />
-                <element signature="e#3008#3016#0" expanded="true" />
-                <element signature="e#4732#5419#0" expanded="true" />
-                <element signature="e#5418#5419#0" expanded="true" />
-                <element signature="e#6173#6182#0" expanded="true" />
+                <element signature="e#2940#2949#0" expanded="true" />
+                <element signature="e#3013#3022#0" expanded="true" />
+                <element signature="e#3075#3083#0" expanded="true" />
+                <element signature="e#4799#5486#0" expanded="true" />
+                <element signature="e#5485#5486#0" expanded="true" />
+                <element signature="e#9436#11897#0" expanded="true" />
+                <element signature="e#9605#9613#0" expanded="true" />
+                <element signature="e#9810#9818#0" expanded="true" />
+                <element signature="e#11896#11897#0" expanded="true" />
                 <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-                <element signature="e#12550#13542#0" expanded="true" />
-                <element signature="e#13541#13542#0" expanded="true" />
+                <element signature="e#13674#14666#0" expanded="true" />
+                <element signature="e#14665#14666#0" expanded="true" />
                 <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-                <element signature="e#16468#18686#0" expanded="true" />
-                <element signature="e#16984#17008#0" expanded="true" />
-                <element signature="e#18685#18686#0" expanded="true" />
+                <element signature="e#17592#19810#0" expanded="true" />
+                <element signature="e#18108#18132#0" expanded="true" />
+                <element signature="e#19809#19810#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3696,7 +3700,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.093856655" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4778157" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -3789,18 +3793,22 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="402" column="10" selection-start-line="402" selection-start-column="10" selection-end-line="402" selection-end-column="10" />
           <folding>
-            <element signature="e#2946#2955#0" expanded="true" />
-            <element signature="e#3008#3016#0" expanded="true" />
-            <element signature="e#4732#5419#0" expanded="true" />
-            <element signature="e#5418#5419#0" expanded="true" />
-            <element signature="e#6173#6182#0" expanded="true" />
+            <element signature="e#2940#2949#0" expanded="true" />
+            <element signature="e#3013#3022#0" expanded="true" />
+            <element signature="e#3075#3083#0" expanded="true" />
+            <element signature="e#4799#5486#0" expanded="true" />
+            <element signature="e#5485#5486#0" expanded="true" />
+            <element signature="e#9436#11897#0" expanded="true" />
+            <element signature="e#9605#9613#0" expanded="true" />
+            <element signature="e#9810#9818#0" expanded="true" />
+            <element signature="e#11896#11897#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#12550#13542#0" expanded="true" />
-            <element signature="e#13541#13542#0" expanded="true" />
+            <element signature="e#13674#14666#0" expanded="true" />
+            <element signature="e#14665#14666#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#16468#18686#0" expanded="true" />
-            <element signature="e#16984#17008#0" expanded="true" />
-            <element signature="e#18685#18686#0" expanded="true" />
+            <element signature="e#17592#19810#0" expanded="true" />
+            <element signature="e#18108#18132#0" expanded="true" />
+            <element signature="e#19809#19810#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3895,18 +3903,22 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="402" column="10" selection-start-line="402" selection-start-column="10" selection-end-line="402" selection-end-column="10" />
           <folding>
-            <element signature="e#2946#2955#0" expanded="true" />
-            <element signature="e#3008#3016#0" expanded="true" />
-            <element signature="e#4732#5419#0" expanded="true" />
-            <element signature="e#5418#5419#0" expanded="true" />
-            <element signature="e#6173#6182#0" expanded="true" />
+            <element signature="e#2940#2949#0" expanded="true" />
+            <element signature="e#3013#3022#0" expanded="true" />
+            <element signature="e#3075#3083#0" expanded="true" />
+            <element signature="e#4799#5486#0" expanded="true" />
+            <element signature="e#5485#5486#0" expanded="true" />
+            <element signature="e#9436#11897#0" expanded="true" />
+            <element signature="e#9605#9613#0" expanded="true" />
+            <element signature="e#9810#9818#0" expanded="true" />
+            <element signature="e#11896#11897#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#12550#13542#0" expanded="true" />
-            <element signature="e#13541#13542#0" expanded="true" />
+            <element signature="e#13674#14666#0" expanded="true" />
+            <element signature="e#14665#14666#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#16468#18686#0" expanded="true" />
-            <element signature="e#16984#17008#0" expanded="true" />
-            <element signature="e#18685#18686#0" expanded="true" />
+            <element signature="e#17592#19810#0" expanded="true" />
+            <element signature="e#18108#18132#0" expanded="true" />
+            <element signature="e#19809#19810#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4001,18 +4013,22 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="380" column="20" selection-start-line="380" selection-start-column="20" selection-end-line="380" selection-end-column="20" />
           <folding>
-            <element signature="e#2946#2955#0" expanded="true" />
-            <element signature="e#3008#3016#0" expanded="true" />
-            <element signature="e#4732#5419#0" expanded="true" />
-            <element signature="e#5418#5419#0" expanded="true" />
-            <element signature="e#6173#6182#0" expanded="true" />
+            <element signature="e#2940#2949#0" expanded="true" />
+            <element signature="e#3013#3022#0" expanded="true" />
+            <element signature="e#3075#3083#0" expanded="true" />
+            <element signature="e#4799#5486#0" expanded="true" />
+            <element signature="e#5485#5486#0" expanded="true" />
+            <element signature="e#9436#11897#0" expanded="true" />
+            <element signature="e#9605#9613#0" expanded="true" />
+            <element signature="e#9810#9818#0" expanded="true" />
+            <element signature="e#11896#11897#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#12550#13542#0" expanded="true" />
-            <element signature="e#13541#13542#0" expanded="true" />
+            <element signature="e#13674#14666#0" expanded="true" />
+            <element signature="e#14665#14666#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#16468#18686#0" expanded="true" />
-            <element signature="e#16984#17008#0" expanded="true" />
-            <element signature="e#18685#18686#0" expanded="true" />
+            <element signature="e#17592#19810#0" expanded="true" />
+            <element signature="e#18108#18132#0" expanded="true" />
+            <element signature="e#19809#19810#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4192,21 +4208,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.4274354">
-          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.5683453">
+          <caret line="182" column="20" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
           <folding>
-            <element signature="e#2946#2955#0" expanded="true" />
-            <element signature="e#3008#3016#0" expanded="true" />
-            <element signature="e#4732#5419#0" expanded="true" />
-            <element signature="e#5418#5419#0" expanded="true" />
-            <element signature="e#6173#6182#0" expanded="true" />
+            <element signature="e#2940#2949#0" expanded="true" />
+            <element signature="e#3013#3022#0" expanded="true" />
+            <element signature="e#3075#3083#0" expanded="true" />
+            <element signature="e#4799#5486#0" expanded="true" />
+            <element signature="e#5485#5486#0" expanded="true" />
+            <element signature="e#9436#11897#0" expanded="true" />
+            <element signature="e#9605#9613#0" expanded="true" />
+            <element signature="e#9810#9818#0" expanded="true" />
+            <element signature="e#11896#11897#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#12550#13542#0" expanded="true" />
-            <element signature="e#13541#13542#0" expanded="true" />
+            <element signature="e#13674#14666#0" expanded="true" />
+            <element signature="e#14665#14666#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#16468#18686#0" expanded="true" />
-            <element signature="e#16984#17008#0" expanded="true" />
-            <element signature="e#18685#18686#0" expanded="true" />
+            <element signature="e#17592#19810#0" expanded="true" />
+            <element signature="e#18108#18132#0" expanded="true" />
+            <element signature="e#19809#19810#0" expanded="true" />
           </folding>
         </state>
       </provider>
