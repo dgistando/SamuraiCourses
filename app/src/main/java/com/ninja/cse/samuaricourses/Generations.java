@@ -22,7 +22,9 @@ public class Generations extends BaseGenerations {
         startTime.set(Calendar.HOUR_OF_DAY, 3);
         startTime.set(Calendar.DAY_OF_MONTH, 22);
         startTime.set(Calendar.MINUTE, 0);
-        startTime.set(Calendar.MONTH, 7);
+        startTime.set(Calendar.MONTH, 6);//set month one month before the set month of august
+        startTime.add(Calendar.MONTH,1);//adding one month to July, makes August
+        startTime.add(Calendar.WEEK_OF_YEAR,5);//now you can increment by weeks, number means, + or - week
         startTime.set(Calendar.YEAR, newYear);
         Calendar endTime = (Calendar) startTime.clone();
         endTime.add(Calendar.HOUR, 1);
