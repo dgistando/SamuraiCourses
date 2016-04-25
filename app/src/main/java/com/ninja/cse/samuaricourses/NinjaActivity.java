@@ -136,6 +136,7 @@ public class NinjaActivity extends AppCompatActivity {
                                 int newpos = departmentTempAdapter.getPosition(chosen);
                                 chosen = departmentTagAdapter.getItem(newpos);
                                 Log.w("EndCheck", chosen);
+                                selectedCourses.clear();
                                 selectedCourses.addAll(db.courseSearchByDepartment(chosen));
 
                                 Set<String> hashedset = new HashSet<>();
@@ -205,10 +206,6 @@ public class NinjaActivity extends AppCompatActivity {
                 String validCourseNumber="-0",Selected = "-0";
                 Selected = classes.getText().toString();
 
-                if(mycourses.contains(chosen + " " + selectedCourses)){
-                    Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 for(int i = 0; i<selectedCourses.size(); i++) {
                     validCourseNumber = selectedCourses.get(i).getNumber();
@@ -217,10 +214,14 @@ public class NinjaActivity extends AppCompatActivity {
                     Log.d("compared", validCourseNumber +" compared with "+ Selected);
                     if (validCourseNumber.equals(Selected)) {
 
-                        //if(listToGenerateCourses.contains(selectedCourses.get(i))){
-                           // Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
-                           // return;
-                        //}
+                        for(courses entity: listToGenerateCourses){
+                            //if(listToGenerateCourses.contains(selectedCourses.get(i)) ){
+                            if(entity.getCrn() == selectedCourses.get(i).getCrn()){
+                                Log.d("CRN CHECK: ", "selected courses.size: "+selectedCourses.size()+"   "+entity.getCrn()+entity.getNumber() +" "+ selectedCourses.get(i).getCrn()+selectedCourses.get(i).getNumber());
+                                Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
 
                         listadapter.add(chosen + " " + validCourseNumber);
                         listview.setItemChecked(listadapter.getCount()-1, true);
@@ -233,10 +234,11 @@ public class NinjaActivity extends AppCompatActivity {
                     //listview.setItemChecked(i, true);
                     //listadapter.notifyDataSetChanged();
                 Log.w("GetCheck", " " + classes.getText().toString());
-
+                classeslist.clear();
                 for(courses entity:listToGenerateCourses){
                     Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
                 }
+                Log.d("list to generate", "\n");
 
             }
         });

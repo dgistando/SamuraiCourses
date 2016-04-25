@@ -84,10 +84,14 @@ public class DBHelper extends SQLiteOpenHelper{
         try{
             Log.d("SELECTED", dep);
             String query = "SELECT * FROM courses WHERE number like '%" + dep + "%' order by number";
+            Log.d("SELECTED",query);
             db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
 
             res = db.rawQuery(query, null);
             while(res.moveToNext()) {
+                if(res.getString(2).equals("TBD-TBD")){
+                    continue;
+                }
                 result.add(new courses());
                 result.get(result.size()-1).setId(res.getString(0));
                 result.get(result.size()-1).setNumber(res.getString(1));
