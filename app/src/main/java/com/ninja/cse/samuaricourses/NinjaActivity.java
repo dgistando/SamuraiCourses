@@ -60,10 +60,12 @@ public class NinjaActivity extends AppCompatActivity {
     //private MobileServiceTable<courses> mCoursesTable;
     private MobileServiceSyncTable<courses> mCoursesTable;
     private ProgressBar mProgressBar;
+    DBHelper db;
 
 
     private AutoCompleteTextView department,classes;
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
+    ArrayList<courses> listToGenerateCourses = new ArrayList<courses>();
     ArrayList<String> classeslist = new ArrayList<String>();
     ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
     /**
@@ -79,6 +81,7 @@ public class NinjaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ninja);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        db = new DBHelper(this);
         setSupportActionBar(toolbar);
 
         classesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classeslist);
@@ -123,6 +126,7 @@ public class NinjaActivity extends AppCompatActivity {
                         department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                ArrayList<courses> selectedCourses = new ArrayList<courses>();
                                 Log.d("Item Clicked", "Item was clicked");
                                 ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
                                 ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
@@ -131,6 +135,23 @@ public class NinjaActivity extends AppCompatActivity {
                                 int newpos = departmentTempAdapter.getPosition(chosen);
                                 chosen = departmentTagAdapter.getItem(newpos);
                                 Log.w("EndCheck", chosen);
+                                selectedCourses.addAll(db.courseSearchByDepartment(chosen));
+
+                                Set<String> hashedset = new HashSet<>();
+                                String temp;
+                                for (courses number : selectedCourses) {
+                                    //gets rid of extra characters and duplicates
+                                    temp = number.getNumber();
+                                    temp = temp.substring(temp.indexOf("-") + 1);
+                                    temp = temp.substring(0, temp.indexOf("-"));
+                                    hashedset.add(temp);
+                                }
+
+                                classesAdapter.clear();
+                                for (String each : hashedset) {
+                                    classesAdapter.add(each.replaceFirst("^0+(?!$)",""));
+                                    classesAdapter.notifyDataSetChanged();
+                                }
                                 //disabled to avoid errors.
                                 //setClasseslist(chosen);
                             }

@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="QUER" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -40,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/courses.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="33" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
+              <caret line="195" column="32" selection-start-line="195" selection-start-column="32" selection-end-line="195" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -56,27 +57,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NinjaActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NinjaActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
+            <state vertical-scroll-proportion="-3.4274354">
+              <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
               <folding>
+                <element signature="e#2946#2955#0" expanded="true" />
+                <element signature="e#3008#3016#0" expanded="true" />
+                <element signature="e#4732#5419#0" expanded="true" />
+                <element signature="e#5418#5419#0" expanded="true" />
+                <element signature="e#6173#6182#0" expanded="true" />
                 <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
+                <element signature="e#12550#13542#0" expanded="true" />
+                <element signature="e#13541#13542#0" expanded="true" />
                 <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-                <element signature="e#15246#17464#0" expanded="true" />
-                <element signature="e#17463#17464#0" expanded="true" />
+                <element signature="e#16468#18686#0" expanded="true" />
+                <element signature="e#16984#17008#0" expanded="true" />
+                <element signature="e#18685#18686#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/DBHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45698926">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -91,11 +90,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/DBHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="79" column="54" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="54" />
+              <folding>
+                <element signature="e#2499#2508#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+              <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -129,7 +140,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-              <folding />
+              <folding>
+                <element signature="e#0#26992#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,7 +153,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-              <folding />
+              <folding>
+                <element signature="e#863#864#0" expanded="false" />
+                <element signature="e#888#889#0" expanded="false" />
+                <element signature="e#916#917#0" expanded="false" />
+                <element signature="e#944#945#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -3342,10 +3361,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/Generator.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/courses.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/courses.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/DBHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java" />
       </list>
     </option>
   </component>
@@ -3409,6 +3428,48 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="SamuraiCourses" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamuraiCourses" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamuraiCourses" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SamuraiCourses" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="samuaricourses" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -3624,7 +3685,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3635,26 +3696,26 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4710145" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.093856655" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17473525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12405446" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18600683" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3702,7 +3763,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3728,10 +3789,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="402" column="10" selection-start-line="402" selection-start-column="10" selection-end-line="402" selection-end-column="10" />
           <folding>
+            <element signature="e#2946#2955#0" expanded="true" />
+            <element signature="e#3008#3016#0" expanded="true" />
+            <element signature="e#4732#5419#0" expanded="true" />
+            <element signature="e#5418#5419#0" expanded="true" />
+            <element signature="e#6173#6182#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
+            <element signature="e#12550#13542#0" expanded="true" />
+            <element signature="e#13541#13542#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#15246#17464#0" expanded="true" />
-            <element signature="e#17463#17464#0" expanded="true" />
+            <element signature="e#16468#18686#0" expanded="true" />
+            <element signature="e#16984#17008#0" expanded="true" />
+            <element signature="e#18685#18686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3740,7 +3809,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="e#2499#2508#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3783,7 +3854,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#0#26992#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3791,7 +3865,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#888#889#0" expanded="false" />
+            <element signature="e#916#917#0" expanded="false" />
+            <element signature="e#944#945#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3816,10 +3895,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="402" column="10" selection-start-line="402" selection-start-column="10" selection-end-line="402" selection-end-column="10" />
           <folding>
+            <element signature="e#2946#2955#0" expanded="true" />
+            <element signature="e#3008#3016#0" expanded="true" />
+            <element signature="e#4732#5419#0" expanded="true" />
+            <element signature="e#5418#5419#0" expanded="true" />
+            <element signature="e#6173#6182#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
+            <element signature="e#12550#13542#0" expanded="true" />
+            <element signature="e#13541#13542#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#15246#17464#0" expanded="true" />
-            <element signature="e#17463#17464#0" expanded="true" />
+            <element signature="e#16468#18686#0" expanded="true" />
+            <element signature="e#16984#17008#0" expanded="true" />
+            <element signature="e#18685#18686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3828,7 +3915,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="e#2499#2508#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3871,7 +3960,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#0#26992#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3879,7 +3971,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#888#889#0" expanded="false" />
+            <element signature="e#916#917#0" expanded="false" />
+            <element signature="e#944#945#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3904,10 +4001,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="380" column="20" selection-start-line="380" selection-start-column="20" selection-end-line="380" selection-end-column="20" />
           <folding>
+            <element signature="e#2946#2955#0" expanded="true" />
+            <element signature="e#3008#3016#0" expanded="true" />
+            <element signature="e#4732#5419#0" expanded="true" />
+            <element signature="e#5418#5419#0" expanded="true" />
+            <element signature="e#6173#6182#0" expanded="true" />
             <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
+            <element signature="e#12550#13542#0" expanded="true" />
+            <element signature="e#13541#13542#0" expanded="true" />
             <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#15246#17464#0" expanded="true" />
-            <element signature="e#17463#17464#0" expanded="true" />
+            <element signature="e#16468#18686#0" expanded="true" />
+            <element signature="e#16984#17008#0" expanded="true" />
+            <element signature="e#18685#18686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3916,7 +4021,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#0#26992#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3924,7 +4032,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#888#889#0" expanded="false" />
+            <element signature="e#916#917#0" expanded="false" />
+            <element signature="e#944#945#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3961,7 +4074,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="e#863#864#0" expanded="false" />
+            <element signature="e#888#889#0" expanded="false" />
+            <element signature="e#916#917#0" expanded="false" />
+            <element signature="e#944#945#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3997,15 +4115,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/courses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="33" selection-start-line="80" selection-start-column="33" selection-end-line="80" selection-end-column="33" />
-          <folding />
+          <folding>
+            <element signature="e#0#26992#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4013,14 +4126,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33221477">
           <caret line="101" column="34" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/Generations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4043,14 +4148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.microsoft.azure/azure-mobile-android/3.1.0/5c98a96a9c847af22f99948dd701f033c6f4a8b2/azure-mobile-android-3.1.0-sources.jar!/com/microsoft/windowsazure/mobileservices/table/sync/MobileServiceSyncContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4059,24 +4156,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="420" column="5" selection-start-line="420" selection-start-column="5" selection-end-line="420" selection-end-column="5" />
-          <folding>
-            <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
-            <element signature="e#15246#17464#0" expanded="true" />
-            <element signature="e#17463#17464#0" expanded="true" />
-          </folding>
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/Generations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/courses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="195" column="32" selection-start-line="195" selection-start-column="32" selection-end-line="195" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/DBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45698926">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="54" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="54" />
+          <folding>
+            <element signature="e#2499#2508#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ninja/cse/samuaricourses/NinjaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4274354">
+          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+          <folding>
+            <element signature="e#2946#2955#0" expanded="true" />
+            <element signature="e#3008#3016#0" expanded="true" />
+            <element signature="e#4732#5419#0" expanded="true" />
+            <element signature="e#5418#5419#0" expanded="true" />
+            <element signature="e#6173#6182#0" expanded="true" />
+            <element signature="method#setClasseslist#0;class#NinjaActivity#0" expanded="false" />
+            <element signature="e#12550#13542#0" expanded="true" />
+            <element signature="e#13541#13542#0" expanded="true" />
+            <element signature="method#availableClasses#0;class#NinjaActivity#0" expanded="false" />
+            <element signature="e#16468#18686#0" expanded="true" />
+            <element signature="e#16984#17008#0" expanded="true" />
+            <element signature="e#18685#18686#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

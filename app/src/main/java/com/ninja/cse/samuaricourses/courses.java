@@ -68,7 +68,7 @@ public class courses {
         this.setDays(days);
         this.setStartTime(time);
         this.setEndTime(time);
-        //this.setTime(time);
+        this.setTime(time);
         this.setRoom(room);
         this.setLength(length);
         this.setInstruction(instruction);
@@ -88,7 +88,7 @@ public class courses {
         this.setDays(temp.getDays());
         this.startTime = temp.getStartTime();
         this.endTime = temp.getEndTime();
-        //this.setTime(time);
+        this.setTime(time);
         this.setRoom(temp.getRoom());
         this.setLength(temp.getLength());
         this.setInstruction(temp.getInstruction());
@@ -194,6 +194,8 @@ public class courses {
     }
 
     public void setTime(String time) {
+        setStartTime(time);
+        setEndTime(time);
     this.time = time;
     }
 
