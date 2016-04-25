@@ -172,7 +172,7 @@ public class NinjaActivity extends AppCompatActivity {
 
 
         final ListView listview = (ListView) findViewById(R.id.listViewToDo);
-        ArrayList<String> mycourses = new ArrayList<String>();
+        final ArrayList<String> mycourses = new ArrayList<String>();
         final ArrayAdapter<String> listadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_listitems, mycourses);
         listview.setAdapter(listadapter);
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
@@ -180,7 +180,7 @@ public class NinjaActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 if(!listview.isItemChecked(position)) {
                     listadapter.remove(listadapter.getItem(position).toString());
-                    
+
                     listadapter.notifyDataSetChanged();
                 }
             }
@@ -202,21 +202,25 @@ public class NinjaActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
-
                 String validCourseNumber="-0",Selected = "-0";
+                Selected = classes.getText().toString();
+
+                if(mycourses.contains(chosen + " " + selectedCourses)){
+                    Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 for(int i = 0; i<selectedCourses.size(); i++) {
                     validCourseNumber = selectedCourses.get(i).getNumber();
                     validCourseNumber = validCourseNumber.substring(validCourseNumber.indexOf('-') + 1, validCourseNumber.indexOf('-') + 4);
                     validCourseNumber = validCourseNumber.replaceFirst("^0+(?!$)","");
-                    Selected = classes.getText().toString();
                     Log.d("compared", validCourseNumber +" compared with "+ Selected);
                     if (validCourseNumber.equals(Selected)) {
 
-                        if(listToGenerateCourses.contains(selectedCourses.get(i))){
-                            Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
+                        //if(listToGenerateCourses.contains(selectedCourses.get(i))){
+                           // Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
+                           // return;
+                        //}
 
                         listadapter.add(chosen + " " + validCourseNumber);
                         listview.setItemChecked(listadapter.getCount()-1, true);
@@ -229,6 +233,10 @@ public class NinjaActivity extends AppCompatActivity {
                     //listview.setItemChecked(i, true);
                     //listadapter.notifyDataSetChanged();
                 Log.w("GetCheck", " " + classes.getText().toString());
+
+                for(courses entity:listToGenerateCourses){
+                    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
+                }
 
             }
         });

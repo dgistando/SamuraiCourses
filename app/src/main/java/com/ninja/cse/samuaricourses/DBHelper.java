@@ -83,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper{
         ArrayList<courses> result= new ArrayList<courses>();
         try{
             Log.d("SELECTED", dep);
-            String query = "SELECT * FROM courses WHERE number like '%" + dep + "%'";
+            String query = "SELECT * FROM courses WHERE number like '%" + dep + "%' order by number";
             db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
 
             res = db.rawQuery(query, null);
