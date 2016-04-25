@@ -1,5 +1,9 @@
 package com.ninja.cse.samuaricourses;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
  * Created by dgist on 4/5/2016.
  */
@@ -88,7 +92,7 @@ public class courses {
         this.setDays(temp.getDays());
         this.startTime = temp.getStartTime();
         this.endTime = temp.getEndTime();
-        this.setTime(time);
+        this.setTime(temp.getTime());
         this.setRoom(temp.getRoom());
         this.setLength(temp.getLength());
         this.setInstruction(temp.getInstruction());
@@ -273,4 +277,39 @@ public class courses {
             return int_time;
         }
     }
+
+    protected boolean conflicts(courses temp){
+        //return false if the start time or finish time falls in
+        //in the middle of other class time
+
+        //convert days to list and compare.
+        char[] a = getDays().toCharArray();
+        ArrayList<Character> days = new ArrayList<Character>();
+        for(char c : a){days.add(c);}
+
+        a = temp.getDays().toCharArray();
+        ArrayList<Character> days1 = new ArrayList<Character>();
+        for(char c : a){days1.add(c);}
+
+        days.retainAll(days1);
+
+        if(days.size() == 0){
+            Log.d("GENERATOR ", "No days in common");
+            return false;
+        }
+
+        if(this.startTime >= temp.startTime && this.startTime <= temp.endTime)
+        {
+            return true;
+        }
+        else if(this.endTime >= temp.startTime && this.endTime <= temp.endTime)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }

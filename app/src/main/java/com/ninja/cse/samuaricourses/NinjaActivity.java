@@ -127,7 +127,7 @@ public class NinjaActivity extends AppCompatActivity {
                         department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                                selectedCourses.clear();
                                 Log.d("Item Clicked", "Item was clicked");
                                 ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
                                 ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
@@ -136,7 +136,7 @@ public class NinjaActivity extends AppCompatActivity {
                                 int newpos = departmentTempAdapter.getPosition(chosen);
                                 chosen = departmentTagAdapter.getItem(newpos);
                                 Log.w("EndCheck", chosen);
-                                selectedCourses.clear();
+
                                 selectedCourses.addAll(db.courseSearchByDepartment(chosen));
 
                                 Set<String> hashedset = new HashSet<>();
@@ -167,6 +167,36 @@ public class NinjaActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i = listToGenerateCourses.size()-1; i >= 0; i--){
+                    String number = listToGenerateCourses.get(i).getNumber();
+                    listToGenerateCourses.remove(i);
+                    listToGenerateCourses.addAll(db.courseSearchByDepartment(number.substring(0,number.indexOf('-')+4)));
+                }
+
+                for(courses entity:listToGenerateCourses){
+                    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
+                }
+
+                ArrayList<courses> GoodLectures = new ArrayList<courses>();
+
+                Generator gen = new Generator();
+                GoodLectures.addAll(gen.sortLectures(listToGenerateCourses));
+
+                if(GoodLectures.size() == 0){
+                    Toast.makeText(NinjaActivity.this,"Too many conflicts",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                coursesList.addAll(gen.getFinalList(GoodLectures,listToGenerateCourses));
+
+                for(ArrayList<courses> course: coursesList){
+                    for(courses entity: course){
+                        Log.d("GENRATIONS", entity.getCrn()+"");
+                    }
+                    Log.d("GERATIONS", "+++++++++++++++++++");
+                }
+
+
                 startActivity(new Intent(NinjaActivity.this, Generations.class));
             }
         });
@@ -184,11 +214,9 @@ public class NinjaActivity extends AppCompatActivity {
                     Log.d("Removed", listadapter.getItem(position).toString());
                     listadapter.remove(listadapter.getItem(position).toString());
 
-                    num = num.replace(' ','-');
+                    num = num.replace(' ', '-');
                     int i = Integer.parseInt(num.substring(num.indexOf('-')+1, num.length()));
                     num = num.replaceAll(num.substring(num.indexOf('-')+1,num.length()),String.format("%03d",i));
-
-                    Log.d("Removed","New String: "+ num);
 
                     for(int j = 0; j < listToGenerateCourses.size(); j++){
                         if(listToGenerateCourses.get(j).getNumber().contains(num)){
@@ -214,8 +242,8 @@ public class NinjaActivity extends AppCompatActivity {
                 int newpos = departmentTempAdapter.getPosition(department.getText().toString());
                 chosen = departmentTagAdapter.getItem(newpos);
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                //InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
+                //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
                 String validCourseNumber="-0",Selected = "-0";
                 Selected = classes.getText().toString();
@@ -249,10 +277,10 @@ public class NinjaActivity extends AppCompatActivity {
                     //listadapter.notifyDataSetChanged();
                 Log.w("GetCheck", " " + classes.getText().toString());
                 classeslist.clear();
-                for(courses entity:listToGenerateCourses){
-                    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
-                }
-                Log.d("list to generate", "\n");
+                //for(courses entity:listToGenerateCourses){
+                //    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
+                //}
+                //Log.d("list to generate", "\n");
 
             }
         });

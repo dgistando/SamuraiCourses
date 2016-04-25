@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
             res = db.rawQuery(query, null);
             while(res.moveToNext()) {
-                if(res.getString(2).equals("TBD-TBD")){
+                if(res.getString(2).equals("TBD-TBD") || res.getString(6).equals("?")){
                     continue;
                 }
                 result.add(new courses());
