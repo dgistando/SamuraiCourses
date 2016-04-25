@@ -180,7 +180,21 @@ public class NinjaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 if(!listview.isItemChecked(position)) {
+                    String num = listadapter.getItem(position).toString();
+                    Log.d("Removed", listadapter.getItem(position).toString());
                     listadapter.remove(listadapter.getItem(position).toString());
+
+                    num = num.replace(' ','-');
+                    int i = Integer.parseInt(num.substring(num.indexOf('-')+1, num.length()));
+                    num = num.replaceAll(num.substring(num.indexOf('-')+1,num.length()),String.format("%03d",i));
+
+                    Log.d("Removed","New String: "+ num);
+
+                    for(int j = 0; j < listToGenerateCourses.size(); j++){
+                        if(listToGenerateCourses.get(j).getNumber().contains(num)){
+                            listToGenerateCourses.remove(j);
+                        }
+                    }
 
                     listadapter.notifyDataSetChanged();
                 }
