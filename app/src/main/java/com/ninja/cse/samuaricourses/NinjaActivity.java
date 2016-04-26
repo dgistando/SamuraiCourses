@@ -193,18 +193,17 @@ public class NinjaActivity extends AppCompatActivity {
 
                 coursesList.addAll(gen.getFinalList(GoodLectures, listToGenerateCourses));
 
-                for(ArrayList<courses> course: coursesList){
-                    for(courses entity: course){
-                        Log.d("GENRATIONS", entity.getCrn()+" ");
+                Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
+
+                for(int i=0;i<coursesList.size();i++){
+                    myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
+
+                    for(int j=0;j<coursesList.get(i).size();j++){
+                        Log.d("GENRATIONS", coursesList.get(i).get(j).getCrn()+" ");
                     }
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
 
-
-                Intent myIntent = new Intent(NinjaActivity.this, Generations.class);
-                Bundle b = new Bundle();
-                b.putParcelable("Generates",coursesList);
-                
                 //myIntent.putExtra("Generated",coursesList);
                 startActivity(myIntent);
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));

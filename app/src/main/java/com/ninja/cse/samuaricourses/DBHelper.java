@@ -1,5 +1,6 @@
 package com.ninja.cse.samuaricourses;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 

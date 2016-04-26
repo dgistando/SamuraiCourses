@@ -1,5 +1,7 @@
 package com.ninja.cse.samuaricourses;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by dgist on 4/5/2016.
  */
-public class courses {
+public class courses implements Parcelable{
     /**
     * Item id
     * Item crn
@@ -57,6 +59,52 @@ public class courses {
     private int sem_id;
 
     private int startTime=0, endTime=0;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
+        dest.writeInt(crn);
+        dest.writeString(number);
+        dest.writeString(title);
+        dest.writeInt(units);
+        dest.writeString(activity);
+        dest.writeString(days);
+        dest.writeString(time);
+        dest.writeString(room);
+        dest.writeString(length);
+        dest.writeString(instruction);
+        dest.writeInt(maxEnrl);
+        dest.writeInt(seatsAvailable);
+        dest.writeInt(activeEnrl);
+        dest.writeInt(sem_id);
+        dest.writeInt(startTime);
+        dest.writeInt(endTime);
+    }
+
+    private courses(Parcel in){
+         mId = in.readString();
+         crn = in.readInt();
+         number = in.readString();
+         title = in.readString();
+         units = in.readInt();
+         activity = in.readString();
+         days = in.readString();
+         time = in.readString();
+         room = in.readString();
+         length = in.readString();
+         instruction = in.readString();
+         maxEnrl = in.readInt();
+         seatsAvailable = in.readInt();
+         activeEnrl = in.readInt();
+         sem_id = in.readInt();
+         startTime = in.readInt();
+         endTime = in.readInt();
+    }
 
     public courses(){
 
@@ -311,5 +359,17 @@ public class courses {
             return false;
         }
     }
+
+    public static final Parcelable.Creator<courses> CREATOR = new Parcelable.Creator<courses>() {
+        @Override
+        public courses createFromParcel(Parcel source) {
+            return new courses(source);
+        }
+
+        @Override
+        public courses[] newArray(int size) {
+            return new courses[size];
+        }
+    };
 
 }

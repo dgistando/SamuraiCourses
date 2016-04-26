@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by dgist on 4/20/2016.
  */
-public class Generator {
+public class Generator{
     courses LECT;
     ArrayList<courses> DISC,LAB,OTHER;
     int count;
@@ -30,6 +30,8 @@ public class Generator {
 
         }
     }
+
+
 
     public void insert(courses temp){
         if(temp.getActivity().equals("DISC")){
