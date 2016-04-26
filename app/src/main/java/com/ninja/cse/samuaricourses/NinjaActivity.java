@@ -182,22 +182,32 @@ public class NinjaActivity extends AppCompatActivity {
                 Generator gen = new Generator();
                 GoodLectures.addAll(gen.sortLectures(listToGenerateCourses));
 
+                /*for(courses entity: GoodLectures){
+                    Log.d("GoodLectures", entity.getCrn() + entity.getNumber());
+                }*/
+
                 if(GoodLectures.size() == 0){
                     Toast.makeText(NinjaActivity.this,"Too many conflicts",Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                coursesList.addAll(gen.getFinalList(GoodLectures,listToGenerateCourses));
+                coursesList.addAll(gen.getFinalList(GoodLectures, listToGenerateCourses));
 
                 for(ArrayList<courses> course: coursesList){
                     for(courses entity: course){
-                        Log.d("GENRATIONS", entity.getCrn()+"");
+                        Log.d("GENRATIONS", entity.getCrn()+" ");
                     }
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
 
 
-                startActivity(new Intent(NinjaActivity.this, Generations.class));
+                Intent myIntent = new Intent(NinjaActivity.this, Generations.class);
+                Bundle b = new Bundle();
+                b.putParcelable("Generates",coursesList);
+                
+                //myIntent.putExtra("Generated",coursesList);
+                startActivity(myIntent);
+                //startActivity(new Intent(NinjaActivity.this, Generations.class));
             }
         });
 

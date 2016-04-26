@@ -135,6 +135,36 @@ public class Generator {
         ArrayList<Generator> Scheduler = new ArrayList<Generator>();
         ArrayList<ArrayList<Generator>> semifinal = new ArrayList<ArrayList<Generator>>();
 
+        /**
+         * if lecture and in Lectures list then its okay to add everything
+         * after until you reach a lecture that's not in the list. if the lecture isn't in
+         * list then its not okay to add everything after.
+         */
+        for(courses course : coursesList){
+
+            //System.out.println("\n: "+course.getNumber());
+
+            if(course.getActivity().equals("LECT")){
+
+                for(int i=0;i<Lectures.size();i++){
+
+                    //System.out.println("comparing: "+course.getCrn()+" and "+Lectures.get(i).getCrn());
+                    if(course.getCrn() == Lectures.get(i).getCrn()){
+                        okay=true;
+                        break;
+                    }else{
+                        okay=false;
+                    }
+                }
+                //okay = (Lectures.contains(course)) ? true : false;
+            }
+
+            if(okay){
+                finalList.add(course);
+                //System.out.println(course.getCrn() +" "+course.getNumber());
+            }
+        }
+
         String str="";
         Generator c = new Generator();
 
