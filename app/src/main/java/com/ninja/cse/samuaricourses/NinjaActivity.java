@@ -204,6 +204,7 @@ public class NinjaActivity extends AppCompatActivity {
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
 
+                myIntent.putExtra("ScheduleSize",coursesList.size());
                 //myIntent.putExtra("Generated",coursesList);
                 startActivity(myIntent);
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));
