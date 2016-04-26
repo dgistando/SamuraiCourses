@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class Generations extends BaseGenerations {
 
+    int j=0;
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
@@ -24,8 +25,8 @@ public class Generations extends BaseGenerations {
         int j = this.getIntent().getIntExtra("ScheduleSize", 0);
 
         for(int i=0;i<j;i++){
-            listOfCourses.addAll(this.getIntent().getParcelableArrayListExtra("schedule" + i));
-            Log.d("RESULTS: ", listOfCourses.get(i).getNumber()+"");
+            listOfCourses.addAll((ArrayList) this.getIntent().getParcelableArrayListExtra("schedule: " + i));
+            Log.d("RESULTS: ", listOfCourses.get(i).getNumber() + "");
         }
 
         // Populate the week view with some events.
