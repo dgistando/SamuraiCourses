@@ -1,6 +1,8 @@
 package com.ninja.cse.samuaricourses;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.alamkanak.weekview.WeekViewEvent;
 
@@ -15,15 +17,16 @@ import java.util.List;
  */
 public class Generations extends BaseGenerations {
 
-    Intent i;
-
-
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
         ArrayList<courses> listOfCourses = new ArrayList<courses>();
+        int j = this.getIntent().getIntExtra("ScheduleSize", 0);
 
-        
+        for(int i=0;i<j;i++){
+            listOfCourses.addAll(this.getIntent().getParcelableArrayListExtra("schedule" + i));
+            Log.d("RESULTS: ", listOfCourses.get(i).getNumber()+"");
+        }
 
         // Populate the week view with some events.
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
