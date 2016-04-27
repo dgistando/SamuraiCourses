@@ -313,7 +313,7 @@ public class Generator{
             {
                 ct=0;
                 list.add(new ArrayList<Generator>());
-                System.out.print("{ ");
+                //System.out.print("{ ");
                 for (int j = 0; j < N; j++)
                 {
                     if (binary[i] % 10 == 1)
@@ -325,15 +325,15 @@ public class Generator{
                         list.get(list.size()-1).add(sequence[j]);
 
                         str = sequence[j].LECT.getNumber().substring(0, sequence[j].LECT.getNumber().indexOf('-')+4);
-                        //System.out.print(sequence[j].LECT.getNumber() + " ");
+                        System.out.print(sequence[j].LECT.getNumber() + " ");
 
                     }
                     binary[i] /= 10;
                 }
-                //System.out.println("}");
+                System.out.println("}");
 
                 if(ct != n){
-                    //System.out.print(ct +" ::Rejected:: \n");
+                    System.out.print(ct +" ::Rejected:: \n");
                     list.remove(list.size()-1);
                 }
             }

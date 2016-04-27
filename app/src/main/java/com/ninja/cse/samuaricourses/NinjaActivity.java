@@ -169,25 +169,10 @@ public class NinjaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ArrayList<courses> templistToGenerate = new ArrayList<courses>();
                 templistToGenerate.addAll(listToGenerateCourses);
-                if(templistToGenerate.size() == 0){
-                    Toast.makeText(NinjaActivity.this,"Add courses first",Toast.LENGTH_SHORT).show();
+                if(templistToGenerate.size() == 0) {
+                    Toast.makeText(NinjaActivity.this, "Add courses first", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                /*if(coursesList.size() > 0){
-                    Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
-                    for(int i=0;i<coursesList.size();i++){
-                        myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
-                        for(int j=0;j<coursesList.get(i).size();j++){
-                            Log.d("GENRATIONS", coursesList.get(i).get(j).getCrn()+" ");
-                        }
-                        Log.d("GERATIONS", "+++++++++++++++++++");
-                    }
-                    myIntent.putExtra("ScheduleSize",coursesList.size());
-                    //myIntent.putExtra("Generated",coursesList);
-                    startActivity(myIntent);
-                    return;
-                }*/
 
                 for(int i = templistToGenerate.size()-1; i >= 0; i--){
                     String number = templistToGenerate.get(i).getNumber();
