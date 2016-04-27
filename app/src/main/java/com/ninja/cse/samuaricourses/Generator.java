@@ -60,10 +60,13 @@ public class Generator{
         ArrayList<courses> Lectures = new ArrayList<courses>();
 
         for (courses entity : coursesList) {
-            if (entity.getActivity().equals("LECT")) {
+            if(entity.getNumber().substring(0,entity.getNumber().indexOf('-')+4).equals("WRI-001")){
+                entity.setActivity("LECT");
+            }
+            if (entity.getActivity().equals("LECT") ){//|| entity.getNumber().substring(0,entity.getNumber().indexOf('-')+4).equals("WRI-001")) {
                 String s = entity.getNumber();
                 s = s.substring(0, s.indexOf('-') + 4);
-                //System.out.println("test: "+entity.getNumber());
+                Log.d("LECTS: ", entity.getNumber() + "   " + s);
                 Lectures.add(new courses(entity));//added
                 Lectures.get(Lectures.size() - 1).setNumber(s);//edit entry
 
@@ -73,6 +76,11 @@ public class Generator{
 
                 className = s;
             }
+        }
+
+        Log.d("NUM DIFF CLASS: ", numDiffClasses+"");
+        if(numDiffClasses == 1){
+            return Lectures;
         }
 
         for(int i=0;i<Lectures.size();i++)
