@@ -33,6 +33,7 @@ public class Generations extends BaseGenerations {
                     startTime.set(Calendar.MINUTE, listOfCourses.get(k).getStartTime() % 100);
                     startTime.set(Calendar.MONTH, 6);//set month one month before the set month of august
                     startTime.add(Calendar.MONTH, 1);//adding one month to July, makes August
+
                     switch (listOfCourses.get(k).getDays().charAt(d)) {
                         case 'M':
                             startTime.add(Calendar.DAY_OF_MONTH, 0);
