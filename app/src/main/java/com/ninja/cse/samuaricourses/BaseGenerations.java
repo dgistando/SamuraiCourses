@@ -33,6 +33,9 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
     private WeekView mWeekView;
     Calendar testDate = Calendar.getInstance();
 
+    private int scheduleIndex = 1;
+    public static int numSchedules;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,22 +72,38 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
 
         //mWeekView.goToToday();
 
-        Button btn = (Button)findViewById(R.id.btnNext);
-        btn.setOnClickListener(new View.OnClickListener() {
+        final Button btnNext = (Button)findViewById(R.id.btnNext);
+        final Button btnPrev = (Button)findViewById(R.id.btnPrev);
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testDate.add(Calendar.DATE, 7);
-                mWeekView.goToDate(testDate);
+                if (scheduleIndex < numSchedules) {
+                    btnNext.setEnabled(true);
+                    scheduleIndex = scheduleIndex + 1;
+                    testDate.add(Calendar.DATE, 7);
+                    mWeekView.goToDate(testDate);
+                }
+                else {
+                    btnNext.setEnabled(false);
+                    btnPrev.setEnabled(true);
+                }
             }
         });
 
-        btn = (Button)findViewById(R.id.btnPrev);
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Calendar testDate2 = Calendar.getInstance();
-                testDate.add(Calendar.DATE, -7);
-                mWeekView.goToDate(testDate);
+                if (scheduleIndex > 1) {
+                    btnNext.setEnabled(true);
+                    scheduleIndex = scheduleIndex - 1;
+                    testDate.add(Calendar.DATE, -7);
+                    mWeekView.goToDate(testDate);
+                }
+                else {
+                    btnPrev.setEnabled(false);
+                    btnNext.setEnabled(true);
+                }
             }
         });
     }

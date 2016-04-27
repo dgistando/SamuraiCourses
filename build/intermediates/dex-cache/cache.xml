@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\exploded-aar\SamuraiCourses.app.libs\Calendar_Library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="76bfac7fffe1d7a66488501bc1b072f3ba9d2b90">
+        <dex dex="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\pre-dexed\debug\SamuraiCourses.app.libs-Calendar_Library-unspecified_b2a4113cad976bfa08a389247896ba052df73ccf.jar" />
+    </item>
+
+</items>
