@@ -32,6 +32,7 @@ public class Generations extends BaseGenerations {
             for (int k = 0; k < listOfCourses.size(); k++) {
 
                 for (int d = 0; d < listOfCourses.get(k).getDays().length(); d++) {
+                    startTime=Calendar.getInstance();
                     startTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getStartTime() / 100);
                     startTime.set(Calendar.DAY_OF_MONTH, 22);
                     startTime.set(Calendar.MINUTE, listOfCourses.get(k).getStartTime() % 100);
