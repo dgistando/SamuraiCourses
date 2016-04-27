@@ -58,7 +58,7 @@ public class Generations extends BaseGenerations {
                     endTime.set(Calendar.MINUTE, listOfCourses.get(k).getEndTime() % 100);
                     WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber(),
                             startTime, endTime);
-                    event.setColor(getResources().getColor(R.color.event_color_01));
+                    event.setColor(getResources().getColor(listOfCourses.get(k).getColor()));
                     events.add(event);
                 }
                 startTime = Calendar.getInstance();

@@ -47,6 +47,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,7 +62,7 @@ public class NinjaActivity extends AppCompatActivity {
     private MobileServiceSyncTable<courses> mCoursesTable;
     private ProgressBar mProgressBar;
     DBHelper db;
-
+    static ArrayList<Integer> colors;
 
     private AutoCompleteTextView department,classes;
     private ArrayAdapter<String> departmentAdapter,classesAdapter;
@@ -84,6 +85,8 @@ public class NinjaActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         db = new DBHelper(this);
         setSupportActionBar(toolbar);
+        colors = new ArrayList<Integer>();
+        addColor();
 
         classesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classeslist);
         classes = (AutoCompleteTextView) findViewById(R.id.number);
@@ -174,10 +177,39 @@ public class NinjaActivity extends AppCompatActivity {
                     return;
                 }
 
+                ArrayList<courses> forColor;
+                Iterator<Integer> colorsIterator = colors.iterator();
                 for(int i = templistToGenerate.size()-1; i >= 0; i--){
                     String number = templistToGenerate.get(i).getNumber();
                     templistToGenerate.remove(i);
-                    templistToGenerate.addAll(db.courseSearchByDepartment(number.substring(0,number.indexOf('-')+4)));
+                    forColor = new ArrayList<courses>();
+                    forColor.addAll(db.courseSearchByDepartment(number.substring(0, number.indexOf('-') + 4)));
+                    String previousType = "initial";
+                    int C=0;
+                    for(int j=0; j<forColor.size(); j++){
+                        if(!previousType.equals("initial") && !previousType.equals("LECT") && colorsIterator.hasNext()){
+                            previousType = forColor.get(j).getActivity();
+                            C = colorsIterator.next();
+                            forColor.get(j).setColor(C);
+                            templistToGenerate.add(forColor.get(j));
+                            continue;
+                        }
+
+                        if(forColor.get(j).getActivity().equals("LECT")  && previousType.equals("LECT")){
+                            previousType = forColor.get(j).getActivity();
+                            forColor.get(j).setColor(C);
+                        }else if(colorsIterator.hasNext()){
+                            previousType = forColor.get(j).getActivity();
+                            C = colorsIterator.next();
+                            forColor.get(j).setColor(C);
+                        }else{
+                            colorsIterator = colors.iterator();
+                            forColor.get(j).setColor(colorsIterator.next());
+                            previousType = forColor.get(j).getActivity();
+                        }
+
+                        templistToGenerate.add(forColor.get(j));
+                    }
                 }
 
                 for(courses entity:templistToGenerate){
@@ -535,6 +567,27 @@ public class NinjaActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void addColor(){
+        colors.add(R.color.event_color_01);
+        colors.add(R.color.event_color_02);
+        colors.add(R.color.event_color_03);
+        colors.add(R.color.event_color_04);
+        colors.add(R.color.event_color_05);
+        colors.add(R.color.event_color_06);
+        colors.add(R.color.event_color_07);
+        colors.add(R.color.event_color_08);
+        colors.add(R.color.event_color_09);
+        colors.add(R.color.event_color_10);
+        colors.add(R.color.event_color_11);
+        colors.add(R.color.event_color_12);
+        colors.add(R.color.event_color_13);
+        colors.add(R.color.event_color_14);
+        colors.add(R.color.event_color_15);
+        colors.add(R.color.event_color_16);
+        colors.add(R.color.event_color_17);
+        colors.add(R.color.event_color_18);
     }
 
     /*private AsyncTask<Void, Void, Void> sync() {
