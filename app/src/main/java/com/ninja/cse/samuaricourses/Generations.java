@@ -22,6 +22,7 @@ public class Generations extends BaseGenerations {
 
         ArrayList<courses> listOfCourses = new ArrayList<courses>();
         int numOfSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
+        numSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
         Calendar startTime = Calendar.getInstance();
@@ -69,7 +70,7 @@ public class Generations extends BaseGenerations {
                     endTime = (Calendar) startTime.clone();
                     endTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getEndTime() / 100);
                     endTime.set(Calendar.MINUTE, listOfCourses.get(k).getEndTime() % 100);
-                    WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber(),
+                    WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber() + "\n" + listOfCourses.get(k).getTime(), listOfCourses.get(k).getNumber(),
                             startTime, endTime);
                     event.setColor(getResources().getColor(listOfCourses.get(k).getColor()));
                     events.add(event);

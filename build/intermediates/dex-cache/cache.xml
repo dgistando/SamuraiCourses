@@ -2,11 +2,19 @@
 <items version="2" >
 
     <item
+<<<<<<< HEAD
         jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.2"
         sha1="219301aa9e93a06d4d782dce24d657249299659a">
         <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a6377156617cbe6c033076075fc2bdc70a6876f3/classes.dex" />
+=======
+        jar="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\exploded-aar\SamuraiCourses.app.libs\Calendar_Library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="76bfac7fffe1d7a66488501bc1b072f3ba9d2b90">
+        <dex dex="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\pre-dexed\debug\SamuraiCourses.app.libs-Calendar_Library-unspecified_b2a4113cad976bfa08a389247896ba052df73ccf.jar" />
+>>>>>>> 534081a5627dbbe00b26169e2c25fff184671490
     </item>
 
 </items>
