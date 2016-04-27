@@ -1,5 +1,7 @@
 package com.ninja.cse.samuaricourses;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -163,7 +165,7 @@ public class Generator{
 
             if(okay){
                 finalList.add(course);
-                //System.out.println(course.getCrn() +" "+course.getNumber());
+                System.out.println("FINAL LIST: "+course.getCrn() +" "+course.getNumber());
             }
         }
 
@@ -171,6 +173,10 @@ public class Generator{
         Generator c = new Generator();
 
         for(courses entity: finalList){
+
+            if(Scheduler.size() > 0){
+                Log.d("SCHEDULER",Scheduler.size()+"");
+            }
 
             if(entity.getActivity().equals("LECT")){
 
@@ -191,7 +197,7 @@ public class Generator{
         }
 
         semifinal.addAll(Kcombinations(Scheduler.toArray(new Generator[Scheduler.size()]),numDiffClasses));
-
+        Scheduler.clear();
 
         for(ArrayList<Generator> test : semifinal){
             for(ArrayList<courses> list : df(test.toArray(new Generator[test.size()]))){
@@ -284,10 +290,11 @@ public class Generator{
         ArrayList<ArrayList<Generator>> list = new ArrayList<ArrayList<Generator>>();
         int N = sequence.length,ct = 1;
         String str = "";
-        Generator[] temp = new Generator[n];
+        //Generator[] temp = new Generator[n];
         //param int[] sequence,
         //N = arr size.
         //n = num elements in subsets or number of different classes
+        Log.d("TEST VALUEs: ",N + "");
         int[] binary = new int[(int) Math.pow(2, N)];
         for (int i = 0; i < Math.pow(2, N); i++)
         {

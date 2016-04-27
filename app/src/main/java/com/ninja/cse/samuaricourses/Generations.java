@@ -25,8 +25,12 @@ public class Generations extends BaseGenerations {
         int j = this.getIntent().getIntExtra("ScheduleSize", 0);
 
         for(int i=0;i<j;i++){
+            listOfCourses.clear();
             listOfCourses.addAll((ArrayList) this.getIntent().getParcelableArrayListExtra("schedule: " + i));
-            Log.d("RESULTS: ", listOfCourses.get(i).getNumber() + "");
+            for(int k=0;k<listOfCourses.size();k++){
+                Log.d("RESULTS: ", listOfCourses.get(k).getNumber() + "");
+            }
+            Log.d("RESULTS: ", "=========================");
         }
 
         // Populate the week view with some events.

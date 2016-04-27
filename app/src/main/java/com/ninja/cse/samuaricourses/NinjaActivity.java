@@ -167,20 +167,42 @@ public class NinjaActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = listToGenerateCourses.size()-1; i >= 0; i--){
-                    String number = listToGenerateCourses.get(i).getNumber();
-                    listToGenerateCourses.remove(i);
-                    listToGenerateCourses.addAll(db.courseSearchByDepartment(number.substring(0,number.indexOf('-')+4)));
+                ArrayList<courses> templistToGenerate = new ArrayList<courses>();
+                templistToGenerate.addAll(listToGenerateCourses);
+                if(templistToGenerate.size() == 0){
+                    Toast.makeText(NinjaActivity.this,"Add courses first",Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                for(courses entity:listToGenerateCourses){
+                /*if(coursesList.size() > 0){
+                    Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
+                    for(int i=0;i<coursesList.size();i++){
+                        myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
+                        for(int j=0;j<coursesList.get(i).size();j++){
+                            Log.d("GENRATIONS", coursesList.get(i).get(j).getCrn()+" ");
+                        }
+                        Log.d("GERATIONS", "+++++++++++++++++++");
+                    }
+                    myIntent.putExtra("ScheduleSize",coursesList.size());
+                    //myIntent.putExtra("Generated",coursesList);
+                    startActivity(myIntent);
+                    return;
+                }*/
+
+                for(int i = templistToGenerate.size()-1; i >= 0; i--){
+                    String number = templistToGenerate.get(i).getNumber();
+                    templistToGenerate.remove(i);
+                    templistToGenerate.addAll(db.courseSearchByDepartment(number.substring(0,number.indexOf('-')+4)));
+                }
+
+                for(courses entity:templistToGenerate){
                     Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
                 }
 
                 ArrayList<courses> GoodLectures = new ArrayList<courses>();
 
                 Generator gen = new Generator();
-                GoodLectures.addAll(gen.sortLectures(listToGenerateCourses));
+                GoodLectures.addAll(gen.sortLectures(templistToGenerate));
 
                 /*for(courses entity: GoodLectures){
                     Log.d("GoodLectures", entity.getCrn() + entity.getNumber());
@@ -191,7 +213,8 @@ public class NinjaActivity extends AppCompatActivity {
                     return;
                 }
 
-                coursesList.addAll(gen.getFinalList(GoodLectures, listToGenerateCourses));
+                coursesList.addAll(gen.getFinalList(GoodLectures, templistToGenerate));
+                GoodLectures.clear();
 
                 Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
 
@@ -204,7 +227,8 @@ public class NinjaActivity extends AppCompatActivity {
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
 
-                myIntent.putExtra("ScheduleSize",coursesList.size());
+                myIntent.putExtra("ScheduleSize", coursesList.size());
+
                 //myIntent.putExtra("Generated",coursesList);
                 startActivity(myIntent);
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));
@@ -245,6 +269,7 @@ public class NinjaActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                coursesList.clear();
                 ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
                 ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
 
