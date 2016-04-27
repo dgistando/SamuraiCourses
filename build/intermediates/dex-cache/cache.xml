@@ -2,88 +2,19 @@
 <items version="2" >
 
     <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.2.1_cf7a20b40593e844ffa86f6253d9190fcc382c7c/classes.dex" />
-    </item>
-    <item
+<<<<<<< HEAD
         jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.2"
-        sha1="8ffcb1a13baef10b6fae86fa369502a683cee98b">
+        sha1="219301aa9e93a06d4d782dce24d657249299659a">
         <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a6377156617cbe6c033076075fc2bdc70a6876f3/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
-        jumboMode="true"
+=======
+        jar="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\exploded-aar\SamuraiCourses.app.libs\Calendar_Library\unspecified\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.2"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.6.0_9be540e4fec40da1d581177daa57a064807a27c0/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="f56253000d9b35649a807df39488020888d67bf7">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_09909fd3ac979e5c7d9a9188ce36226ed06862c2/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.1.1_ef6f371a985414c254779c32896134d745bfa9ba/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="673d77a5bbddd766037f088e775df525c46407f0">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.2.1_eac9b5b0bf8f0ebb06f6d3587dc9695b6eca6222/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.5.0/4de2b4ed3445c37ec1720a7d214712e845a24636/okhttp-2.5.0.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-2.5.0_81a3c8f911520bc740e22bb5122e7799b023030c/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.3_546dbcc5372466667c77d250096fe6706a47819b/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.2.1_bacf35e1bfcd0cc290f869d94b15ad3d76960467/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.2.1_cc8dbf8afe2128188be2213f5490b6c463184345/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/.gradle/caches/modules-2/files-2.1/com.microsoft.azure/azure-mobile-android/3.1.0/ae6cfa31ba5a84141676d2d92fa64ca36c52d28/azure-mobile-android-3.1.0.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="0ae6cfa31ba5a84141676d2d92fa64ca36c52d28">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/azure-mobile-android-3.1.0_dd8938ca728db5210645a6652f92967ac7a3998c/classes.dex" />
-    </item>
-    <item
-        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
-        jumboMode="true"
-        revision="23.0.2"
-        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
-        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.2.1_f10696a1447fcb7657976afe84f1beb90317bde3/classes.dex" />
+        sha1="76bfac7fffe1d7a66488501bc1b072f3ba9d2b90">
+        <dex dex="C:\Users\Marlo\Documents\GitHub\samco9\SamuraiCourses\app\build\intermediates\pre-dexed\debug\SamuraiCourses.app.libs-Calendar_Library-unspecified_b2a4113cad976bfa08a389247896ba052df73ccf.jar" />
+>>>>>>> 534081a5627dbbe00b26169e2c25fff184671490
     </item>
 
 </items>

@@ -18,10 +18,10 @@
         />
     <size
         android:width="175dp"
-        android:height="5dp"
+        android:height="3dp"
         />
     <stroke
-        android:width="3dp"
+        android:width="2dp"
         android:color="@color/colorPrimaryDark"
         />
 
