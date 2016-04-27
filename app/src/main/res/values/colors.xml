@@ -9,6 +9,20 @@
     <color name="event_color_02">#f57f68</color>
     <color name="event_color_03">#87d288</color>
     <color name="event_color_04">#f8b552</color>
+    <color name="event_color_05">#FFFF00</color>
+    <color name="event_color_06">#E5E56A</color>
+    <color name="event_color_07">#DCFECC</color>
+    <color name="event_color_08">#B6836C</color>
+    <color name="event_color_09">#F98DBA</color>
+    <color name="event_color_10">#E2E68A</color>
+    <color name="event_color_11">#B4E68A</color>
+    <color name="event_color_12">#BC8AE6</color>
+    <color name="event_color_13">#8AB4E6</color>
+    <color name="event_color_14">#eae9ee</color>
+    <color name="event_color_15">#be9843</color>
+    <color name="event_color_16">#835364</color>
+    <color name="event_color_17">#C57574</color>
+    <color name="event_color_18">#74C575</color>
 
     <color name="toolbar">#212121</color>
     <color name="toolbar_text">#727272</color>

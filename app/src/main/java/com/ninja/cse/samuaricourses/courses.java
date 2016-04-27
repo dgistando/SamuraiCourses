@@ -58,7 +58,7 @@ public class courses implements Parcelable{
     @com.google.gson.annotations.SerializedName("sem_id")
     private int sem_id;
 
-    private int startTime=0, endTime=0;
+    private int startTime=0, endTime=0,color=0;
 
     @Override
     public int describeContents() {
@@ -84,6 +84,7 @@ public class courses implements Parcelable{
         dest.writeInt(sem_id);
         dest.writeInt(startTime);
         dest.writeInt(endTime);
+        dest.writeInt(color);
     }
 
     private courses(Parcel in){
@@ -104,6 +105,7 @@ public class courses implements Parcelable{
          sem_id = in.readInt();
          startTime = in.readInt();
          endTime = in.readInt();
+         color  = in.readInt();
     }
 
     public courses(){
@@ -127,6 +129,7 @@ public class courses implements Parcelable{
         this.setMaxEnrl(maxEnrl);
         this.setSeatsAvailable(seatsAvailable);
         this.setActiveEnrl(activeEnrl);
+        this.setColor(color);
         this.setSem_id(1);
     }
 
@@ -147,6 +150,7 @@ public class courses implements Parcelable{
         this.setMaxEnrl(temp.getMaxEnrl());
         this.setSeatsAvailable(temp.getSeatsAvailable());
         this.setActiveEnrl(temp.getActiveEnrl());
+        this.setColor(temp.getColor());
         this.setSem_id(1);
     }
 
@@ -218,6 +222,10 @@ public class courses implements Parcelable{
         return this.endTime;
     }
 
+    public int getColor(){
+        return this.color;
+    }
+
 
     public void setId(String id){mId = id;}
 
@@ -273,6 +281,10 @@ public class courses implements Parcelable{
 
     public void setActiveEnrl(int activeEnrl) {
     this.activeEnrl = activeEnrl;
+    }
+
+    public void setColor(int colour){
+        this.color = colour;
     }
 
     public void setSem_id(int sem_id) {

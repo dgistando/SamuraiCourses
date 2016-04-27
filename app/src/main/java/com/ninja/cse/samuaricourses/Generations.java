@@ -73,6 +73,35 @@ public class Generations extends BaseGenerations {
                         }
                         startTime = Calendar.getInstance();
 
+<<<<<<< HEAD
+=======
+                    switch (listOfCourses.get(k).getDays().charAt(d)) {
+                        case 'M':
+                            startTime.add(Calendar.DAY_OF_MONTH, 0);
+                            break;
+                        case 'T':
+                            startTime.add(Calendar.DAY_OF_MONTH, 1);
+                            break;
+                        case 'W':
+                            startTime.add(Calendar.DAY_OF_MONTH, 2);
+                            break;
+                        case 'R':
+                            startTime.add(Calendar.DAY_OF_MONTH, 3);
+                            break;
+                        case 'F':
+                            startTime.add(Calendar.DAY_OF_MONTH, 4);
+                            break;
+                    }
+                    startTime.add(Calendar.WEEK_OF_YEAR, i);//0-number of schedules,0:first week
+                    startTime.set(Calendar.YEAR, newYear);
+                    endTime = (Calendar) startTime.clone();
+                    endTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getEndTime() / 100);
+                    endTime.set(Calendar.MINUTE, listOfCourses.get(k).getEndTime() % 100);
+                    WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber(),
+                            startTime, endTime);
+                    event.setColor(getResources().getColor(listOfCourses.get(k).getColor()));
+                    events.add(event);
+>>>>>>> eeb5ca2ae2389342da3dcac07d0b440f2463cb98
                 }
             }
             return events;
