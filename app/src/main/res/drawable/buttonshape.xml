@@ -18,11 +18,11 @@
         />
     <size
         android:width="175dp"
-        android:height="10dp"
+        android:height="5dp"
         />
     <stroke
         android:width="3dp"
-        android:color="#828282"
+        android:color="@color/colorPrimaryDark"
         />
 
 </shape>
