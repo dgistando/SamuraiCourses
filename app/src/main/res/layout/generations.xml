@@ -51,4 +51,14 @@
         android:layout_toLeftOf="@+id/btnNext"
         android:layout_toStartOf="@+id/btnNext" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="
+   0/0"
+        android:id="@+id/textView2"
+        android:layout_alignTop="@+id/btnNext"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
