@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/event_color_01"
+    android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="Samurai Courses"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/samurai_pic"
+            android:alpha=".1"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        />
 
+        />
         <Button
+            android:id="@+id/notify"
+            android:text="Get Notified"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get Notified"
-            android:id="@+id/notify"
+            android:background="@drawable/buttonshape"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_centerHorizontal="true"
+            />
         <Button
             android:id="@+id/plan"
+
+            android:textColor="@color/colorPrimaryDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plan Schedule!"
+            android:text="Plan Schedule"
+            android:background="@drawable/buttonshape"
             android:layout_above="@+id/notify"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            />
+
+
     </RelativeLayout>
 
 </LinearLayout>
