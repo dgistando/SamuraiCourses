@@ -63,7 +63,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         testDate.set(2016, 8-1, 22);
         mWeekView.goToDate(testDate);
 
-        mWeekView.setHourHeight(45);
+        mWeekView.setHourHeight(50);
         mWeekView.goToHour(7);
 
 
