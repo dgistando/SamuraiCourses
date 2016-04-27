@@ -1,7 +1,5 @@
 package com.ninja.cse.samuaricourses;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 
 import com.alamkanak.weekview.WeekViewEvent;
