@@ -159,7 +159,7 @@ public class WeekView extends View {
         @Override
         public boolean onDown(MotionEvent e) {
             goToNearestOrigin();
-            return true;
+            return false;//originally TRUE!!!!!!!!
         }
 
         @Override
