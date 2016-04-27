@@ -221,9 +221,9 @@ public class NinjaActivity extends AppCompatActivity {
                 Generator gen = new Generator();
                 GoodLectures.addAll(gen.sortLectures(templistToGenerate));
 
-                /*for(courses entity: GoodLectures){
+                for(courses entity: GoodLectures){
                     Log.d("GoodLectures", entity.getCrn() + entity.getNumber());
-                }*/
+                }
 
                 if(GoodLectures.size() == 0){
                     Toast.makeText(NinjaActivity.this,"Too many conflicts",Toast.LENGTH_LONG).show();
