@@ -8,28 +8,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-
+    android:background="@color/primary_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ninja.cse.samuaricourses.NinjaActivity"
     tools:showIn="@layout/activity_ninja"
     >
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="@string/generate"
         android:id="@+id/btnGenerate"
+        android:background="@drawable/buttonshape"
         android:layout_marginBottom="42dp"
+        android:width="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:id="@+id/btnAdd"
         android:text="@string/add"
         android:layout_below="@+id/LL"
         android:layout_alignRight="@+id/btnGenerate"
+        android:background="@drawable/buttonshape"
         android:layout_alignEnd="@+id/btnGenerate"
         android:windowSoftInputMode="stateHidden" />
 
@@ -44,12 +47,14 @@
         <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/department"
             android:layout_weight="1"
             />
         <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/number"
             android:layout_weight="1"
             />

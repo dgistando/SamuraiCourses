@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="219301aa9e93a06d4d782dce24d657249299659a">
+        <dex dex="/Users/ezequielcontreras/Documents/GitHub/SamuraiCourses/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a6377156617cbe6c033076075fc2bdc70a6876f3/classes.dex" />
+    </item>
+
+</items>
