@@ -63,7 +63,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         setupDateTimeInterpreter(false);
 
         // Calendar testDate = Calendar.getInstance();
-        testDate.set(2016, 8-1, 22);
+        testDate.set(2016, 8 - 1, 22);
         mWeekView.goToDate(testDate);
 
         mWeekView.setHourHeight(130);
@@ -72,8 +72,8 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
 
         //mWeekView.goToToday();
 
-        final Button btnNext = (Button)findViewById(R.id.btnNext);
-        final Button btnPrev = (Button)findViewById(R.id.btnPrev);
+        final Button btnNext = (Button) findViewById(R.id.btnNext);
+        final Button btnPrev = (Button) findViewById(R.id.btnPrev);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,15 +82,12 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
                     scheduleIndex = scheduleIndex + 1;
                     testDate.add(Calendar.DATE, 7);
                     mWeekView.goToDate(testDate);
-                }
-                else {
+                } else {
                     btnNext.setEnabled(false);
                     btnPrev.setEnabled(true);
                 }
             }
         });
-
-
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,16 +96,13 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
                     scheduleIndex = scheduleIndex - 1;
                     testDate.add(Calendar.DATE, -7);
                     mWeekView.goToDate(testDate);
-                }
-                else {
+                } else {
                     btnPrev.setEnabled(false);
                     btnNext.setEnabled(true);
                 }
             }
         });
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_generations, menu);

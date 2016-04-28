@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Notification"
+            android:name=".NotificationActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>

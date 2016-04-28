@@ -13,7 +13,6 @@
     tools:context="com.ninja.cse.samuaricourses.NinjaActivity"
     tools:showIn="@layout/activity_ninja"
     >
-
     <Button
         android:layout_width="100dp"
         android:layout_height="40dp"
@@ -24,7 +23,6 @@
         android:width="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
     <Button
         android:layout_width="100dp"
         android:layout_height="35dp"
