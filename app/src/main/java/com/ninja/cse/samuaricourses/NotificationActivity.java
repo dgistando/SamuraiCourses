@@ -21,4 +21,8 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.notification);
 
     }
+
+
+
+
 }

@@ -9,7 +9,11 @@
         />
     <solid
         android:color="@color/accent"
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> refs/remotes/origin/master
         />
     <padding
         android:left="0dp"

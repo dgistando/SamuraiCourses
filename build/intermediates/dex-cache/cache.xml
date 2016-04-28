@@ -1,3 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <items version="2" />
 
+=======
+<items version="2" >
+
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\SamuraiCourses.app.libs\Calendar_Library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1fa476f1e07bcc423807364fe7c4ca9514a5d666">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\SamuraiCourses.app.libs-Calendar_Library-unspecified_0b88d45d57fcf598906311c2345d639e4463470a.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.2.1_295a07b549b02ddff45f007061a3ad0730a4ee27.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\18.0\cce0823396aa693798f8882e64213b1772032b09\guava-18.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\guava-18.0_377c22f26f118b51c0c3d31957ba329d8560be4e.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.2.1_8e8dffb6213e995ffe9f8a35b4cdbcc2ccb51c61.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3\5fc52c41ef0239d1093a1eb7c3697036183677ce\gson-2.3.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\gson-2.3_fd3ab781fbfd440d8875d6dbda7de5a46f4104a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\okhttp-2.5.0_89beaebab913d8a425bb2ca0d5063c90496dfa45.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.microsoft.azure\azure-notifications-handler\1.0.1\c322af100020e6db539f2aa367698d4b88fc453f\azure-notifications-handler-1.0.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c322af100020e6db539f2aa367698d4b88fc453f">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\azure-notifications-handler-1.0.1_ec835f318717bb8b030053afb0a75c298a478e03.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.microsoft.azure\azure-mobile-android\3.1.0\ae6cfa31ba5a84141676d2d92fa64ca36c52d28\azure-mobile-android-3.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0ae6cfa31ba5a84141676d2d92fa64ca36c52d28">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\azure-mobile-android-3.1.0_34ae246c6241a3276cd1dac4a8d094cb28af7608.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_c54ab992e7aed9f6e6040d194512642456d41e05.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.2.1\support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\support-annotations-23.2.1_e35dbfe4cca1b51ec056f3b9b8ae59b609e78a2d.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.2.1_301f99be70e6829c3ef2f306d1673119aade1d1f.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\internal_impl-23.2.1_2c8b2bd37682039e78cdbefafe6f83a82699f140.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\okio-1.6.0_98415fb13e6085b4c7c28a839d33bf5a3d2517a7.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_98d4c30fe5ffd48ab8b3c482830573aa5c2d5556.jar" />
+    </item>
+    <item
+        jar="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="C:\Users\dgist\Documents\GitHub\SamuraiCourses\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.2.1_8c97e9db57d92708a5c2e69300c57327ec4d10be.jar" />
+    </item>
+
+</items>
+>>>>>>> refs/remotes/origin/master
