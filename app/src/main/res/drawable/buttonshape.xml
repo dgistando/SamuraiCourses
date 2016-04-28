@@ -9,6 +9,7 @@
         />
     <solid
         android:color="@color/accent"
+
         />
     <padding
         android:left="0dp"

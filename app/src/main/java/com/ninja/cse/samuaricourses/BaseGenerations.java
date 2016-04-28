@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -34,7 +35,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
     Calendar testDate = Calendar.getInstance();
 
     private int scheduleIndex = 1;
-    public static int numSchedules;
+    public static int scheduleSize;
 
 
     @Override
@@ -63,46 +64,63 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         setupDateTimeInterpreter(false);
 
         // Calendar testDate = Calendar.getInstance();
-        testDate.set(2016, 8 - 1, 22);
+        testDate.set(2016, 8-1, 22);
         mWeekView.goToDate(testDate);
 
-        mWeekView.setHourHeight(130);
+        mWeekView.setHourHeight(95);
         mWeekView.goToHour(7);
 
 
         //mWeekView.goToToday();
+        final TextView tv = (TextView)findViewById(R.id.textScheduleCounter);
+        tv.setText(scheduleIndex + "/" + scheduleSize);
 
-        final Button btnNext = (Button) findViewById(R.id.btnNext);
-        final Button btnPrev = (Button) findViewById(R.id.btnPrev);
+        final Button btnNext = (Button)findViewById(R.id.btnNext);
+        final Button btnPrev = (Button)findViewById(R.id.btnPrev);
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex < numSchedules) {
+                if (scheduleIndex < scheduleSize) {
                     btnNext.setEnabled(true);
+                    btnPrev.setEnabled(true);
                     scheduleIndex = scheduleIndex + 1;
                     testDate.add(Calendar.DATE, 7);
                     mWeekView.goToDate(testDate);
-                } else {
+                    tv.setText(scheduleIndex + "/" + scheduleSize);
+                }
+                else {
                     btnNext.setEnabled(false);
                     btnPrev.setEnabled(true);
                 }
+//                testDate.add(Calendar.DATE, 7);
+//                mWeekView.goToDate(testDate);
             }
         });
+
+
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex > 1) {
+                if (scheduleIndex > 0) {
                     btnNext.setEnabled(true);
+                    btnPrev.setEnabled(true);
                     scheduleIndex = scheduleIndex - 1;
                     testDate.add(Calendar.DATE, -7);
                     mWeekView.goToDate(testDate);
-                } else {
+                    tv.setText(scheduleIndex + "/" + scheduleSize);
+                }
+                else {
                     btnPrev.setEnabled(false);
                     btnNext.setEnabled(true);
                 }
+//                testDate.add(Calendar.DATE, -7);
+//                mWeekView.goToDate(testDate);
             }
         });
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_generations, menu);
