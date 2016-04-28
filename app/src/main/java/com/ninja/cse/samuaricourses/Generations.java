@@ -41,11 +41,11 @@ public class Generations extends BaseGenerations {
                     startTime.add(Calendar.MONTH, 1);//original:1,adding one month to July, makes August
 
                     //if(((newMonth-2)+1)==8) {
-                    Log.d("Schedule", i + "");
-                    Log.d("Months 8!", (newMonth - 2) + 1 + "");
-                    Log.d("Course Name: ", listOfCourses.get(k).getNumber() + "");
+                    //Log.d("Schedule", i + "");
+                    //Log.d("Months 8!", (newMonth - 2) + 1 + "");
+                    //Log.d("Course Name: ", listOfCourses.get(k).getNumber() + "");
                     //Log.d("Course Days: ",listOfCourses.get(k).getDays()+"");
-                    Log.d("Day: ", listOfCourses.get(k).getDays().charAt(d) + "");
+                    //Log.d("Day: ", listOfCourses.get(k).getDays().charAt(d) + "");
                     //}
 
                     switch (listOfCourses.get(k).getDays().charAt(d)) {

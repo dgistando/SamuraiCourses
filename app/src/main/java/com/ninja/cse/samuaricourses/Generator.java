@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by dgist on 4/20/2016.
@@ -221,29 +222,212 @@ public class Generator{
         ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
         ArrayList<courses> list =  new ArrayList<courses>();
 
+        ArrayList<courses> DISCs = new ArrayList<courses>();
+        ArrayList<courses> LABs = new ArrayList<courses>();
 
-	/*for(int i=0;i<arr.length;i++){
-		//list.add(arr[i].LECT);
-		for (int j = 0 ;j<arr.length;j++){
-			list.add(arr[j].LECT);
 
-			if(arr[i].DISC.size() != 0){
-				list.add(arr[i].DISC.get(0));
-			}
 
-			if(arr[i].LAB.size() !=0){
-				list.add(arr[i].LAB.get(0));
-			}
+        //Removing courses without disc or lab
+        ArrayList<Generator> temp = new ArrayList<Generator>();
+        temp = new ArrayList<Generator>(Arrays.asList(arr));
+        for(int test=0;test<arr.length;test++){
+            if(arr[test].DISC.size() == 0 && arr[test].LAB.size() == 0){
+                //no labs or discussions
+                list.add(arr[test].LECT);
+                //Log.d("ADDDED THIS tO", arr[test].LECT.getNumber());
+                temp.remove(test);
+            }
+        }
+        arr = temp.toArray(new Generator[temp.size()]);
+        temp.clear();
 
-		}
+        int i, j;
+        Generator key = new Generator();
+        //n is length
+        //key is a object
+        //Sorting in increasing order.
+        for (i = 1; i < arr.length; i++)
+        {
+            key = arr[i];
+            j = i-1;
 
-		if(testSchedule(list)){
-			coursesList.add(list);
-		}
 
-	}*/
+            while (j >= 0 && (arr[j].DISC.size() + arr[j].LAB.size()) > (key.DISC.size() + key.LAB.size()))
+            {
+                arr[j+1] = arr[j];
+                j = j-1;
+            }
+            arr[j+1] = key;
+        }
 
-        for(int j = 0; j < arr.length; j++)
+        int numberOfTimes = 0;
+
+        if(arr[0].LAB.size() != 0){
+            numberOfTimes += arr[0].LAB.size();
+        }else if(arr[0].DISC.size() != 0) {
+            numberOfTimes += arr[0].DISC.size();
+        }
+
+        Log.d("numberOfTimes",numberOfTimes +"");
+
+        for(int k=0;k<arr.length;k++){
+            list.add(arr[k].LECT);//Added lectures
+
+            if(k>0){
+                for(int pl=0; pl < numberOfTimes; pl++){
+                    if(arr[k].DISC.size() != 0){
+                        DISCs.addAll(arr[k].DISC);
+                    }
+                    if(arr[k].LAB.size() != 0){
+                        DISCs.addAll(arr[k].LAB);
+                    }
+                }
+            }else{
+                //added both discussions and labs to first list
+                if(arr[k].DISC.size() != 0){
+                    LABs.addAll(arr[k].DISC);
+                }
+                if(arr[k].LAB.size() != 0){
+                    LABs.addAll(arr[k].LAB);
+                }
+            }
+            Log.d("ARRAY_OF_LECTURES", list.get(list.size()-1).getNumber());
+
+        }
+
+
+        ///////////////////////
+        //
+        for(int which=0;which<LABs.size();which++){
+            Log.d("COURSES_LIST_LABs", LABs.get(which).getNumber());
+        }
+        Log.d("COURSES_LIST_", "..");
+
+        ///////////////////////
+        //
+        for(int which=0;which<DISCs.size();which++){
+            Log.d("COURSES_LIST_DISCs", DISCs.get(which).getNumber());
+        }
+        Log.d("COURSES_LIST_", "..");
+
+
+        boolean lab=false,disc=false;
+        for(int h=0;h<LABs.size();h++){
+
+            ArrayList<courses> tempLect = new ArrayList<courses>(list);
+
+            if (arr[0].LAB.size() != 0 && arr[0].DISC.size() != 0) {
+                    //they need both labs and discussions
+                    list.add(LABs.get(h));//getting first thing and type
+                    if (LABs.get(h).getActivity().equals("DISC")) {
+                        disc = true;
+                    } else {
+                        lab = true;
+                    }
+
+                    for (int l = h + 1; l < LABs.size(); l++) {
+                        if (disc == true && lab == true) {
+                            LABs.remove(h);
+                            LABs.remove(l);
+                            disc = lab = false;
+                            break;
+                        }
+                        //if you already have a discussion and looking for a lab;
+                        if (lab == false && LABs.get(l).getActivity().equals("LAB")) {
+                            tempLect.add(LABs.get(l));
+                            lab = true;
+                        } else if (lab == true && LABs.get(l).getActivity().equals("DISC")) {//have a lab and looking for discussion
+                            tempLect.add(LABs.get(l));
+                            disc = true;
+                        } else {
+                            continue;
+                        }
+                    }
+
+
+                } else if (arr[0].DISC.size() != 0 && arr[0].LAB.size() == 0) {
+                    //They needs discussions only
+                    if(LABs.get(h).getActivity().equals("DISC")){
+                        tempLect.add(LABs.get(h));
+                        LABs.remove(h);
+                    }
+                } else {
+                    //only LABS
+                    tempLect.add(LABs.get(h));
+                    LABs.remove(h);
+                }
+
+
+            //adding for other courses
+            for(int l = 1; l < arr.length; l++){
+
+                for(int fin=0; fin<DISCs.size(); fin++){
+
+                    if(arr[l].LAB.size() != 0 && arr[l].DISC.size() != 0){
+                        //needs both
+                        if(lab == true && disc == true){
+                            coursesList.add(new ArrayList<courses>(tempLect));
+                        }
+
+                        if(arr[l].DISC.contains(DISCs.get(fin))){
+                            tempLect.add(DISCs.get(fin));
+                            DISCs.remove(fin);
+                            disc=true;
+                        }else if(arr[l].LAB.contains(DISCs.get(fin))){
+                            tempLect.add(DISCs.get(fin));
+                            DISCs.remove(fin);
+                            lab=true;
+                        }
+
+                    } else if (arr[l].DISC.size() != 0 && arr[l].LAB.size() == 0) {
+                        //only discussion
+                        if(disc == true ){
+                            coursesList.add(new ArrayList<courses>(tempLect));
+                        }
+
+                        if(arr[l].DISC.contains(DISCs.get(fin))){
+                            tempLect.add(DISCs.get(fin));
+                            DISCs.remove(fin);
+                            disc=true;
+                        }
+                    }else{
+                        //only lab
+                        if(lab == true ){
+                            coursesList.add(new ArrayList<courses>(tempLect));
+                        }
+
+                         if(arr[l].LAB.contains(DISCs.get(fin))){
+                            tempLect.add(DISCs.get(fin));
+                            DISCs.remove(fin);
+                            lab=true;
+                        }
+
+                    }
+                }
+
+            }
+
+            ///////////////////////
+            //
+            for(int which=0;which<tempLect.size();which++){
+                Log.d("COURSES_LIST", tempLect.get(which).getNumber());
+            }
+            Log.d("COURSES_LIST", "..");
+
+            //coursesList.add(tempLect);
+
+        }
+
+
+        for(int which=0;which<coursesList.size();which++){
+            if(!testSchedule(coursesList.get(which))){
+                coursesList.remove(which);
+            }
+        }
+
+
+
+        /*for(int j = 0; j < arr.length; j++)
         {
             list = new ArrayList<courses>();
             for(int i = 0; i<arr.length; i++)
@@ -272,7 +456,7 @@ public class Generator{
                 //}
                 coursesList.add(list);
             }
-        }
+        }*/
 
         return coursesList;
     }

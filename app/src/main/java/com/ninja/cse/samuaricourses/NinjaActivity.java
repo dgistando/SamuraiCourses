@@ -301,13 +301,13 @@ public class NinjaActivity extends AppCompatActivity {
                     validCourseNumber = selectedCourses.get(i).getNumber();
                     validCourseNumber = validCourseNumber.substring(validCourseNumber.indexOf('-') + 1, validCourseNumber.indexOf('-') + 4);
                     validCourseNumber = validCourseNumber.replaceFirst("^0+(?!$)","");
-                    Log.d("compared", validCourseNumber +" compared with "+ Selected);
+                    //Log.d("compared", validCourseNumber +" compared with "+ Selected);
                     if (validCourseNumber.equals(Selected)) {
 
                         for(courses entity: listToGenerateCourses){
                             //if(listToGenerateCourses.contains(selectedCourses.get(i)) ){
                             if(entity.getCrn() == selectedCourses.get(i).getCrn()){
-                                Log.d("CRN CHECK: ", "selected courses.size: "+selectedCourses.size()+"   "+entity.getCrn()+entity.getNumber() +" "+ selectedCourses.get(i).getCrn()+selectedCourses.get(i).getNumber());
+                               // Log.d("CRN CHECK: ", "selected courses.size: "+selectedCourses.size()+"   "+entity.getCrn()+entity.getNumber() +" "+ selectedCourses.get(i).getCrn()+selectedCourses.get(i).getNumber());
                                 Toast.makeText(NinjaActivity.this,"Course already selected",Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -323,7 +323,7 @@ public class NinjaActivity extends AppCompatActivity {
                     //listadapter.add(chosen + " " + classes.getText().toString());
                     //listview.setItemChecked(i, true);
                     //listadapter.notifyDataSetChanged();
-                Log.w("GetCheck", " " + classes.getText().toString());
+                //Log.w("GetCheck", " " + classes.getText().toString());
                 classeslist.clear();
                 //for(courses entity:listToGenerateCourses){
                 //    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
