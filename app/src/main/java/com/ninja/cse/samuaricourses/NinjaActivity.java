@@ -234,7 +234,6 @@ public class NinjaActivity extends AppCompatActivity {
 
                 Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
 
-                int numCoursesinSchedule = 0;
                 for(int i=0;i<coursesList.size();i++){
                     myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
 
@@ -247,6 +246,7 @@ public class NinjaActivity extends AppCompatActivity {
                 myIntent.putExtra("ScheduleSize", coursesList.size());
 
                 //myIntent.putExtra("Generated",coursesList);
+
                 startActivity(myIntent);
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));
             }

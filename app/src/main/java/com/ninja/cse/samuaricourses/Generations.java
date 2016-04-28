@@ -6,7 +6,6 @@ import com.alamkanak.weekview.WeekViewEvent;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -20,95 +19,67 @@ public class Generations extends BaseGenerations {
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
+
         ArrayList<courses> listOfCourses = new ArrayList<courses>();
+        int numOfSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
         scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-        List<WeekViewEvent> finalEvents = new ArrayList<WeekViewEvent>();
 
-        for(int i=0; i<scheduleSize; i++){
+        Calendar startTime = Calendar.getInstance();
+        Calendar endTime = (Calendar) startTime.clone();
+        for (int i = 0; i < numOfSchedules; i++) {
+            listOfCourses.clear();
             listOfCourses.addAll((ArrayList) this.getIntent().getParcelableArrayListExtra("schedule: " + i));
-        }
+            for (int k = 0; k < listOfCourses.size(); k++) {
 
-        Log.d("SCHEDULESIZE: ", Integer.toString(scheduleSize));
-        for(int i=0; i<listOfCourses.size(); i++){
-            for(int j=0; j < scheduleSize; j++)
-                Log.d("RESULTS: ", listOfCourses.get(i).getNumber() + "");
-            Log.d("RESULTS: ", "--------------------------");
-        }
-
-        int numTotalEvents = 0;
-        for(int i=0; i < listOfCourses.size(); i++){
-            ;
-            numTotalEvents = numTotalEvents + listOfCourses.get(i).getDays().length();
-
-        }
-
-        int scheduleCounter = 0;
-        int eventCounter = 0;
-        for (int i = 0; i < listOfCourses.size(); i++) {
-
-            for (int k = 0; k < scheduleSize+1; k++) {
-
-                for (int d = 0; d < listOfCourses.get(i).getDays().length(); d++) {
-
-                    Calendar startTime = Calendar.getInstance();
-                    startTime.set(Calendar.MONTH, 7);
+                for (int d = 0; d < listOfCourses.get(k).getDays().length(); d++) {
+                    startTime=Calendar.getInstance();
+                    startTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getStartTime() / 100);
                     startTime.set(Calendar.DAY_OF_MONTH, 22);
-                    startTime.set(Calendar.YEAR, 2016);
-                    startTime.add(Calendar.DATE, 7 * scheduleCounter);
-                    startTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(i).getStartTime() / 100);
-                    startTime.set(Calendar.MINUTE, listOfCourses.get(i).getStartTime() % 100);
+                    startTime.set(Calendar.MINUTE, listOfCourses.get(k).getStartTime() % 100);
+                    startTime.set(Calendar.MONTH, (newMonth - 2));//original:6,set month one month before the set month of august
+                    startTime.add(Calendar.MONTH, 1);//original:1,adding one month to July, makes August
 
-                    Calendar endTime = (Calendar) startTime.clone();
-                    endTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(i).getEndTime() / 100);
-                    endTime.set(Calendar.MINUTE, listOfCourses.get(i).getEndTime() % 100);
+                    //if(((newMonth-2)+1)==8) {
+                    Log.d("Schedule", i + "");
+                    Log.d("Months 8!", (newMonth - 2) + 1 + "");
+                    Log.d("Course Name: ", listOfCourses.get(k).getNumber() + "");
+                    //Log.d("Course Days: ",listOfCourses.get(k).getDays()+"");
+                    Log.d("Day: ", listOfCourses.get(k).getDays().charAt(d) + "");
+                    //}
 
-                    switch (listOfCourses.get(i).getDays().charAt(d)) {
+                    switch (listOfCourses.get(k).getDays().charAt(d)) {
                         case 'M':
-                            startTime.add(Calendar.DATE, 0);
-                            endTime.add(Calendar.DATE, 0);
+                            startTime.add(Calendar.DAY_OF_MONTH, 0);
                             break;
                         case 'T':
-                            startTime.add(Calendar.DATE, 1);
-                            endTime.add(Calendar.DATE, 1);
+                            startTime.add(Calendar.DAY_OF_MONTH, 1);
                             break;
                         case 'W':
-                            startTime.add(Calendar.DATE, 2);
-                            endTime.add(Calendar.DATE, 2);
+                            startTime.add(Calendar.DAY_OF_MONTH, 2);
                             break;
                         case 'R':
-                            startTime.add(Calendar.DATE, 3);
-                            endTime.add(Calendar.DATE, 3);
+                            startTime.add(Calendar.DAY_OF_MONTH, 3);
                             break;
                         case 'F':
-                            startTime.add(Calendar.DATE, 4);
-                            endTime.add(Calendar.DATE, 4);
+                            startTime.add(Calendar.DAY_OF_MONTH, 4);
                             break;
                     }
-
-                    WeekViewEvent event = new WeekViewEvent(eventCounter,
-                            listOfCourses.get(i).getCrn() + "\n"
-                                    + listOfCourses.get(i).getNumber() + "\n"
-                                    + listOfCourses.get(i).getTime() + "\n"
-                                    + listOfCourses.get(i).getRoom() + "\n",
-                            listOfCourses.get(i).getNumber(),
+                    startTime.add(Calendar.WEEK_OF_YEAR, i);//0-number of schedules,0:first week
+                    startTime.set(Calendar.YEAR, newYear);
+                    endTime = (Calendar) startTime.clone();
+                    endTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getEndTime() / 100);
+                    endTime.set(Calendar.MINUTE, listOfCourses.get(k).getEndTime() % 100);
+                    WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber() + "\n" + listOfCourses.get(k).getTime(), listOfCourses.get(k).getNumber(),
                             startTime, endTime);
-                    event.setColor(getResources().getColor(listOfCourses.get(i).getColor()));
+                    event.setColor(getResources().getColor(listOfCourses.get(k).getColor()));
                     events.add(event);
-
-                    eventCounter = eventCounter + 1;
                 }
-
-                i = i+1;
+                startTime=Calendar.getInstance();
             }
-            scheduleCounter = scheduleCounter + 1;
-            i = i - 1;
-        }
+            //return events;
 
-        for(int i=0; i< events.size(); i++){
-            if(events.get(i).getStartTime().get(Calendar.MONTH) == newMonth)
-                finalEvents.add(events.get(i));
         }
-        return finalEvents;
+        return events;
     }
 }
