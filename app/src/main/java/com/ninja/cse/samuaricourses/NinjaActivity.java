@@ -12,10 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< HEAD
+
 import android.view.inputmethod.InputMethodManager;
-=======
->>>>>>> refs/remotes/origin/master
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
