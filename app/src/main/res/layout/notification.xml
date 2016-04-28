@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <TextView
-        android:layout_width="127dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/primary_light"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ninja.cse.samuaricourses.NinjaActivity"
+    tools:showIn="@layout/activity_ninja">
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Get Notified"
+        android:id="@+id/btnGenerate"
+        android:background="@drawable/buttonshape"
+        android:layout_marginBottom="42dp"
+        android:width="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:id="@+id/btnAdd"
+        android:text="@string/add"
+        android:layout_below="@+id/LL"
+        android:layout_alignRight="@+id/btnGenerate"
+        android:background="@drawable/buttonshape"
+        android:layout_alignEnd="@+id/btnTrack"
+        android:windowSoftInputMode="stateHidden" />
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is Noitfication"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:orientation="horizontal"
+        android:id="@+id/LL"
+        android:weightSum="2"
+        >
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:id="@+id/department"
+            android:layout_weight="1"
+            />
+        <AutoCompleteTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:id="@+id/number"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/listViewToDo"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:choiceMode="multipleChoice"
+        android:textColor="@color/black"
+        tools:listitem="@layout/row_list_to_do"
+        android:padding="6dip"
+        android:layout_below="@+id/btnAdd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnGenerate">
+    </ListView>
+</RelativeLayout>

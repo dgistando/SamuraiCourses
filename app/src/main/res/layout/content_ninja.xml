@@ -11,8 +11,7 @@
     android:background="@color/primary_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ninja.cse.samuaricourses.NinjaActivity"
-    tools:showIn="@layout/activity_ninja"
-    >
+    tools:showIn="@layout/activity_ninja">
     <Button
         android:layout_width="100dp"
         android:layout_height="40dp"
@@ -33,7 +32,6 @@
         android:background="@drawable/buttonshape"
         android:layout_alignEnd="@+id/btnGenerate"
         android:windowSoftInputMode="stateHidden" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +39,6 @@
         android:id="@+id/LL"
         android:weightSum="2"
         >
-
         <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,12 +51,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/number"
-            android:layout_weight="1"
-            />
-
-
+            android:layout_weight="1" />
     </LinearLayout>
-
     <ListView
         android:id="@+id/listViewToDo"
         android:layout_width="match_parent"
@@ -72,9 +65,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/btnGenerate">
-
     </ListView>
-
-
-
 </RelativeLayout>
