@@ -22,7 +22,7 @@ public class Generations extends BaseGenerations {
 
         ArrayList<courses> listOfCourses = new ArrayList<courses>();
         int numOfSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
-        numSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
+        scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
         Calendar startTime = Calendar.getInstance();

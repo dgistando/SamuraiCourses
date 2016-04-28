@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.view.inputmethod.InputMethodManager;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -235,7 +238,7 @@ public class NinjaActivity extends AppCompatActivity {
                     myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
 
                     for(int j=0;j<coursesList.get(i).size();j++){
-                        Log.d("GENRATIONS", coursesList.get(i).get(j).getCrn()+" ");
+                        Log.d("GENRATIONS", i + " " + j + " " + coursesList.get(i).get(j).getCrn()+" " + " " +  coursesList.get(i).get(j).getNumber() + " " + coursesList.get(i).get(j).getDays());
                     }
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
@@ -243,6 +246,7 @@ public class NinjaActivity extends AppCompatActivity {
                 myIntent.putExtra("ScheduleSize", coursesList.size());
 
                 //myIntent.putExtra("Generated",coursesList);
+
                 startActivity(myIntent);
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));
             }
@@ -290,12 +294,8 @@ public class NinjaActivity extends AppCompatActivity {
                 int newpos = departmentTempAdapter.getPosition(department.getText().toString());
                 chosen = departmentTagAdapter.getItem(newpos);
 
-                //InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
-                //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
                 String validCourseNumber="-0",Selected = "-0";
                 Selected = classes.getText().toString();
-
 
                 for(int i = 0; i<selectedCourses.size(); i++) {
                     validCourseNumber = selectedCourses.get(i).getNumber();
@@ -329,6 +329,11 @@ public class NinjaActivity extends AppCompatActivity {
                 //    Log.d("list to generate", entity.getNumber() + "::" +entity.getCrn());
                 //}
                 //Log.d("list to generate", "\n");
+
+                department.setText("");
+                classes.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
             }
         });
