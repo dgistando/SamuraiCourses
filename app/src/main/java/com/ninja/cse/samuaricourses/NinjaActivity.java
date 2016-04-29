@@ -595,7 +595,6 @@ public class NinjaActivity extends AppCompatActivity {
         colors.add(R.color.event_color_11);
         colors.add(R.color.event_color_12);
         colors.add(R.color.event_color_13);
-        colors.add(R.color.event_color_14);
         colors.add(R.color.event_color_15);
         colors.add(R.color.event_color_16);
         colors.add(R.color.event_color_17);

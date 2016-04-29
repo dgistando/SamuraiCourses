@@ -5,6 +5,7 @@ import android.util.Log;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Created by dgist on 4/20/2016.
@@ -367,53 +368,77 @@ public class Generator{
 
             //adding for other courses
             for(int l = 1; l < arr.length; l++){
-
-                for(int fin=0; fin<DISCs.size(); fin++){
+                int count = 0;
+                while(counter != (arr[l].DISC.size() + arr[l].LAB.size()) && !DISCs.isEmpty()){
+                //for(int fin=0; fin<DISCs.size(); fin++){
 
                     if(arr[l].LAB.size() != 0 && arr[l].DISC.size() != 0){
-                        //needs both
-                        if(lab == true && disc == true){
-                            lab=disc=false;
+                        //needs both just unwrapped both cases
+                        if(DISCs.get(0).getActivity().equals("DISC") && arr[i].DISC.contains(DISCs.get(0))){
+                            for(int fin=0;fin<DISCs.size();fin++){
+                                if(DISCs.get(fin).getActivity().equals("LAB") && arr[i].LAB.contains(DISCs.get(fin))){
 
-                            //coursesList.add(new ArrayList<courses>(tempLect));
-                            break;
-                        }
+                                    tempLect.add(DISCs.get(0));
+                                    tempLect.add(DISCs.get(fin));
+                                    if(testSchedule(tempLect)){
+                                        coursesList.add(new ArrayList<courses>(tempLect));
+                                    }
+                                    //removed from list to recycle good parts
+                                    tempLect.remove(tempLect.size()-1);
+                                    tempLect.remove(tempLect.size()-1);
+                                    counter++;
+                                    counter++;
+                                    DISCs.remove(0);
+                                    DISCs.remove(fin);
+                                    break;
+                                }
+                            }
+                        }else if(DISCs.get(0).getActivity().equals("LAB") && arr[i].LAB.contains(DISCs.get(0))){
+                            for(int fin=0;fin<DISCs.size();fin++){
+                                if(DISCs.get(fin).getActivity().equals("DISC") && arr[i].DISC.contains(DISCs.get(fin))){
 
-                        if(arr[l].DISC.contains(DISCs.get(fin))){
-                            tempLect.add(DISCs.get(fin));
-                            DISCs.remove(fin);
-                            disc=true;
-                        }else if(arr[l].LAB.contains(DISCs.get(fin))){
-                            tempLect.add(DISCs.get(fin));
-                            DISCs.remove(fin);
-                            lab=true;
+                                    tempLect.add(DISCs.get(0));
+                                    tempLect.add(DISCs.get(fin));
+                                    if(testSchedule(tempLect)){
+                                        coursesList.add(new ArrayList<courses>(tempLect));
+                                    }
+                                    //removed from list to recycle good parts
+                                    tempLect.remove(tempLect.size()-1);
+                                    tempLect.remove(tempLect.size()-1);
+                                    counter++;
+                                    counter++;
+                                    DISCs.remove(0);
+                                    DISCs.remove(fin);
+                                    break;
+                                }
+                            }
                         }
 
                     } else if (arr[l].DISC.size() != 0 && arr[l].LAB.size() == 0) {
                         //only discussion
-                        if(disc == true ){
-                            disc=false;
-                            //coursesList.add(new ArrayList<courses>(tempLect));
-                            break;
-                        }
-
-                        if(arr[l].DISC.contains(DISCs.get(fin))){
-                            tempLect.add(DISCs.get(fin));
-                            DISCs.remove(fin);
-                            disc=true;
+                        if(arr[l].DISC.contains(DISCs.get(0))){
+                            tempLect.add(DISCs.get(0));
+                            if(testSchedule(tempLect)){
+                                coursesList.add(new ArrayList<courses>(tempLect));
+                            }
+                            //removed from list to recycle good parts
+                            tempLect.remove(tempLect.size()-1);
+                            counter++;
+                            DISCs.remove(0);
                         }
                     }else{
                         //only lab
-                        if(lab == true ){
-                            lab=false;
-                            //coursesList.add(new ArrayList<courses>(tempLect));
-                            break;
-                        }
+                         if(arr[l].LAB.contains(DISCs.get(0))){
+                            tempLect.add(DISCs.get(0));
 
-                         if(arr[l].LAB.contains(DISCs.get(fin))){
-                            tempLect.add(DISCs.get(fin));
-                            DISCs.remove(fin);
-                            lab=true;
+                             if(testSchedule(tempLect)){
+                                 coursesList.add(new ArrayList<courses>(tempLect));
+                             }
+                             //removed from list to recycle good parts
+                             tempLect.remove(tempLect.size()-1);
+                             counter++;
+                            DISCs.remove(0);
+
                         }
 
                     }
@@ -428,16 +453,12 @@ public class Generator{
             }
             Log.d("COURSES_LIST", "..");
 
-            coursesList.add(new ArrayList<courses>(tempLect));
-
-        }
-
-
-        for(int which=0;which<coursesList.size();which++){
-            if(!testSchedule(coursesList.get(which))){
-                coursesList.remove(which);
+            if(coursesList.size() > 20){
+                break;
             }
+
         }
+
 
 
 
@@ -478,10 +499,10 @@ public class Generator{
     public static boolean testSchedule(ArrayList<courses> list){
 
         for(int i=0;i<list.size();i++){
-            for(int j=0;j<list.size();j++){
+            for(int j=i+1;j<list.size();j++){
 
-                if(list.get(i).conflicts(list.get(j))){
-                    System.out.println("CONFLICTS");
+                if(list.get(i).conflicts(list.get(j)) && list.get(i).getCrn() != list.get(j).getCrn()){
+                    System.out.println("CONFLICTS");// + list.get(i).getCrn() + " and " + list.get(j).getCrn());
                     return false;
                 }
 

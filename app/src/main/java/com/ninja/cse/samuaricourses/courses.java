@@ -358,18 +358,18 @@ public class courses implements Parcelable{
         days.retainAll(days1);
 
         if (days.size() == 0) {
-            Log.d("DAYS OF EACH", this.getDays() + "compare" + temp.getDays());
-            Log.d("GENERATOR ", "No days in common");
+            //Log.d("DAYS OF EACH", this.getDays() + "compare" + temp.getDays());
+            //Log.d("GENERATOR ", "No days in common");
             return false;
         }
 
         if (this.startTime >= temp.startTime && this.startTime <= temp.endTime) {
-            Log.d("CONFLICTS:", " THERE WAS CONFLICT");
+            Log.d("CONFLICTS:"," THERE WAS CONFLICT. The start time and endtime this " +this.getNumber() +" "+ this.getStartTime() +" "+ this.getEndTime() + " other: " + temp.getNumber() +" "+ temp.getStartTime() +" "+ temp.getEndTime());
             return true;
         }
         else if (this.endTime >= temp.startTime && this.endTime <= temp.endTime)
         {
-            Log.d("CONFLICTS:"," THERE WAS CONFLICT");
+            Log.d("CONFLICTS:"," THERE WAS CONFLICT. The start time and endtime this " + this.getNumber() +" "+ this.getStartTime() +" "+ this.getEndTime() + " other: " + temp.getNumber() +" "+ temp.getStartTime() +" "+ temp.getEndTime());
             return true;
         }
         else
