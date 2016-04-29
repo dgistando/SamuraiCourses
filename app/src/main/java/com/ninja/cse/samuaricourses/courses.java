@@ -338,33 +338,38 @@ public class courses implements Parcelable{
         }
     }
 
-    protected boolean conflicts(courses temp){
+    protected boolean conflicts(courses temp) {
         //return false if the start time or finish time falls in
         //in the middle of other class time
 
         //convert days to list and compare.
         char[] a = getDays().toCharArray();
         ArrayList<Character> days = new ArrayList<Character>();
-        for(char c : a){days.add(c);}
+        for (char c : a) {
+            days.add(c);
+        }
 
         a = temp.getDays().toCharArray();
         ArrayList<Character> days1 = new ArrayList<Character>();
-        for(char c : a){days1.add(c);}
+        for (char c : a) {
+            days1.add(c);
+        }
 
         days.retainAll(days1);
 
-        if(days.size() == 0){
+        if (days.size() == 0) {
             Log.d("DAYS OF EACH", this.getDays() + "compare" + temp.getDays());
             Log.d("GENERATOR ", "No days in common");
             return false;
         }
 
-        if(this.startTime >= temp.startTime && this.startTime <= temp.endTime)
-        {
+        if (this.startTime >= temp.startTime && this.startTime <= temp.endTime) {
+            Log.d("CONFLICTS:", " THERE WAS CONFLICT");
             return true;
         }
-        else if(this.endTime >= temp.startTime && this.endTime <= temp.endTime)
+        else if (this.endTime >= temp.startTime && this.endTime <= temp.endTime)
         {
+            Log.d("CONFLICTS:"," THERE WAS CONFLICT");
             return true;
         }
         else

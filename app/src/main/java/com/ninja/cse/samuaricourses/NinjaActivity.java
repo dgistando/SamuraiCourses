@@ -252,6 +252,7 @@ public class NinjaActivity extends AppCompatActivity {
                 //myIntent.putExtra("Generated",coursesList);
 
                 startActivity(myIntent);
+                coursesList.clear();
                 //startActivity(new Intent(NinjaActivity.this, Generations.class));
             }
         });

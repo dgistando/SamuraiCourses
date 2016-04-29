@@ -88,7 +88,7 @@ public class Generator{
             Log.d("Lecutres in list", Lectures.get(i).getNumber() + " "+ Lectures.get(i).getStartTime() + " " + Lectures.get(i).getEndTime());
         }
 
-        for(int i=0;i<Lectures.size();i++)
+        /*for(int i=0;i<Lectures.size();i++)
         {
             boolean deleteIt = false;
             String Title = "-sentinel";
@@ -96,7 +96,12 @@ public class Generator{
 
             for(int j=i+1;j<Lectures.size();j++)
             {
-                if(!Lectures.get(i).getNumber().equals(Lectures.get(j).getNumber()) && Title.equals("-sentinel") && !Lectures.get(j).getNumber().equals(Lectures.get(j-1).getNumber())){
+                Log.d("CONFLICTS:", "i: "+Lectures.get(i).getNumber() + " and " + Lectures.get(j).getNumber());
+                if(!Lectures.get(i).getNumber().equals(Lectures.get(j).getNumber()) && Title.equals("-sentinel")) {
+                    Title = Lectures.get(j).getNumber();
+                }
+
+                if(!Lectures.get(i).getNumber().equals(Lectures.get(j).getNumber()) && !Lectures.get(j).getNumber().equals(Lectures.get(j-1).getNumber())){
                     Title = Lectures.get(j).getNumber();
                 }
 
@@ -113,7 +118,7 @@ public class Generator{
             if(deleteIt){
                 Lectures.remove(which);
             }
-        }
+        }*/
 
         String classNumbers = Lectures.get(0).getNumber();
         int ClassesAfter = 1;
