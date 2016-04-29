@@ -30,7 +30,6 @@
         android:layout_below="@+id/LL"
         android:layout_alignRight="@+id/btnGenerate"
         android:background="@drawable/buttonshape"
-        android:layout_alignEnd="@+id/btnTrack"
         android:windowSoftInputMode="stateHidden" />
     <LinearLayout
         android:layout_width="match_parent"
