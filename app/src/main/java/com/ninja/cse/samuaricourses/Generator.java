@@ -42,8 +42,6 @@ public class Generator{
             DISC.add(temp);
         }else if(temp.getActivity().equals("LAB")){
             LAB.add(temp);
-        }else{
-            OTHER.add(temp);
         }
     }
 
@@ -194,7 +192,7 @@ public class Generator{
         for(courses entity: finalList){
 
             if(Scheduler.size() > 0){
-                Log.d("SCHEDULER",Scheduler.size()+"");
+                Log.d("SCHEDULER",Scheduler.size()+" " + Scheduler.get(0).LECT.getNumber());
             }
 
             if(entity.getActivity().equals("LECT")){
@@ -215,11 +213,18 @@ public class Generator{
             }
         }
 
-        semifinal.addAll(Kcombinations(Scheduler.toArray(new Generator[Scheduler.size()]),numDiffClasses));
-        Scheduler.clear();
+
+        if(numDiffClasses != 1) {
+            semifinal.addAll(Kcombinations(Scheduler.toArray(new Generator[Scheduler.size()]), numDiffClasses));
+            Scheduler.clear();
+        }else{
+            System.out.println("Test for writing");
+            Valid.addAll(generateSingleCourse(Scheduler.toArray(new Generator[Scheduler.size()])));
+            return Valid;
+        }
 
         for(ArrayList<Generator> test : semifinal){
-            for(ArrayList<courses> list : df(test.toArray(new Generator[test.size()]))){
+            for(ArrayList<courses> list : generateCourses(test.toArray(new Generator[test.size()]))){
                 Valid.add(new ArrayList<courses>());
                 Valid.get(Valid.size()-1).addAll(list);
             }
@@ -228,7 +233,46 @@ public class Generator{
         return Valid;
     }
 
-    public static ArrayList<ArrayList<courses>> df(Generator[] arr){
+
+    public static ArrayList<ArrayList<courses>> generateSingleCourse(Generator[] course){
+        ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
+        ArrayList<courses> list =  new ArrayList<courses>();
+
+        //doesnt have lab or disc
+        if(course[0].LAB.size() == 0 && course[0].DISC.size() == 0){
+            for(Generator c : course){
+                list.add(c.LECT);
+                coursesList.add(new ArrayList<courses>(list));
+                list.clear();
+            }
+            list.clear();
+        }
+
+        //has lab and discussion
+        if(course[0].LAB.size() != 0 || course[0].DISC.size() != 0) {
+            for (Generator c : course) {
+                list.add(c.LECT);
+
+                for (int k=0;k<c.DISC.size();k++) {
+                    list.add(c.DISC.get(0));
+
+                    if(c.LAB.size() != 0){
+                        list.add(c.DISC.get(0));
+                    }
+
+                    if (testSchedule(list)) {
+                        coursesList.add(new ArrayList<courses>(list));
+                    }
+                    list.remove(list.size() - 1);
+                }
+                list.clear();
+            }
+        }
+
+        return coursesList;
+    }
+
+    public static ArrayList<ArrayList<courses>> generateCourses(Generator[] arr){
         ArrayList<ArrayList<courses>> coursesList = new ArrayList<ArrayList<courses>>();
         ArrayList<courses> list =  new ArrayList<courses>();
 
@@ -236,9 +280,8 @@ public class Generator{
         ArrayList<courses> LABs = new ArrayList<courses>();
 
 
-
         //Removing courses without disc or lab
-        ArrayList<Generator> temp = new ArrayList<Generator>();
+        ArrayList<Generator> temp;
         temp = new ArrayList<Generator>(Arrays.asList(arr));
         for(int test=0;test<arr.length;test++){
             if(arr[test].DISC.size() == 0 && arr[test].LAB.size() == 0){
