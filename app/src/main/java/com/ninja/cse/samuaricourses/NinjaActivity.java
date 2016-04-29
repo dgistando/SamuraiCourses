@@ -235,6 +235,9 @@ public class NinjaActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(NinjaActivity.this,Generations.class);
 
                 for(int i=0;i<coursesList.size();i++){
+                    if(myIntent.getExtras() != null){
+                        myIntent.removeExtra("schedule: " + i);
+                    }
                     myIntent.putParcelableArrayListExtra("schedule: " + i, coursesList.get(i));
 
                     for(int j=0;j<coursesList.get(i).size();j++){
@@ -243,7 +246,8 @@ public class NinjaActivity extends AppCompatActivity {
                     Log.d("GERATIONS", "+++++++++++++++++++");
                 }
 
-                myIntent.putExtra("ScheduleSize", coursesList.size());
+                myIntent.removeExtra("ScheduleSize");
+                   myIntent.putExtra("ScheduleSize", coursesList.size());
 
                 //myIntent.putExtra("Generated",coursesList);
 
@@ -275,6 +279,7 @@ public class NinjaActivity extends AppCompatActivity {
                         }
                     }
 
+
                     listadapter.notifyDataSetChanged();
                 }
             }
@@ -286,13 +291,18 @@ public class NinjaActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(department.getText().toString().equals("") || classes.getText().toString().equals("")){
+                    Toast.makeText(NinjaActivity.this," Select valid courses",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 coursesList.clear();
                 ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
                 ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
 
-                String chosen = "depart.";
-                int newpos = departmentTempAdapter.getPosition(department.getText().toString());
-                chosen = departmentTagAdapter.getItem(newpos);
+                //String chosen = "depart.";
+                //int newpos = departmentTempAdapter.getPosition(department.getText().toString());
+                //chosen = departmentTagAdapter.getItem(newpos);
 
                 String validCourseNumber="-0",Selected = "-0";
                 Selected = classes.getText().toString();
@@ -313,7 +323,7 @@ public class NinjaActivity extends AppCompatActivity {
                             }
                         }
 
-                        listadapter.add(chosen + " " + validCourseNumber);
+                        listadapter.add(selectedCourses.get(i).getNumber().substring(0,selectedCourses.get(i).getNumber().indexOf('-')) + " " + validCourseNumber);
                         listview.setItemChecked(listadapter.getCount()-1, true);
                         listToGenerateCourses.add(selectedCourses.get(i));
                         listadapter.notifyDataSetChanged();

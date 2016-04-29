@@ -354,6 +354,7 @@ public class courses implements Parcelable{
         days.retainAll(days1);
 
         if(days.size() == 0){
+            Log.d("DAYS OF EACH", this.getDays() + "compare" + temp.getDays());
             Log.d("GENERATOR ", "No days in common");
             return false;
         }
