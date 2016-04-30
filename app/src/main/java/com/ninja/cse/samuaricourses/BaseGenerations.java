@@ -3,9 +3,7 @@ package com.ninja.cse.samuaricourses;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,16 +31,15 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
     Calendar testDate = Calendar.getInstance();
-
-    private int scheduleIndex = 0;
-    public int scheduleSize;
+    Calendar weekIncr=Calendar.getInstance();
+    private int scheduleIndex = 1;
+    // public static int scheduleSize;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generations);
-        scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
 
         // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
@@ -64,58 +61,70 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
 
-        // Calendar testDate = Calendar.getInstance();
-                    //7 is August; 0 is Janurary
-        testDate.set(2016, 7, 22);
+        testDate.set(2016, 8-1, 22);
         mWeekView.goToDate(testDate);
 
-        mWeekView.setHourHeight(95);
+        mWeekView.setHourHeight(130);
         mWeekView.goToHour(7);
-
-
         //mWeekView.goToToday();
         final TextView tv = (TextView)findViewById(R.id.textScheduleCounter);
-        tv.setText((scheduleIndex+1) + "/" + scheduleSize);
+        final int numOfSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
+
+        int day=testDate.get(Calendar.DATE);
+        int month=testDate.get(Calendar.MONTH);
+        int year=testDate.get(Calendar.YEAR);
+
+        tv.setText(scheduleIndex + "/" + numOfSchedules/*+": "+(month+1)+"/"+day+"/"+year*/);
 
         final Button btnNext = (Button)findViewById(R.id.btnNext);
         final Button btnPrev = (Button)findViewById(R.id.btnPrev);
 
+        //PREV button is disabled when app starts
+        btnPrev.setEnabled(false);
+
+        Log.d("Number of schedule",scheduleIndex+"");
+        Log.d("Size of schedules",numOfSchedules+"");
+
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex+1 < scheduleSize) {
-                    tv.setText(1+(++scheduleIndex) + "/" + scheduleSize);
+                if(scheduleIndex==numOfSchedules){
+                    btnNext.setEnabled(false);
+                    btnPrev.setEnabled(true);
+                }
+                if ((scheduleIndex < numOfSchedules)) {
                     btnNext.setEnabled(true);
                     btnPrev.setEnabled(true);
-                    testDate.add(Calendar.WEEK_OF_YEAR,1);
-                    mWeekView.goToDate(testDate);
-                    /*btnNext.setEnabled(true);
-                    btnPrev.setEnabled(true);
                     scheduleIndex = scheduleIndex + 1;
-                    testDate.add(Calendar.DATE, 7);
+
+                    testDate.add(Calendar.WEEK_OF_YEAR, 1);
                     mWeekView.goToDate(testDate);
-                    tv.setText(scheduleIndex+1 + "/" + scheduleSize);*/
+                    tv.setText(scheduleIndex + "/" + numOfSchedules/*+": "+(1+month)+"/"+day+"/"+year*/);
                 }
                 else {
                     btnNext.setEnabled(false);
                     btnPrev.setEnabled(true);
                 }
-//                testDate.add(Calendar.DATE, 7);
-//                mWeekView.goToDate(testDate);
             }
         });
+
 
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex+1 > 0) {
+
+                if (scheduleIndex >1) {
                     btnNext.setEnabled(true);
                     btnPrev.setEnabled(true);
+
                     scheduleIndex = scheduleIndex - 1;
-                    testDate.add(Calendar.DATE, -7);
+                    testDate.add(Calendar.WEEK_OF_YEAR, -1);
+
                     mWeekView.goToDate(testDate);
-                    tv.setText(scheduleIndex+1 + "/" + scheduleSize);
+                    tv.setText(scheduleIndex + "/" + numOfSchedules/*+": "+(1+month)+"/"+day+"/"+year*/);
                 }
+
                 else {
                     btnPrev.setEnabled(false);
                     btnNext.setEnabled(true);
@@ -125,69 +134,13 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
             }
         });
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_generations, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        setupDateTimeInterpreter(id == R.id.action_week_view);
-        switch (id){
-            case R.id.action_today:
-                mWeekView.goToToday();
-                return true;
-            case R.id.action_day_view:
-                if (mWeekViewType != TYPE_DAY_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(1);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                }
-                return true;
-            case R.id.action_three_day_view:
-                if (mWeekViewType != TYPE_THREE_DAY_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_THREE_DAY_VIEW;
-                    mWeekView.setNumberOfVisibleDays(3);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
-                }
-                return true;
-            case R.id.action_week_view:
-                if (mWeekViewType != TYPE_WEEK_VIEW) {
-                    item.setChecked(!item.isChecked());
-                    mWeekViewType = TYPE_WEEK_VIEW;
-                    mWeekView.setNumberOfVisibleDays(7);
-
-                    // Lets change some dimensions to best fit the view.
-                    mWeekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-                    mWeekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                    mWeekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                }
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
      * date values otherwise.
      * @param shortDate True if the date values should be short.
      */
     private void setupDateTimeInterpreter(final boolean shortDate) {
+
         mWeekView.setDateTimeInterpreter(new DateTimeInterpreter() {
             @Override
             public String interpretDate(Calendar date) {
