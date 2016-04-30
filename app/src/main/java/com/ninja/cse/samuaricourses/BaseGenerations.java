@@ -84,8 +84,6 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
 
         Log.d("Number of schedule",scheduleIndex+"");
         Log.d("Size of schedules",numOfSchedules+"");
-
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

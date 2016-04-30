@@ -2,10 +2,8 @@ package com.ninja.cse.samuaricourses;
 
 import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 /**
  * Created by dgist on 4/20/2016.
@@ -343,6 +341,7 @@ public class Generator{
 
             while (j >= 0 && (arr[j].DISC.size() + arr[j].LAB.size()) > (key.DISC.size() + key.LAB.size()))
             {
+
                 arr[j+1] = arr[j];
                 j = j-1;
             }
@@ -447,8 +446,8 @@ public class Generator{
 
             //adding for other courses
             for(int l = 1; l < arr.length; l++){
-                int count = 0;
-                while(counter != (arr[l].DISC.size() + arr[l].LAB.size()) && !DISCs.isEmpty()){
+                int count = 1;
+                while(count < (arr[l].DISC.size() + arr[l].LAB.size()) && !DISCs.isEmpty()){
                 //for(int fin=0; fin<DISCs.size(); fin++){
 
                     if(arr[l].LAB.size() != 0 && arr[l].DISC.size() != 0){
@@ -465,8 +464,8 @@ public class Generator{
                                     //removed from list to recycle good parts
                                     tempLect.remove(tempLect.size()-1);
                                     tempLect.remove(tempLect.size()-1);
-                                    counter++;
-                                    counter++;
+                                    count++;
+                                    count++;
                                     DISCs.remove(0);
                                     DISCs.remove(fin);
                                     break;
@@ -484,8 +483,8 @@ public class Generator{
                                     //removed from list to recycle good parts
                                     tempLect.remove(tempLect.size()-1);
                                     tempLect.remove(tempLect.size()-1);
-                                    counter++;
-                                    counter++;
+                                    count++;
+                                    count++;
                                     DISCs.remove(0);
                                     DISCs.remove(fin);
                                     break;
@@ -502,7 +501,7 @@ public class Generator{
                             }
                             //removed from list to recycle good parts
                             tempLect.remove(tempLect.size()-1);
-                            counter++;
+                            count++;
                             DISCs.remove(0);
                         }
                     }else{
@@ -515,7 +514,7 @@ public class Generator{
                              }
                              //removed from list to recycle good parts
                              tempLect.remove(tempLect.size()-1);
-                             counter++;
+                             count++;
                             DISCs.remove(0);
 
                         }
