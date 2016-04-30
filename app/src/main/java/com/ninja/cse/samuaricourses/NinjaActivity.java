@@ -59,7 +59,6 @@ public class NinjaActivity extends AppCompatActivity {
 
     private MobileServiceClient mClient;
     //private MobileServiceTable<courses> mCoursesTable;
-    private MobileServiceSyncTable<courses> mCoursesTable;
     private ProgressBar mProgressBar;
     DBHelper db;
     static ArrayList<Integer> colors;
@@ -101,69 +100,41 @@ public class NinjaActivity extends AppCompatActivity {
         department.setThreshold(1);
         department.setHint("Department");
 
-                    try {
-                        mClient = new MobileServiceClient(
-                                "https://samuraicourses.azurewebsites.net",
-                                this).withFilter(new ProgressFilter());
-                        mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
-                            /**
-                             * makes an http request to the server for this application and
-                             * passes the response to progress filter.
-                             *
-                             * @return
-                             */
-                            @Override
-                            public OkHttpClient createOkHttpClient() {
-                                OkHttpClient client = new OkHttpClient();
-                                client.setReadTimeout(20, TimeUnit.SECONDS);
-                                return client;
-                            }
-                        });
 
-                        //mCoursesTable = mClient.getTable(courses.class);
-                        //mPullQurey = mClient.getTable(courses.class).where().field("complete").eq(false);
-                        mCoursesTable = mClient.getSyncTable("courses", courses.class);
-                        initLocalStore();
-                        //sync();
-                        //refreshItemsFromMobileServiceTableSyncTable();
+        department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedCourses.clear();
+                Log.d("Item Clicked", "Item was clicked");
+                ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
+                ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
 
-                        department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                selectedCourses.clear();
-                                Log.d("Item Clicked", "Item was clicked");
-                                ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
-                                ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NinjaActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
+                String chosen = parent.getItemAtPosition(position).toString();
+                int newpos = departmentTempAdapter.getPosition(chosen);
+                chosen = departmentTagAdapter.getItem(newpos);
+                Log.w("EndCheck", chosen);
 
-                                String chosen = parent.getItemAtPosition(position).toString();
-                                int newpos = departmentTempAdapter.getPosition(chosen);
-                                chosen = departmentTagAdapter.getItem(newpos);
-                                Log.w("EndCheck", chosen);
+                selectedCourses.addAll(db.courseSearchByDepartment(chosen));
+                Set<String> hashedset = new HashSet<>();
+                String temp;
+                for (courses number : selectedCourses) {
+                    //gets rid of extra characters and duplicates
+                    temp = number.getNumber();
+                    temp = temp.substring(temp.indexOf("-") + 1);
+                    temp = temp.substring(0, temp.indexOf("-"));
+                    hashedset.add(temp);
+                }
 
-                                selectedCourses.addAll(db.courseSearchByDepartment(chosen));
-                                Set<String> hashedset = new HashSet<>();
-                                String temp;
-                                for (courses number : selectedCourses) {
-                                    //gets rid of extra characters and duplicates
-                                    temp = number.getNumber();
-                                    temp = temp.substring(temp.indexOf("-") + 1);
-                                    temp = temp.substring(0, temp.indexOf("-"));
-                                    hashedset.add(temp);
-                                }
+                classesAdapter.clear();
+                for (String each : hashedset) {
+                    classesAdapter.add(each.replaceFirst("^0+(?!$)", ""));
+                    classesAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
-                                classesAdapter.clear();
-                                for (String each : hashedset) {
-                                    classesAdapter.add(each.replaceFirst("^0+(?!$)",""));
-                                    classesAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
 
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
 
         Button btn = (Button)findViewById(R.id.btnGenerate);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -452,65 +423,13 @@ public class NinjaActivity extends AppCompatActivity {
         return (new ArrayList<courses>());
     }
 
-
-    private class ProgressFilter implements ServiceFilter {
-
-        /**
-         * method that handles the html response from the client.
-         *
-         * Plan to implement the progress bar for longer wait times.
-         *
-         * @param request
-         * @param nextServiceFilterCallback
-         * @return
-         */
-        @Override
-        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
-
-            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
-
-
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-            });
-
-            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
-
-            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
-                @Override
-                public void onFailure(Throwable e) {
-                    resultFuture.setException(e);
-                }
-
-                @Override
-                public void onSuccess(ServiceFilterResponse response) {
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
-                        }
-                    });
-
-                    resultFuture.set(response);
-                }
-            });
-
-            return resultFuture;
-        }
-    }
-
     /**
      * Initialize local storage
      * @return
      * @throws MobileServiceLocalStoreException
      * @throws ExecutionException
      * @throws InterruptedException
-     */
+     *
     private AsyncTask<Void, Void, Void> initLocalStore() throws MobileServiceLocalStoreException, ExecutionException, InterruptedException {
 
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
@@ -560,7 +479,7 @@ public class NinjaActivity extends AppCompatActivity {
         };
 
         return runAsyncTask(task);
-    }
+    }*/
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -570,12 +489,6 @@ public class NinjaActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
 
     private void addColor(){
         colors.add(R.color.event_color_01);

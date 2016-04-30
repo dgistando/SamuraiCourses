@@ -28,8 +28,27 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db){
+        db = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH + DATABASE_NAME,null,null);
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS localsave(scheduleId int NOT NULL" +
+                "crn int NOT NULL," +
+                "number varchar (100) NOT NULL," +
+                "title varchar (500) NOT NULL," +
+                "units int NOT NULL," +
+                "activity varchar (60) NOT NULL," +
+                "days varchar (20) NOT NULL," +
+                "time varchar (20) NOT NULL," +
+                "room varchar (20) NOT NULL," +
+                "length varchar (20)," +
+                "instructor varchar (40)," +
+                "maxEnrl int," +
+                "seatsAvailable int," +
+                "activeEnrl int," +
+                "sem_id int  NOT NULL);");
+
+        db.close();
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
