@@ -1932,7 +1932,7 @@ public class WeekView extends View {
             return;
         }
 
-        mRefreshEvents = true;
+        mRefreshEvents = false;
 
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, 0);

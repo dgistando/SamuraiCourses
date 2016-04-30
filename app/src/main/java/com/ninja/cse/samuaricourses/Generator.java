@@ -248,22 +248,58 @@ public class Generator{
             list.clear();
         }
 
-        //has lab and discussion
-        if(course[0].LAB.size() != 0 || course[0].DISC.size() != 0) {
-            for (Generator c : course) {
+        //there are just labs
+        if(course[0].LAB.size() != 0 && course[0].DISC.size() == 0){
+            for(Generator c :course){
                 list.add(c.LECT);
 
-                for (int k=0;k<c.DISC.size();k++) {
-                    list.add(c.DISC.get(0));
-
-                    if(c.LAB.size() != 0){
-                        list.add(c.DISC.get(0));
-                    }
+                for(int k=0;k<c.LAB.size();k++){
+                    list.add(c.LAB.get(k));
 
                     if (testSchedule(list)) {
                         coursesList.add(new ArrayList<courses>(list));
                     }
+
+                    list.remove(list.size()-1);
+                }
+                list.clear();
+            }
+        }
+
+        //has discussion
+        if(course[0].LAB.size() == 0 && course[0].DISC.size() != 0) {
+            for (Generator c : course) {
+                list.add(c.LECT);
+
+                for (int k=0;k<c.DISC.size();k++) {
+                        list.add(c.DISC.get(k));
+
+
+                    if (testSchedule(list)) {
+                        coursesList.add(new ArrayList<courses>(list));
+                    }
+
                     list.remove(list.size() - 1);
+                }
+                list.clear();
+            }
+        }
+
+
+        if(course[0].LAB.size() != 0 && course[0].DISC.size() != 0){
+            for(Generator c: course){
+                list.add(c.LECT);
+                for(int k=0;k<c.DISC.size();k++){
+                    list.add(c.DISC.get(k));
+                    list.add(c.LAB.get(k));
+
+                    if (testSchedule(list)) {
+                        coursesList.add(new ArrayList<courses>(list));
+                    }
+
+                    list.remove(list.size() - 1);
+                    list.remove(list.size() - 1);
+
                 }
                 list.clear();
             }
@@ -496,7 +532,7 @@ public class Generator{
             }
             Log.d("COURSES_LIST", "..");
 
-            if(coursesList.size() > 20){
+            if(coursesList.size() > 15){
                 break;
             }
 

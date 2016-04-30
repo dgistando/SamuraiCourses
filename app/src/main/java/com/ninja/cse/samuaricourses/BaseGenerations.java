@@ -34,14 +34,15 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
     private WeekView mWeekView;
     Calendar testDate = Calendar.getInstance();
 
-    private int scheduleIndex = 1;
-    public static int scheduleSize;
+    private int scheduleIndex = 0;
+    public int scheduleSize;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generations);
+        scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
 
         // Get a reference for the week view in the layout.
         mWeekView = (WeekView) findViewById(R.id.weekView);
@@ -64,7 +65,8 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         setupDateTimeInterpreter(false);
 
         // Calendar testDate = Calendar.getInstance();
-        testDate.set(2016, 8-1, 22);
+                    //7 is August; 0 is Janurary
+        testDate.set(2016, 7, 22);
         mWeekView.goToDate(testDate);
 
         mWeekView.setHourHeight(95);
@@ -73,7 +75,7 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
 
         //mWeekView.goToToday();
         final TextView tv = (TextView)findViewById(R.id.textScheduleCounter);
-        tv.setText(scheduleIndex + "/" + scheduleSize);
+        tv.setText((scheduleIndex+1) + "/" + scheduleSize);
 
         final Button btnNext = (Button)findViewById(R.id.btnNext);
         final Button btnPrev = (Button)findViewById(R.id.btnPrev);
@@ -81,13 +83,18 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex < scheduleSize) {
+                if (scheduleIndex+1 < scheduleSize) {
+                    tv.setText(1+(++scheduleIndex) + "/" + scheduleSize);
                     btnNext.setEnabled(true);
+                    btnPrev.setEnabled(true);
+                    testDate.add(Calendar.WEEK_OF_YEAR,1);
+                    mWeekView.goToDate(testDate);
+                    /*btnNext.setEnabled(true);
                     btnPrev.setEnabled(true);
                     scheduleIndex = scheduleIndex + 1;
                     testDate.add(Calendar.DATE, 7);
                     mWeekView.goToDate(testDate);
-                    tv.setText(scheduleIndex + "/" + scheduleSize);
+                    tv.setText(scheduleIndex+1 + "/" + scheduleSize);*/
                 }
                 else {
                     btnNext.setEnabled(false);
@@ -98,17 +105,16 @@ public abstract class BaseGenerations extends AppCompatActivity implements WeekV
             }
         });
 
-
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scheduleIndex > 0) {
+                if (scheduleIndex+1 > 0) {
                     btnNext.setEnabled(true);
                     btnPrev.setEnabled(true);
                     scheduleIndex = scheduleIndex - 1;
                     testDate.add(Calendar.DATE, -7);
                     mWeekView.goToDate(testDate);
-                    tv.setText(scheduleIndex + "/" + scheduleSize);
+                    tv.setText(scheduleIndex+1 + "/" + scheduleSize);
                 }
                 else {
                     btnPrev.setEnabled(false);

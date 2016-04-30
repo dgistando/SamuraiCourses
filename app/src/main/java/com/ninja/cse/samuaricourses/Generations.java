@@ -22,22 +22,25 @@ public class Generations extends BaseGenerations {
 
         ArrayList<courses> listOfCourses = new ArrayList<courses>();
         int numOfSchedules = this.getIntent().getIntExtra("ScheduleSize", 0);
-        scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
+        //scheduleSize = this.getIntent().getIntExtra("ScheduleSize", 0);
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-        Calendar startTime = Calendar.getInstance();
-        Calendar endTime = (Calendar) startTime.clone();
+        Calendar startTime;// = Calendar.getInstance();
+        Calendar endTime;// = (Calendar) startTime.clone();
         for (int i = 0; i < numOfSchedules; i++) {
             listOfCourses.clear();
             listOfCourses.addAll((ArrayList) this.getIntent().getParcelableArrayListExtra("schedule: " + i));
             for (int k = 0; k < listOfCourses.size(); k++) {
 
                 for (int d = 0; d < listOfCourses.get(k).getDays().length(); d++) {
-                    //startTime=Calendar.getInstance();
+                    startTime=Calendar.getInstance();
                     startTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getStartTime() / 100);
                     startTime.set(Calendar.DAY_OF_MONTH, 22);
                     startTime.set(Calendar.MINUTE, listOfCourses.get(k).getStartTime() % 100);
-                    startTime.set(Calendar.MONTH, (newMonth - 2));//original:6,set month one month before the set month of august
+                    startTime.set(Calendar.MONTH, 6);
+
+
+                    //original:6,set month one month before the set month of august
                     startTime.add(Calendar.MONTH, 1);//original:1,adding one month to July, makes August
 
                     //if(((newMonth-2)+1)==8) {
