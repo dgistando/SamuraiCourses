@@ -4,6 +4,8 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="primary_light">#BBDEFB</color>
+    <color name="primary_event">#cbe6fc</color>
+    <color name="primary_lightest">#e1f0fc</color>
 
     <color name="event_color_01">#59dbe0</color>
     <color name="event_color_02">#f57f68</color>

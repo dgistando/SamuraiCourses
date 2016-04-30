@@ -58,9 +58,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="test"
+        android:text="MATH-21"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="119dp"
+        android:layout_above="@+id/getNotified"
         android:layout_alignRight="@+id/getNotified"
         android:layout_alignEnd="@+id/getNotified" />
 
@@ -68,29 +69,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="test"
+        android:text="CSE-21"
         android:id="@+id/textView2"
-        android:layout_below="@+id/delete1"
-        android:layout_toLeftOf="@+id/delete1"
-        android:layout_toStartOf="@+id/delete1" />
+        android:layout_marginBottom="18dp"
+        android:layout_above="@+id/imageButton2"
+        android:layout_toLeftOf="@+id/imageButton2"
+        android:layout_toStartOf="@+id/imageButton2" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:id="@+id/delete1"
-        android:layout_centerVertical="true"
+    <ImageButton
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:id="@+id/imageButton"
+        android:background="@drawable/garbage_can"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <ImageButton
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:id="@+id/imageButton2"
+        android:background="@drawable/garbage_can"
+        android:layout_alignBottom="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:id="@+id/delete2"
-        android:layout_below="@+id/delete1"
-        android:layout_alignLeft="@+id/delete1"
-        android:layout_alignStart="@+id/delete1" />
 
 
 </RelativeLayout>
