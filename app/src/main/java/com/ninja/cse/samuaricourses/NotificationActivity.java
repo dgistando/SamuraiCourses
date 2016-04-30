@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,9 +50,10 @@ public class NotificationActivity extends AppCompatActivity {
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
     Button add,notify;
+    ImageButton trash1,trash2;
     courses[] arr = new courses[2];
     TextView tv1,tv2;
-    static int selection=0;
+    public static int selection=0;
 
     DBHelper db;
     //removed from layout: <android:layout_alignEnd="@+id/btnTrack" under add button
@@ -63,9 +65,12 @@ public class NotificationActivity extends AppCompatActivity {
         add = (Button)findViewById(R.id.btnAdd);
         notify = (Button)findViewById(R.id.getNotified);
         listOfCourses = new ArrayList<courses>();
-        tv1 = (TextView)findViewById(R.id.textView);
-        tv2 = (TextView)findViewById(R.id.textView2);
-
+        tv1 = (TextView)findViewById(R.id.textView2);
+        tv2 = (TextView)findViewById(R.id.textView);
+        trash1 = (ImageButton)findViewById(R.id.imageButton1);
+        trash2 = (ImageButton)findViewById(R.id.imageButton2);
+        trash1.setVisibility(View.GONE);
+        trash2.setVisibility(View.GONE);
 
         db = new DBHelper(this);
 
@@ -132,7 +137,16 @@ public class NotificationActivity extends AppCompatActivity {
         Classes.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selection = position;
+                //find course in list
+                for(int i =0; i< listOfCourses.size();i++){
+                    String temp = listOfCourses.get(i).getNumber();
+                    if(temp.substring(temp.indexOf("-")+1,temp.length()).equals(parent.getItemAtPosition(position).toString())){
+                        selection = i;
+                    }
+                }
+
+
+                Log.d("Position", "the position:" + position + "selected: "+selection);
             }
         });
 
@@ -140,18 +154,20 @@ public class NotificationActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Department.getText().equals("") || Classes.getText().equals("")){
+                if(Department.getText().toString().equals("") || Classes.getText().toString().equals("")){
                     Toast.makeText(NotificationActivity.this,"fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(tv1.getText().toString().equals("")){
+                if(tv1.getText().toString().equals("Course 1")){
                     arr[0] = listOfCourses.get(selection);
                     tv1.setText(arr[0].getCrn() + " " + arr[0].getNumber());
+                    trash1.setVisibility(v.VISIBLE);
                     return;
-                }else if(tv2.getText().toString().equals("")){
-                    arr[0] = listOfCourses.get(selection);
-                    tv2.setText(arr[0].getCrn() + " " + arr[0].getNumber());
+                }else if(tv2.getText().toString().equals("Course 2")){
+                    arr[1] = listOfCourses.get(selection);
+                    tv2.setText(arr[1].getCrn() + " " + arr[1].getNumber());
+                    trash2.setVisibility(v.VISIBLE);
                     add.setEnabled(false);
                     return;
                 }else{
@@ -163,12 +179,30 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-        notify.setOnClickListener(new View.OnClickListener() {
+            trash1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tv1.setText("Course 1");
+                    trash1.setVisibility(v.GONE);
+                    add.setEnabled(true);
+                }
+            });
+
+            trash2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tv2.setText("Course 2");
+                    trash2.setVisibility(v.GONE);
+                    add.setEnabled(true);
+                }
+            });
+
+            notify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            }
-        });
+                }
+            });
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
