@@ -71,7 +71,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="CSE-21"
         android:id="@+id/textView2"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="41dp"
         android:layout_above="@+id/imageButton2"
         android:layout_toLeftOf="@+id/imageButton2"
         android:layout_toStartOf="@+id/imageButton2" />
