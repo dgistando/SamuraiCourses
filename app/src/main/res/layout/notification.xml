@@ -17,7 +17,7 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="Get Notified"
-        android:id="@+id/getNotified"
+        android:id="@+id/btnNotify"
         android:background="@drawable/buttonshape"
         android:layout_marginBottom="42dp"
         android:width="20dp"
@@ -28,10 +28,11 @@
         android:layout_height="35dp"
         android:id="@+id/btnAdd"
         android:text="@string/add"
-        android:layout_below="@+id/LL"
-        android:layout_alignRight="@+id/btnGenerate"
         android:background="@drawable/buttonshape"
-        android:windowSoftInputMode="stateHidden" />
+        android:windowSoftInputMode="stateHidden"
+        android:layout_below="@+id/LL"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,9 +62,9 @@
         android:text="MATH-21"
         android:id="@+id/textView"
         android:layout_marginBottom="119dp"
-        android:layout_above="@+id/getNotified"
-        android:layout_alignRight="@+id/getNotified"
-        android:layout_alignEnd="@+id/getNotified" />
+        android:layout_above="@+id/btnNotify"
+        android:layout_alignRight="@+id/btnNotify"
+        android:layout_alignEnd="@+id/btnNotify" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,6 +94,19 @@
         android:layout_alignBottom="@+id/textView"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView" />
+
+    <ListView
+        tools:listitem="@layout/row_list_to_do"
+        android:id="@+id/listViewToDo"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:choiceMode="multipleChoice"
+        android:textColor="@color/black"
+        android:padding="6dip"
+        android:layout_below="@+id/btnAdd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnNotify" />
 
 
 </RelativeLayout>
