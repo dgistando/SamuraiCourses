@@ -59,35 +59,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Course 2"
+        android:text="MATH-21"
         android:id="@+id/textView"
         android:layout_marginBottom="119dp"
-<<<<<<< HEAD
-        android:layout_above="@+id/getNotified"
-        android:layout_alignRight="@+id/getNotified"
-        android:layout_alignEnd="@+id/getNotified"
-        />
-=======
         android:layout_above="@+id/btnNotify"
         android:layout_alignRight="@+id/btnNotify"
         android:layout_alignEnd="@+id/btnNotify" />
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Course 1"
+        android:text="CSE-21"
         android:id="@+id/textView2"
         android:layout_marginBottom="41dp"
-        android:layout_above="@+id/textView"
+        android:layout_above="@+id/imageButton2"
         android:layout_toLeftOf="@+id/imageButton2"
         android:layout_toStartOf="@+id/imageButton2" />
 
     <ImageButton
         android:layout_width="50dip"
         android:layout_height="50dip"
-        android:id="@+id/imageButton1"
+        android:id="@+id/imageButton"
         android:background="@drawable/garbage_can"
         android:layout_alignBottom="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"

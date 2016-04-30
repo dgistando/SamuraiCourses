@@ -14,11 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-<<<<<<< HEAD
-import android.widget.ImageButton;
-=======
 import android.widget.ListView;
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,19 +54,14 @@ public class NotificationActivity extends AppCompatActivity {
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
     Button add,notify;
-    ImageButton trash1,trash2;
     courses[] arr = new courses[2];
     TextView tv1,tv2;
-<<<<<<< HEAD
-    public static int selection=0;
-=======
     static int selection=0;
     ArrayList<courses> selectedCourses = new ArrayList<courses>();
 
     private PendingIntent pendingIntent;
     private AlarmManager manager;
 
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
     DBHelper db;
     //removed from layout: <android:layout_alignEnd="@+id/btnTrack" under add button
@@ -79,19 +70,6 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
-<<<<<<< HEAD
-        add = (Button)findViewById(R.id.btnAdd);
-        notify = (Button)findViewById(R.id.getNotified);
-        listOfCourses = new ArrayList<courses>();
-        tv1 = (TextView)findViewById(R.id.textView2);
-        tv2 = (TextView)findViewById(R.id.textView);
-        trash1 = (ImageButton)findViewById(R.id.imageButton1);
-        trash2 = (ImageButton)findViewById(R.id.imageButton2);
-        trash1.setVisibility(View.GONE);
-        trash2.setVisibility(View.GONE);
-
-=======
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
         db = new DBHelper(this);
 
         final Button btnAdd = (Button)findViewById(R.id.btnAdd);
@@ -147,24 +125,8 @@ public class NotificationActivity extends AppCompatActivity {
         listview.setAdapter(listadapter);
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
-<<<<<<< HEAD
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //find course in list
-                for(int i =0; i< listOfCourses.size();i++){
-                    String temp = listOfCourses.get(i).getNumber();
-                    if(temp.substring(temp.indexOf("-")+1,temp.length()).equals(parent.getItemAtPosition(position).toString())){
-                        selection = i;
-                    }
-                }
-
-
-                Log.d("Position", "the position:" + position + "selected: "+selection);
-            }
-        });
-=======
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 if (!listview.isItemChecked(position)) {
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
                     String temp = listadapter.getItem(position);
                     listadapter.remove(temp);
@@ -177,25 +139,6 @@ public class NotificationActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                if(Department.getText().toString().equals("") || Classes.getText().toString().equals("")){
-                    Toast.makeText(NotificationActivity.this,"fill all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(tv1.getText().toString().equals("Course 1")){
-                    arr[0] = listOfCourses.get(selection);
-                    tv1.setText(arr[0].getCrn() + " " + arr[0].getNumber());
-                    trash1.setVisibility(v.VISIBLE);
-                    return;
-                }else if(tv2.getText().toString().equals("Course 2")){
-                    arr[1] = listOfCourses.get(selection);
-                    tv2.setText(arr[1].getCrn() + " " + arr[1].getNumber());
-                    trash2.setVisibility(v.VISIBLE);
-                    add.setEnabled(false);
-                    return;
-                }else{
-=======
                 if (listToTrackCourses.size() == 3) {
                     Toast.makeText(NotificationActivity.this, "Tracking maxed at 3 courses!", Toast.LENGTH_SHORT).show();
                     return;
@@ -203,7 +146,6 @@ public class NotificationActivity extends AppCompatActivity {
 
                 if (Department.getText().toString().equals("") || Classes.getText().toString().equals("")) {
                     Toast.makeText(NotificationActivity.this, " Select valid courses", Toast.LENGTH_SHORT).show();
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
                     return;
                 }
 
@@ -219,32 +161,6 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-            trash1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    tv1.setText("Course 1");
-                    trash1.setVisibility(v.GONE);
-                    add.setEnabled(true);
-                }
-            });
-
-            trash2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    tv2.setText("Course 2");
-                    trash2.setVisibility(v.GONE);
-                    add.setEnabled(true);
-                }
-            });
-
-            notify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                }
-            });
-=======
         btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,11 +182,10 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
     }
->>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
     public void startAlarm(View view) {
         manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        int interval = 10000;
+        int interval = 15000;
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
         Toast.makeText(NotificationActivity.this, "You will get notified!", Toast.LENGTH_LONG).show();
