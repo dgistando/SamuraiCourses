@@ -11,6 +11,7 @@ import android.widget.Toast;
  */
 public class NotificationService extends Service {
 
+
     public static boolean serviceStarted = false;
 
     public NotificationService() {
