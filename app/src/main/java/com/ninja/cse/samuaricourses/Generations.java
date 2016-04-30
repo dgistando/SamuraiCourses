@@ -72,7 +72,12 @@ public class Generations extends BaseGenerations {
                     endTime = (Calendar) startTime.clone();
                     endTime.set(Calendar.HOUR_OF_DAY, listOfCourses.get(k).getEndTime() / 100);
                     endTime.set(Calendar.MINUTE, listOfCourses.get(k).getEndTime() % 100);
-                    WeekViewEvent event = new WeekViewEvent(0, listOfCourses.get(k).getNumber() + "\n" + (month + 1) + startTime.get(Calendar.DATE)/*listOfCourses.get(k).getTime()*/, listOfCourses.get(k).getNumber(),
+                    WeekViewEvent event = new WeekViewEvent(0,
+                            listOfCourses.get(k).getCrn() + "\n"
+                            + listOfCourses.get(k).getNumber() + "\n"
+                            + listOfCourses.get(k).getDays() + "\n"
+                            + listOfCourses.get(k).getTime()/*(month + 1) + startTime.get(Calendar.DATE)listOfCourses.get(k).getTime()*/,
+                            listOfCourses.get(k).getNumber(),
                             startTime, endTime);
                     event.setColor(getResources().getColor(listOfCourses.get(k).getColor()));
                     events.add(event);
