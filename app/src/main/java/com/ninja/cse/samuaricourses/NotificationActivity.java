@@ -1,15 +1,24 @@
 package com.ninja.cse.samuaricourses;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.ImageButton;
+=======
+import android.widget.ListView;
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +55,22 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     AutoCompleteTextView Department, Classes;
-    ArrayList<courses> listOfCourses;
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
     Button add,notify;
     ImageButton trash1,trash2;
     courses[] arr = new courses[2];
     TextView tv1,tv2;
+<<<<<<< HEAD
     public static int selection=0;
+=======
+    static int selection=0;
+    ArrayList<courses> selectedCourses = new ArrayList<courses>();
+
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
+
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
     DBHelper db;
     //removed from layout: <android:layout_alignEnd="@+id/btnTrack" under add button
@@ -62,6 +79,7 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
+<<<<<<< HEAD
         add = (Button)findViewById(R.id.btnAdd);
         notify = (Button)findViewById(R.id.getNotified);
         listOfCourses = new ArrayList<courses>();
@@ -72,7 +90,12 @@ public class NotificationActivity extends AppCompatActivity {
         trash1.setVisibility(View.GONE);
         trash2.setVisibility(View.GONE);
 
+=======
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
         db = new DBHelper(this);
+
+        final Button btnAdd = (Button)findViewById(R.id.btnAdd);
+        final Button btnNotify = (Button)findViewById(R.id.btnNotify);
 
         classesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classeslist);
         Classes = (AutoCompleteTextView) findViewById(R.id.number);
@@ -87,55 +110,44 @@ public class NotificationActivity extends AppCompatActivity {
         Department.setThreshold(1);
         Department.setHint("Department");
 
-
-        try {
-            mClient = new MobileServiceClient(
-                    "https://samuraicourses.azurewebsites.net",
-                    this).withFilter(new ProgressFilter());
-            mClient.setAndroidHttpClientFactory(new OkHttpClientFactory() {
-                /**
-                 * makes an http request to the server for this application and
-                 * passes the response to progress filter.
-                 *
-                 * @return
-                 */
-                @Override
-                public OkHttpClient createOkHttpClient() {
-                    OkHttpClient client = new OkHttpClient();
-                    client.setReadTimeout(20, TimeUnit.SECONDS);
-                    return client;
-                }
-            });
-
-            mCoursesTable = mClient.getTable("courses",courses.class);
-
         Department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listOfCourses.clear();
+                selectedCourses.clear();
+                ArrayAdapter<String> departmentTagAdapter = new ArrayAdapter<String>(NotificationActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_tag_array));
+                ArrayAdapter<String> departmentTempAdapter = new ArrayAdapter<String>(NotificationActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Department_array));
+
                 String chosen = parent.getItemAtPosition(position).toString();
-                listOfCourses.addAll(db.courseSearchByDepartment(chosen));
+                int newpos = departmentTempAdapter.getPosition(chosen);
+                chosen = departmentTagAdapter.getItem(newpos);
+
+                selectedCourses.addAll(db.courseSearchByDepartment(chosen));
 
                 Set<String> hashedset = new HashSet<>();
                 String temp;
-                for (courses number : listOfCourses) {
+                for (courses number : selectedCourses) {
                     //gets rid of extra characters and duplicates
                     temp = number.getNumber();
-                    temp = temp.substring(temp.indexOf("-")+1,temp.length());
+                    temp = temp.substring(temp.indexOf("-") + 1);
+                    temp = temp.substring(0, temp.indexOf("-"));
                     hashedset.add(temp);
                 }
 
                 classesAdapter.clear();
                 for (String each : hashedset) {
-                    classesAdapter.add(each.replaceFirst("^0+(?!$)",""));
+                    classesAdapter.add(each.replaceFirst("^0+(?!$)", ""));
                     classesAdapter.notifyDataSetChanged();
                 }
-
             }
         });
 
-        Classes.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        final ListView listview = (ListView) findViewById(R.id.listViewToDo);
+        final ArrayList<String> listToTrackCourses = new ArrayList<String>();
+        final ArrayAdapter<String> listadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_listitems, listToTrackCourses);
+        listview.setAdapter(listadapter);
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
+<<<<<<< HEAD
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //find course in list
                 for(int i =0; i< listOfCourses.size();i++){
@@ -149,11 +161,23 @@ public class NotificationActivity extends AppCompatActivity {
                 Log.d("Position", "the position:" + position + "selected: "+selection);
             }
         });
+=======
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+                if (!listview.isItemChecked(position)) {
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
 
+                    String temp = listadapter.getItem(position);
+                    listadapter.remove(temp);
+                    listadapter.notifyDataSetChanged();
 
-        add.setOnClickListener(new View.OnClickListener() {
+                }
+            }
+        };
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 if(Department.getText().toString().equals("") || Classes.getText().toString().equals("")){
                     Toast.makeText(NotificationActivity.this,"fill all fields", Toast.LENGTH_SHORT).show();
                     return;
@@ -171,14 +195,31 @@ public class NotificationActivity extends AppCompatActivity {
                     add.setEnabled(false);
                     return;
                 }else{
+=======
+                if (listToTrackCourses.size() == 3) {
+                    Toast.makeText(NotificationActivity.this, "Tracking maxed at 3 courses!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                if (Department.getText().toString().equals("") || Classes.getText().toString().equals("")) {
+                    Toast.makeText(NotificationActivity.this, " Select valid courses", Toast.LENGTH_SHORT).show();
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
+                    return;
+                }
 
+                listadapter.add(Department.getText().toString() + "-" + Classes.getText().toString());
+                listview.setItemChecked(listadapter.getCount() - 1, true);
+                listadapter.notifyDataSetChanged();
 
+                classeslist.clear();
+                Department.setText("");
+                Classes.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
 
+<<<<<<< HEAD
             trash1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -203,13 +244,44 @@ public class NotificationActivity extends AppCompatActivity {
 
                 }
             });
+=======
+        btnNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+                Intent intent = new Intent(NotificationActivity.this, AlarmReceiver.class);
+                Bundle bundle = new Bundle();
+
+                if (listToTrackCourses.size() == 0)
+                    return;
+                else {
+                    bundle.putStringArrayList("CLASSES", listToTrackCourses);
+                    intent.putExtras(bundle);
+
+                    // Retrieve a PendingIntent that will perform a broadcast with the intent and its extras above
+                    pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                    startAlarm(v);
+                }
+            }
+        });
+    }
+>>>>>>> 85755fc873024b65f01821f049db6bc01b8c8740
+
+    public void startAlarm(View view) {
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        int interval = 10000;
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(NotificationActivity.this, "You will get notified!", Toast.LENGTH_LONG).show();
+    }
+
+
+    public void cancelAlarm(View view) {
+        if (manager != null) {
+            manager.cancel(pendingIntent);
+            Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_LONG).show();
         }
-
     }
 
     /**
