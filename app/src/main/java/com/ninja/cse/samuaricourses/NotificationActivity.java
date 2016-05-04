@@ -165,6 +165,12 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(manager!=null){
+                    cancelAlarm(v);
+                    btnNotify.setText("GET NOTIFIED");
+                    return;
+                }
+
                 Intent intent = new Intent(NotificationActivity.this, AlarmReceiver.class);
                 Bundle bundle = new Bundle();
 
@@ -174,9 +180,11 @@ public class NotificationActivity extends AppCompatActivity {
                     bundle.putStringArrayList("CLASSES", listToTrackCourses);
                     intent.putExtras(bundle);
 
+
                     // Retrieve a PendingIntent that will perform a broadcast with the intent and its extras above
                     pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+                    btnNotify.setText("STOP");
                     startAlarm(v);
                 }
             }
@@ -196,6 +204,7 @@ public class NotificationActivity extends AppCompatActivity {
         if (manager != null) {
             manager.cancel(pendingIntent);
             Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_LONG).show();
+            manager = null;
         }
     }
 
@@ -217,7 +226,8 @@ public class NotificationActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //put logic for checking enrollment here
+                            //put logic for checking enrollment here.
+
                         }
                     });
 
