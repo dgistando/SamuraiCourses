@@ -1,5 +1,6 @@
 package com.ninja.cse.samuaricourses;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import java.util.ArrayList;
 
 public class AlarmReceiver extends BroadcastReceiver {
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -28,7 +30,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 //            Notification(context, trackedCourses.get(i), seats, i);
 //        }
 
-        Notification(context, trackedCourses.get(0), "5", 0);
+        intent = new Intent(context, NotificationService.class);
+
+        context.startService(intent);
+
+
+        Notification(context, "test notification", "5", 0);
+
+        intent = new Intent(context, NotificationService.class);
+        context.stopService(intent);
         //Notification(context, trackedCourses.get(1), "4", 1);
     }
 
@@ -45,17 +55,17 @@ public class AlarmReceiver extends BroadcastReceiver {
                 context)
                 // Set Icon
                 .setSmallIcon(R.drawable.testicon)
-                        // Set Ticker Message
-                        //.setTicker(message)
-                        // Set Title;
+                // Set Ticker Message
+                //.setTicker(message)
+                // Set Title;
                 .setContentTitle(course + " has " + seats + " spots left!")
-                        // Set Text
+                // Set Text
                 .setContentText("Register Now!")
-                        // Add an Action Button below Notification
-                        //.addAction(R.drawable.testicon, "Action Button", pIntent)
-                        // Set PendingIntent into Notification
+                // Add an Action Button below Notification
+                //.addAction(R.drawable.testicon, "Action Button", pIntent)
+                // Set PendingIntent into Notification
                 .setContentIntent(pIntent)
-                        // Dismiss Notification
+                // Dismiss Notification
                 .setAutoCancel(true);
 
         // Create Notification Manager

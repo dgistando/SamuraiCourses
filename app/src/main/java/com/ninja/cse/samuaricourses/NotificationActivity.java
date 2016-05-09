@@ -54,13 +54,13 @@ public class NotificationActivity extends AppCompatActivity {
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
     Button add,notify;
-    courses[] arr = new courses[2];
-    TextView tv1,tv2;
+    ArrayList<courses> coursesToPass = new ArrayList<courses>();
     static int selection=0;
     ArrayList<courses> selectedCourses = new ArrayList<courses>();
 
     private PendingIntent pendingIntent;
     private AlarmManager manager;
+    boolean alarmOn;
 
 
     DBHelper db;
@@ -71,6 +71,10 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
         db = new DBHelper(this);
+
+        pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this,0,new Intent(NotificationActivity.this, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE);
+
+        alarmOn = (pendingIntent != null);
 
         final Button btnAdd = (Button)findViewById(R.id.btnAdd);
         final Button btnNotify = (Button)findViewById(R.id.btnNotify);
@@ -88,6 +92,12 @@ public class NotificationActivity extends AppCompatActivity {
         Department.setThreshold(1);
         Department.setHint("Department");
 
+        if(alarmOn){
+            btnNotify.setText("STOP");
+        }
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+
         Department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -101,44 +111,44 @@ public class NotificationActivity extends AppCompatActivity {
 
                 selectedCourses.addAll(db.courseSearchByDepartment(chosen));
 
-                Set<String> hashedset = new HashSet<>();
-                String temp;
-                for (courses number : selectedCourses) {
-                    //gets rid of extra characters and duplicates
-                    temp = number.getNumber();
-                    temp = temp.substring(temp.indexOf("-") + 1);
-                    temp = temp.substring(0, temp.indexOf("-"));
-                    hashedset.add(temp);
-                }
-
                 classesAdapter.clear();
-                for (String each : hashedset) {
-                    classesAdapter.add(each.replaceFirst("^0+(?!$)", ""));
+                for (courses each : selectedCourses) {
+                    classesAdapter.add(each.getNumber().substring(each.getNumber().indexOf('-')+1,each.getNumber().length()).replaceFirst("^0+(?!$)", ""));
                     classesAdapter.notifyDataSetChanged();
+                    //Log.d("ON LIST",classesAdapter.getItem(classesAdapter.getCount()-1));
                 }
             }
         });
 
-        final ListView listview = (ListView) findViewById(R.id.listViewToDo);
+        final ListView listview = (ListView) findViewById(R.id.listViewNotification);
         final ArrayList<String> listToTrackCourses = new ArrayList<String>();
         final ArrayAdapter<String> listadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_listitems, listToTrackCourses);
         listview.setAdapter(listadapter);
+
+        //updates the list to whats in database
+        listadapter.addAll(db.retrieveNotificationCourses());
+        listadapter.notifyDataSetChanged();
+
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 if (!listview.isItemChecked(position)) {
 
                     String temp = listadapter.getItem(position);
+
+                    db.deleteNotificationCourses(temp);
                     listadapter.remove(temp);
                     listadapter.notifyDataSetChanged();
 
                 }
             }
         };
+        listview.setOnItemClickListener(itemClickListener);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (listToTrackCourses.size() == 3) {
                     Toast.makeText(NotificationActivity.this, "Tracking maxed at 3 courses!", Toast.LENGTH_SHORT).show();
                     return;
@@ -149,9 +159,12 @@ public class NotificationActivity extends AppCompatActivity {
                     return;
                 }
 
-                listadapter.add(Department.getText().toString() + "-" + Classes.getText().toString());
+                int numFromNumber = Integer.parseInt(Classes.getText().toString().substring(0,Classes.getText().toString().indexOf('-')));
+                String restOfString = Classes.getText().toString().substring(Classes.getText().toString().indexOf('-'), Classes.getText().toString().length());
+                listadapter.add(Department.getText().toString() + "-" + String.format("%03d",numFromNumber) + restOfString);
                 listview.setItemChecked(listadapter.getCount() - 1, true);
                 listadapter.notifyDataSetChanged();
+
 
                 classeslist.clear();
                 Department.setText("");
@@ -165,7 +178,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(manager!=null){
+                if(alarmOn){
                     cancelAlarm(v);
                     btnNotify.setText("GET NOTIFIED");
                     return;
@@ -177,7 +190,20 @@ public class NotificationActivity extends AppCompatActivity {
                 if (listToTrackCourses.size() == 0)
                     return;
                 else {
-                    bundle.putStringArrayList("CLASSES", listToTrackCourses);
+
+                    for(int j =0;j<listToTrackCourses.size();j++) {
+                        //Log.d("NOTIFY_TEST", listToTrackCourses.get(j));
+                        coursesToPass.add(db.courseSearchByNumber(listToTrackCourses.get(j)));
+                        Log.d("ARRCRN",coursesToPass.get(j).getCrn() + "");
+                        db.deleteNotificationCourses(coursesToPass.get(j).getNumber());
+                        if(!db.insertCourse(coursesToPass.get(j).getCrn(), coursesToPass.get(j).getNumber())){
+                            Log.d("INSERT", "insert failed");
+                            return;
+                        }
+                    }
+
+
+                    bundle.putParcelableArrayList("CLASSES", coursesToPass);
                     intent.putExtras(bundle);
 
 
@@ -192,7 +218,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     public void startAlarm(View view) {
-        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         int interval = 15000;
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
@@ -201,7 +227,7 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     public void cancelAlarm(View view) {
-        if (manager != null) {
+        if (alarmOn) {
             manager.cancel(pendingIntent);
             Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_LONG).show();
             manager = null;

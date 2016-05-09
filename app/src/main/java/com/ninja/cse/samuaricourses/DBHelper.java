@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class DBHelper extends SQLiteOpenHelper{
     static final String DATABASE_NAME = "OfflineStore";
+    static final String NOTIFICATION_TABLE = "NotificationCourses";
     static final String DATABASE_PATH = "/data/data/com.ninja.cse.samuaricourses/databases/";
     static final String TABLE_NAME = "courses";
 
@@ -28,31 +29,53 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH + DATABASE_NAME,null,null);
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS localsave(scheduleId int NOT NULL" +
-                "crn int NOT NULL," +
-                "number varchar (100) NOT NULL," +
-                "title varchar (500) NOT NULL," +
-                "units int NOT NULL," +
-                "activity varchar (60) NOT NULL," +
-                "days varchar (20) NOT NULL," +
-                "time varchar (20) NOT NULL," +
-                "room varchar (20) NOT NULL," +
-                "length varchar (20)," +
-                "instructor varchar (40)," +
-                "maxEnrl int," +
-                "seatsAvailable int," +
-                "activeEnrl int," +
-                "sem_id int  NOT NULL);");
-
-        db.close();
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 
+    }
+
+    public void createTables(){
+        SQLiteDatabase db = null;
+        String sql = "";
+
+        try {
+            db = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH + DATABASE_NAME, null, null);
+
+            sql = "CREATE TABLE IF NOT EXISTS localsave(scheduleId int NOT NULL," +
+                    " crn int NOT NULL," +
+                    " number varchar (100) NOT NULL," +
+                    " title varchar (500) NOT NULL," +
+                    " units int NOT NULL," +
+                    " activity varchar (60) NOT NULL," +
+                    " days varchar (20) NOT NULL," +
+                    " time varchar (20) NOT NULL," +
+                    " room varchar (20) NOT NULL," +
+                    " length varchar (20)," +
+                    " instructor varchar (40)," +
+                    " maxEnrl int," +
+                    " seatsAvailable int," +
+                    " activeEnrl int," +
+                    " sem_id int  NOT NULL);";
+
+            db.execSQL(sql);
+            Log.d("DATABASE", "Executing Query: "+ sql);
+
+            sql = "CREATE TABLE IF NOT EXISTS " + NOTIFICATION_TABLE + "(" +
+                    "crn int NOT NULL," +
+                    "number varchar (100) NOT NULL);";
+
+            db.execSQL(sql);
+
+            Log.d("DATABASE", "Executing Query: "+ sql);
+
+            db.close();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isTableExtant(String tableName) {
@@ -141,5 +164,110 @@ public class DBHelper extends SQLiteOpenHelper{
         }
         return result;
     }
+
+    public courses courseSearchByNumber(String number){
+        Cursor res = null;
+        SQLiteDatabase db=null;
+        courses result = new courses();
+        try{
+            Log.d("SELECTED", number);
+            String query = "SELECT * FROM courses WHERE number like '"+number+"';";
+            Log.d("SELECTED",query);
+            db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
+
+            res = db.rawQuery(query, null);
+            while(res.moveToNext()) {
+                result.setId(res.getString(0));
+                result.setNumber(res.getString(1));
+                result.setTime(res.getString(2));
+                result.setActivity(res.getString(3));
+                result.setUnits(Integer.parseInt(res.getString(4)));
+                result.setRoom(res.getString(5));
+                result.setDays(res.getString(6));
+                result.setTitle(res.getString(7));
+                result.setLength(res.getString(8));
+                result.setActiveEnrl(Integer.parseInt(res.getString(9)));
+                result.setMaxEnrl(Integer.parseInt(res.getString(10)));
+                result.setSeatsAvailable(Integer.parseInt(res.getString(11)));
+                result.setSem_id(Integer.parseInt(res.getString(12)));
+                result.setInstruction(res.getString(13));
+                result.setCrn(Integer.parseInt(res.getString(14)));
+
+                Log.d("DATABASE QUERY", res.getString(1) + "::\n");
+            }
+        }
+        catch(Exception e) {
+            Log.d("DB", e.getMessage());
+        }finally{
+            db.close();
+            res.close();
+        }
+        return result;
+    }
+
+    public boolean insertCourse(int CRN,String NUMBER){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("crn", CRN);
+        contentValues.put("number",NUMBER);
+
+        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
+
+
+        if(result == -1){
+            db.close();
+            return false;
+        }else{
+            db.close();
+            return true;
+        }
+
+    }
+
+    public ArrayList<String> retrieveNotificationCourses(){
+        Cursor res =null;
+        SQLiteDatabase db=null;
+        ArrayList<String> result= new ArrayList<String>();
+        try{
+            String query = "SELECT * FROM "+NOTIFICATION_TABLE;
+            Log.d("SELECTED",query);
+            db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
+
+            res = db.rawQuery(query, null);
+            while(res.moveToNext()) {
+                result.add(res.getString(1));
+                //result.add(res.getString(1));
+                Log.d("DATABASE QUERY", res.getString(1) + "::\n");
+            }
+        }
+        catch(Exception e) {
+            Log.d("DB", e.getMessage());
+        }finally{
+            db.close();
+            res.close();
+        }
+        return result;
+    }
+
+    public boolean deleteNotificationCourses(String number){
+        SQLiteDatabase db = null;
+        try{
+            Log.d("NUMBER",number);
+            String query = "DELETE FROM "+NOTIFICATION_TABLE + " WHERE number like '" +number+ "';";
+            Log.d("SELECTED",query);
+            db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+
+            db.execSQL(query);
+            //db.rawQuery(query, null);
+        }
+        catch(Exception e) {
+            Log.d("DB", e.getMessage());
+            return false;
+        }finally{
+            db.close();
+        }
+        return true;
+    }
+
 
 }
