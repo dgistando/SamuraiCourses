@@ -6,7 +6,8 @@
     <string name="add">Add</string>
     <string name="generate">generate</string>
     <string name="sometext">sometext</string>
-
+    <string name="notification">Get Notified</string>
+    <string name="plan">Plan Schedule</string>
     <string name="action_today">Today</string>
     <string name="action_day_view">Day view</string>
     <string name="action_three_day_view">3 day view</string>
