@@ -10,6 +10,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -54,7 +57,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_page);
         db = new DBHelper(this);
         db.createTables();
-
+        final Animation animRotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
+        final Animation animTranslate = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         if(!isNetworkAvailable()){
             ShowNetworkAlert();
         }
@@ -81,8 +87,35 @@ public class MainActivity extends Activity {
 
             mCoursesTable = mClient.getSyncTable("courses", courses.class);
             initLocalStore();
+            Button btnPlan=(Button)findViewById(R.id.plan);
+            Button btnNotify=(Button)findViewById(R.id.notify);
+
+            btnPlan.setOnClickListener(new Button.OnClickListener(){
+                @Override
+
+                public void onClick(View arg0) {
+                    arg0.startAnimation(animTranslate);
+                    Intent intent = new Intent(MainActivity.this, NinjaActivity.class);
+                    startActivity(intent);
+                    // overridePendingTransition(R.anim.left_out,R.anim.right_in);
 
 
+                }});
+            btnNotify.setOnClickListener(new Button.OnClickListener(){
+                @Override
+                public void onClick(View arg0) {
+                    arg0.startAnimation(animTranslate);
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, NotificationActivity.class);
+                    startActivity(intent);
+                    //finish();
+                    //overridePendingTransition(0,0);
+                    // overridePendingTransition(R.anim.right_in,R.anim.left_out);
+                    overridePendingTransition(android.R.anim.slide_out_right,android.R.anim.slide_in_left);
+                }
+
+            });
+/*
             findViewById(R.id.plan).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -97,6 +130,7 @@ public class MainActivity extends Activity {
                     startActivity(intent);
                 }
             });
+            */
        /*     @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,NinjaActivity.class);

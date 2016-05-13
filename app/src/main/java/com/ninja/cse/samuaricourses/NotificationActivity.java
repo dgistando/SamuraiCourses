@@ -18,11 +18,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-<<<<<<< HEAD
 import android.widget.Switch;
-import android.widget.TextView;
-=======
->>>>>>> b7ba1000a671122e69a763005778bb7ccd61bec6
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -272,6 +268,12 @@ public class NotificationActivity extends AppCompatActivity {
                 }
             }
         });*/
+    }
+    @Override
+    public void onBackPressed() {
+        // finish();
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
     public void startAlarm() {
