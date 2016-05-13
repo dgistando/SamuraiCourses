@@ -26,7 +26,8 @@
         <activity
             android:name=".NinjaActivity"
             android:label="@string/plan"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
 
@@ -37,7 +38,8 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/notification"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
 

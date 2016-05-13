@@ -97,10 +97,12 @@ public class MainActivity extends Activity {
                     arg0.startAnimation(animTranslate);
                     Intent intent = new Intent(MainActivity.this, NinjaActivity.class);
                     startActivity(intent);
-                    // overridePendingTransition(R.anim.left_out,R.anim.right_in);
+
+                    //overridePendingTransition(Android.R.anim.slide_in_left,Android.R.anim.slide_in_right);
 
 
                 }});
+
             btnNotify.setOnClickListener(new Button.OnClickListener(){
                 @Override
                 public void onClick(View arg0) {
@@ -111,7 +113,7 @@ public class MainActivity extends Activity {
                     //finish();
                     //overridePendingTransition(0,0);
                     // overridePendingTransition(R.anim.right_in,R.anim.left_out);
-                    overridePendingTransition(android.R.anim.slide_out_right,android.R.anim.slide_in_left);
+                    overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
                 }
 
             });
