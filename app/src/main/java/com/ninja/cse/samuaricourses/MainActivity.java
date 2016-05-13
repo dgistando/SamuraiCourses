@@ -89,18 +89,17 @@ public class MainActivity extends Activity {
             initLocalStore();
             Button btnPlan=(Button)findViewById(R.id.plan);
             Button btnNotify=(Button)findViewById(R.id.notify);
-
             btnPlan.setOnClickListener(new Button.OnClickListener(){
                 @Override
 
                 public void onClick(View arg0) {
-                    arg0.startAnimation(animTranslate);
-                    Intent intent = new Intent(MainActivity.this, NinjaActivity.class);
+                   arg0.startAnimation(animAlpha);
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, NinjaActivity.class);
                     startActivity(intent);
-
-                    //overridePendingTransition(Android.R.anim.slide_in_left,Android.R.anim.slide_in_right);
-
-
+                    //overridePendingTransition(R.anim.right_to_left,R.anim.left_to_right);
+                    //overridePendingTransition(R.anim.right_to_left,R.anim.right_to_left);
+                    //overridePendingTransition(android.R.anim.fade_out,android.R.anim.fade_in);
                 }});
 
             btnNotify.setOnClickListener(new Button.OnClickListener(){
@@ -110,9 +109,6 @@ public class MainActivity extends Activity {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, NotificationActivity.class);
                     startActivity(intent);
-                    //finish();
-                    //overridePendingTransition(0,0);
-                    // overridePendingTransition(R.anim.right_in,R.anim.left_out);
                     overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
                 }
 

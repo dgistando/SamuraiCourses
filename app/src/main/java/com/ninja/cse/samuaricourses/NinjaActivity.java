@@ -466,7 +466,8 @@ public class NinjaActivity extends AppCompatActivity {
     public void onBackPressed() {
         // finish();
         super.onBackPressed();
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        overridePendingTransition(R.anim.left_to_right,R.anim.right_to_left);
+        //overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
 
