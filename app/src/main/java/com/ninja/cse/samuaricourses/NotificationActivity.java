@@ -18,8 +18,11 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+<<<<<<< HEAD
 import android.widget.Switch;
 import android.widget.TextView;
+=======
+>>>>>>> b7ba1000a671122e69a763005778bb7ccd61bec6
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -28,19 +31,13 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.http.NextServiceFilterCallback;
-import com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilter;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterRequest;
 import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
-import com.squareup.okhttp.OkHttpClient;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by dgist on 4/26/2016.
@@ -135,22 +132,17 @@ public class NotificationActivity extends AppCompatActivity {
         final ArrayList<String> listToTrackCourses = new ArrayList<String>();
         final ArrayAdapter<String> listadapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_listitems, listToTrackCourses);
         listview.setAdapter(listadapter);
-
         //updates the list to whats in database
         listadapter.addAll(db.retrieveNotificationCourses());
         listadapter.notifyDataSetChanged();
-
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
                 if (!listview.isItemChecked(position)) {
-
                     String temp = listadapter.getItem(position);
-
                     db.deleteNotificationCourses(temp);
                     listadapter.remove(temp);
                     listadapter.notifyDataSetChanged();
-
                 }
             }
         };
@@ -260,13 +252,14 @@ public class NotificationActivity extends AppCompatActivity {
                             return;
                         }
                     }
+<<<<<<< HEAD
 
 
                     intent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
+=======
+>>>>>>> b7ba1000a671122e69a763005778bb7ccd61bec6
                     bundle.putParcelableArrayList("CLASSES", coursesToPass);
                     intent.putExtras(bundle);
-
-
                     // Retrieve a PendingIntent that will perform a broadcast with the intent and its extras above
                     pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
