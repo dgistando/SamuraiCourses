@@ -7,6 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -16,7 +18,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        ArrayList<String> trackedCourses = intent.getStringArrayListExtra("CLASSES");
+        ArrayList<courses> trackedCourses = intent.getParcelableArrayListExtra("CLASSES");
 
         // this toast is a test for our recurring task
         //Toast.makeText(context, "oh hi", Toast.LENGTH_SHORT).show();
@@ -33,12 +35,28 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         intent = new Intent(context, NotificationService.class);
 
+        int i=0;
+        for(courses entity : trackedCourses){
+            Log.d("TRACKEDCOURSES",entity.getCrn()+" "+entity.getNumber());
+
+            intent.putExtra("crn" + i++,entity.getCrn());
+
+            if(entity.getSeatsAvailable() > 0){
+                intent.putExtra(entity.getCrn()+"CHECK5",true);
+                intent.putExtra(entity.getCrn()+"i",entity.getSeatsAvailable());
+            }else{
+                intent.putExtra(entity.getCrn()+"CHECK0",true);
+            }
+
+        }
+        intent.putExtra("trackedCourses.size()",trackedCourses.size());
+
         context.startService(intent);
 
 
-        Notification(context, "test notification", "5", 0);
+        //Notification(context, intent.getStringExtra("testval"), "5", 0);
 
-        intent = new Intent(context, NotificationService.class);
+        // intent = new Intent(context, NotificationService.class);
         context.stopService(intent);
         //Notification(context, trackedCourses.get(1), "4", 1);
     }

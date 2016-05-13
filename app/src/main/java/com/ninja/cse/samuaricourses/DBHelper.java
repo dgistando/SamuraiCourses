@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by dgist on 4/22/2016.
@@ -250,10 +251,17 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     public boolean deleteNotificationCourses(String number){
+        String query = "";
         SQLiteDatabase db = null;
         try{
             Log.d("NUMBER",number);
-            String query = "DELETE FROM "+NOTIFICATION_TABLE + " WHERE number like '" +number+ "';";
+            if(number.equals("ALL")){
+                query = "DELETE FROM "+NOTIFICATION_TABLE+";";
+            }
+            else
+            {
+                query = "DELETE FROM "+NOTIFICATION_TABLE + " WHERE number like '" +number+ "';";
+            }
             Log.d("SELECTED",query);
             db = SQLiteDatabase.openDatabase(DATABASE_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
@@ -268,6 +276,5 @@ public class DBHelper extends SQLiteOpenHelper{
         }
         return true;
     }
-
 
 }

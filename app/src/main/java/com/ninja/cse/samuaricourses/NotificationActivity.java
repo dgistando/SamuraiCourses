@@ -18,7 +18,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -41,10 +43,8 @@ import java.util.concurrent.ExecutionException;
 
 public class NotificationActivity extends AppCompatActivity {
 
-    private MobileServiceClient mClient;
-    private MobileServiceTable<courses> mCoursesTable;
-    private ProgressBar mProgressBar;
-
+    Button btnAdd;
+    Switch btnNotify;
 
     AutoCompleteTextView Department, Classes;
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
@@ -55,7 +55,6 @@ public class NotificationActivity extends AppCompatActivity {
 
     private PendingIntent pendingIntent;
     private AlarmManager manager;
-    boolean alarmOn;
     SharedPreferences sharedPreferences;
 
 
@@ -69,18 +68,10 @@ public class NotificationActivity extends AppCompatActivity {
         db = new DBHelper(this);
         sharedPreferences = getSharedPreferences(this.getPackageName(),MODE_PRIVATE);
 
-        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        //Intent myintent = new Intent(NotificationActivity.this, AlarmReceiver.class);
-        //myintent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
-        //PendingIntent MypendingIntent = PendingIntent.getBroadcast(NotificationActivity.this,0, myintent, PendingIntent.FLAG_NO_CREATE);
-
-        //if pending intent exists then it should return null.
-        //alarmOn = (pendingIntent == null);
-
-        final Button btnAdd = (Button)findViewById(R.id.btnAdd);
+        btnAdd = (Button)findViewById(R.id.btnAdd);
         //final Button btnNotify = (Button)findViewById(R.id.btnNotify);
 
-        Switch btnNotify = (Switch)findViewById(R.id.btnNotify);
+        btnNotify = (Switch)findViewById(R.id.btnNotify);
         btnNotify.setChecked(sharedPreferences.getBoolean("isChecked",false));
 
         classesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classeslist);
@@ -95,11 +86,6 @@ public class NotificationActivity extends AppCompatActivity {
         Department.setAdapter(departmentAdapter);
         Department.setThreshold(1);
         Department.setHint("Department");
-
-        //if(alarmOn){
-            //btnNotify.setText("STOP");
-        //}
-        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
 
         Department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -139,6 +125,10 @@ public class NotificationActivity extends AppCompatActivity {
                     db.deleteNotificationCourses(temp);
                     listadapter.remove(temp);
                     listadapter.notifyDataSetChanged();
+                    btnNotify.setChecked(false);
+                    if(sharedPreferences.getBoolean("isChecked",false)){
+                        cancelAlarm();
+                    }
                 }
             }
         };
@@ -148,7 +138,7 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (listToTrackCourses.size() == 3) {
+                if (listToTrackCourses.size() > 3) {
                     Toast.makeText(NotificationActivity.this, "Tracking maxed at 3 courses!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -158,6 +148,7 @@ public class NotificationActivity extends AppCompatActivity {
                     return;
                 }
 
+                //Rebuilding the string to match tables
                 int numFromNumber = Integer.parseInt(Classes.getText().toString().substring(0,Classes.getText().toString().indexOf('-')));
                 String restOfString = Classes.getText().toString().substring(Classes.getText().toString().indexOf('-'), Classes.getText().toString().length());
                 listadapter.add(Department.getText().toString() + "-" + String.format("%03d",numFromNumber) + restOfString);
@@ -170,6 +161,11 @@ public class NotificationActivity extends AppCompatActivity {
                 Classes.setText("");
                 InputMethodManager imm = (InputMethodManager) getSystemService(NinjaActivity.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                btnNotify.setChecked(false);
+                if(sharedPreferences.getBoolean("isChecked",false)) {
+                    cancelAlarm();
+                }
             }
         });
 
@@ -182,21 +178,21 @@ public class NotificationActivity extends AppCompatActivity {
                     Intent intent = new Intent(NotificationActivity.this, AlarmReceiver.class);
                     Bundle bundle = new Bundle();
 
-                    if (listToTrackCourses.size() == 0) {
+                    if (listToTrackCourses.size() == 0 || listToTrackCourses.size() > 3) {
                         return;
                     }else {
 
+                        db.deleteNotificationCourses("ALL");
+                        coursesToPass.clear();
                         for (int j = 0; j < listToTrackCourses.size(); j++) {
                             //Log.d("NOTIFY_TEST", listToTrackCourses.get(j));
                             coursesToPass.add(db.courseSearchByNumber(listToTrackCourses.get(j)));
                             Log.d("ARRCRN", coursesToPass.get(j).getCrn() + "");
-                            db.deleteNotificationCourses(coursesToPass.get(j).getNumber());
                             if (!db.insertCourse(coursesToPass.get(j).getCrn(), coursesToPass.get(j).getNumber())) {
                                 Log.d("INSERT", "insert failed");
                                 return;
                             }
                         }
-
 
                         intent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
                         bundle.putParcelableArrayList("CLASSES", coursesToPass);
@@ -209,7 +205,7 @@ public class NotificationActivity extends AppCompatActivity {
 
                         //btnNotify.setText("STOP");
                         startAlarm();
-                        }
+                    }
                     editor.putBoolean("isChecked",true);
                 }else{
                     cancelAlarm();
@@ -294,105 +290,6 @@ public class NotificationActivity extends AppCompatActivity {
             Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_SHORT).show();
             manager = null;
         //}
-    }
-
-    /**
-     * This method performs an Asynchronous task that adds a list of course number to the
-     * classes TextView.
-     *
-     * @param selectedDepartment String from the first dropdown list of textView ex:CSE
-     */
-    private void getActiveEnrl(final String selectedDepartment)throws ExecutionException, InterruptedException{
-
-        AsyncTask<Void,Void, Void> task = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try{
-                    Log.d("get Query", "Just before getting query");
-                    final courses course = availableClasses(selectedDepartment);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //put logic for checking enrollment here.
-
-                        }
-                    });
-
-                }catch(final Exception e){
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-        };
-        task.execute();
-    }
-
-    /**
-     * Runs LINQ to database and retrieves course that the user selected.
-     *
-     * @param item string passed from the getActiveEnrl method and added to the LINQ query
-     * @return
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
-    private courses availableClasses(String item) throws ExecutionException, InterruptedException{
-        courses entity =  mCoursesTable.where().field("crn").eq(item).execute().get().get(0);
-        return entity;
-    }
-
-
-
-    private class ProgressFilter implements ServiceFilter {
-
-        /**
-         * method that handles the html response from the client.
-         *
-         * Plan to implement the progress bar for longer wait times.
-         *
-         * @param request
-         * @param nextServiceFilterCallback
-         * @return
-         */
-        @Override
-        public ListenableFuture<ServiceFilterResponse> handleRequest(ServiceFilterRequest request, NextServiceFilterCallback nextServiceFilterCallback) {
-
-            final SettableFuture<ServiceFilterResponse> resultFuture = SettableFuture.create();
-
-
-            runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-            });
-
-            ListenableFuture<ServiceFilterResponse> future = nextServiceFilterCallback.onNext(request);
-
-            Futures.addCallback(future, new FutureCallback<ServiceFilterResponse>() {
-                @Override
-                public void onFailure(Throwable e) {
-                    resultFuture.setException(e);
-                }
-
-                @Override
-                public void onSuccess(ServiceFilterResponse response) {
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            if (mProgressBar != null) mProgressBar.setVisibility(ProgressBar.GONE);
-                        }
-                    });
-
-                    resultFuture.set(response);
-                }
-            });
-
-            return resultFuture;
-        }
     }
 
 
