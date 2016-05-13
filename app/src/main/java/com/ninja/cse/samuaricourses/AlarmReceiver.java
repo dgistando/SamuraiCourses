@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+    public static final String ACTION_ALARM_RECEIVER = "ACTION_ALARM_RECEIVER";
 
     @Override
     public void onReceive(Context context, Intent intent) {

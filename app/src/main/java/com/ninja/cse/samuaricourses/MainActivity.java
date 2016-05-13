@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
         db = new DBHelper(this);
+        db.createTables();
 
         if(!isNetworkAvailable()){
             ShowNetworkAlert();

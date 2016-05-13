@@ -13,7 +13,7 @@
     tools:context="com.ninja.cse.samuaricourses.NotificationActivity"
     >
 
-    <Button
+    <Switch
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="Get Notified"

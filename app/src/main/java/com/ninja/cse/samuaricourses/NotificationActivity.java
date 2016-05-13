@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,14 +56,14 @@ public class NotificationActivity extends AppCompatActivity {
     AutoCompleteTextView Department, Classes;
     private ArrayAdapter<String> departmentAdapter, classesAdapter;
     ArrayList<String> classeslist = new ArrayList<String>();
-    Button add,notify;
     ArrayList<courses> coursesToPass = new ArrayList<courses>();
-    static int selection=0;
+
     ArrayList<courses> selectedCourses = new ArrayList<courses>();
 
     private PendingIntent pendingIntent;
     private AlarmManager manager;
     boolean alarmOn;
+    SharedPreferences sharedPreferences;
 
 
     DBHelper db;
@@ -71,13 +74,21 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
         db = new DBHelper(this);
+        sharedPreferences = getSharedPreferences(this.getPackageName(),MODE_PRIVATE);
 
-        pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this,0,new Intent(NotificationActivity.this, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE);
+        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //Intent myintent = new Intent(NotificationActivity.this, AlarmReceiver.class);
+        //myintent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
+        //PendingIntent MypendingIntent = PendingIntent.getBroadcast(NotificationActivity.this,0, myintent, PendingIntent.FLAG_NO_CREATE);
 
-        alarmOn = (pendingIntent != null);
+        //if pending intent exists then it should return null.
+        //alarmOn = (pendingIntent == null);
 
         final Button btnAdd = (Button)findViewById(R.id.btnAdd);
-        final Button btnNotify = (Button)findViewById(R.id.btnNotify);
+        //final Button btnNotify = (Button)findViewById(R.id.btnNotify);
+
+        Switch btnNotify = (Switch)findViewById(R.id.btnNotify);
+        btnNotify.setChecked(sharedPreferences.getBoolean("isChecked",false));
 
         classesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classeslist);
         Classes = (AutoCompleteTextView) findViewById(R.id.number);
@@ -92,10 +103,10 @@ public class NotificationActivity extends AppCompatActivity {
         Department.setThreshold(1);
         Department.setHint("Department");
 
-        if(alarmOn){
-            btnNotify.setText("STOP");
-        }
-        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //if(alarmOn){
+            //btnNotify.setText("STOP");
+        //}
+        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
 
         Department.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,7 +124,7 @@ public class NotificationActivity extends AppCompatActivity {
 
                 classesAdapter.clear();
                 for (courses each : selectedCourses) {
-                    classesAdapter.add(each.getNumber().substring(each.getNumber().indexOf('-')+1,each.getNumber().length()).replaceFirst("^0+(?!$)", ""));
+                    classesAdapter.add(each.getNumber().substring(each.getNumber().indexOf("-")+1,each.getNumber().length()).replaceFirst("^0+(?!$)", ""));
                     classesAdapter.notifyDataSetChanged();
                     //Log.d("ON LIST",classesAdapter.getItem(classesAdapter.getCount()-1));
                 }
@@ -174,13 +185,61 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-        btnNotify.setOnClickListener(new View.OnClickListener() {
+        btnNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if(
+                        isChecked){
+                    Intent intent = new Intent(NotificationActivity.this, AlarmReceiver.class);
+                    Bundle bundle = new Bundle();
+
+                    if (listToTrackCourses.size() == 0) {
+                        return;
+                    }else {
+
+                        for (int j = 0; j < listToTrackCourses.size(); j++) {
+                            //Log.d("NOTIFY_TEST", listToTrackCourses.get(j));
+                            coursesToPass.add(db.courseSearchByNumber(listToTrackCourses.get(j)));
+                            Log.d("ARRCRN", coursesToPass.get(j).getCrn() + "");
+                            db.deleteNotificationCourses(coursesToPass.get(j).getNumber());
+                            if (!db.insertCourse(coursesToPass.get(j).getCrn(), coursesToPass.get(j).getNumber())) {
+                                Log.d("INSERT", "insert failed");
+                                return;
+                            }
+                        }
+
+
+                        intent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
+                        bundle.putParcelableArrayList("CLASSES", coursesToPass);
+                        intent.putExtras(bundle);
+
+
+                        // Retrieve a PendingIntent that will perform a broadcast with the intent and its extras above
+                        pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+                        //btnNotify.setText("STOP");
+                        startAlarm();
+                        }
+                    editor.putBoolean("isChecked",true);
+                }else{
+                    cancelAlarm();
+                    editor.putBoolean("isChecked",false);
+                }
+                editor.apply();
+            }
+        });
+
+        /*btnNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //alarmOn = (MypendingIntent != null);
+                //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
                 if(alarmOn){
                     cancelAlarm(v);
-                    btnNotify.setText("GET NOTIFIED");
+                    //btnNotify.setText("GET NOTIFIED");
                     return;
                 }
 
@@ -203,6 +262,7 @@ public class NotificationActivity extends AppCompatActivity {
                     }
 
 
+                    intent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);
                     bundle.putParcelableArrayList("CLASSES", coursesToPass);
                     intent.putExtras(bundle);
 
@@ -210,28 +270,35 @@ public class NotificationActivity extends AppCompatActivity {
                     // Retrieve a PendingIntent that will perform a broadcast with the intent and its extras above
                     pendingIntent = PendingIntent.getBroadcast(NotificationActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                    btnNotify.setText("STOP");
+
+                    //btnNotify.setText("STOP");
                     startAlarm(v);
+
+                    //alarmOn = (pendingIntent != null);
+                    //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 }
             }
-        });
+        });*/
     }
 
-    public void startAlarm(View view) {
-        //manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+    public void startAlarm() {
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         int interval = 15000;
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-        Toast.makeText(NotificationActivity.this, "You will get notified!", Toast.LENGTH_LONG).show();
+        Toast.makeText(NotificationActivity.this, "You will get notified!", Toast.LENGTH_SHORT).show();
     }
 
 
-    public void cancelAlarm(View view) {
-        if (alarmOn) {
+    public void cancelAlarm() {
+        //alarmOn = (pendingIntent != null);
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        //if (alarmOn) {
             manager.cancel(pendingIntent);
-            Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Notifications Canceled", Toast.LENGTH_SHORT).show();
             manager = null;
-        }
+        //}
     }
 
     /**
@@ -333,5 +400,15 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
+
+    private void CheckForAlarm()
+    {
+        //checking if alarm is working with pendingIntent #3
+        Intent intent = new Intent(getApplicationContext()  , AlarmReceiver.class);//the same as up
+        intent.setAction(AlarmReceiver.ACTION_ALARM_RECEIVER);//the same as up
+        boolean isWorking = (PendingIntent.getBroadcast(getApplicationContext() , 1001, intent, PendingIntent.FLAG_NO_CREATE) != null);//just changed the flag
+        Log.d("TAG: TEST APP:  ", "alarm is " + (isWorking ? "" : "not") + " working...");
+
+    }
 
 }

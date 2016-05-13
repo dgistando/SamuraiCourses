@@ -225,7 +225,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     public ArrayList<String> retrieveNotificationCourses(){
-        Cursor res =null;
+        Cursor res = null;
         SQLiteDatabase db=null;
         ArrayList<String> result= new ArrayList<String>();
         try{
